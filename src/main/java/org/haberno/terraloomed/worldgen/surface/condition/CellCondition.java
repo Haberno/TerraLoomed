@@ -2,14 +2,15 @@ package org.haberno.terraloomed.worldgen.surface.condition;
 
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.gen.surfacebuilder.MaterialRules;
+import net.minecraft.world.gen.surfacebuilder.MaterialRules.HorizontalLazyAbstractPredicate;
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.RTFRandomState;
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.tile.Tile;
+import org.haberno.terraloomed.worldgen.util.PosUtil;
 import org.jetbrains.annotations.Nullable;
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.RTFRandomState;
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.tile.Tile;
-import raccoonman.reterraforged.world.worldgen.util.PosUtil;
 
-abstract class CellCondition extends LazyXZCondition {
+abstract class CellCondition extends HorizontalLazyAbstractPredicate {
 	@Nullable
 	private Tile.Chunk chunk;
 	private long lastXZ;
@@ -21,7 +22,7 @@ abstract class CellCondition extends LazyXZCondition {
 	public CellCondition(MaterialRules.MaterialRuleContext context) {
 		super(context);
 		//TODO store this in SurfaceRules$Context instead so we can cache the chunk lookup
-		if((Object) context.randomState instanceof RTFRandomState randomState && (this.generatorContext = randomState.generatorContext()) != null) {
+		if((Object) context.noiseConfig instanceof RTFRandomState randomState && (this.generatorContext = randomState.generatorContext()) != null) {
 			ChunkPos chunkPos = context.chunk.getPos();
 			this.chunk = this.generatorContext.cache.provideChunk(chunkPos.x, chunkPos.z);
 		}
@@ -31,7 +32,7 @@ abstract class CellCondition extends LazyXZCondition {
 	public abstract boolean test(Cell cell, int x, int z);
 	
 	@Override
-	public boolean compute() {
+	public boolean test() {
         int x = this.context.blockX;
         int z = this.context.blockZ;
         long packedPos = PosUtil.pack(x, z);

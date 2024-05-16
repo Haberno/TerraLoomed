@@ -1,13 +1,14 @@
 package org.haberno.terraloomed.worldgen.feature.template.decorator;
 
-import java.util.List;
-import java.util.Map;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.world.biome.Biome;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import raccoonman.reterraforged.world.worldgen.feature.template.template.TemplateContext;
+import org.haberno.terraloomed.worldgen.feature.template.template.TemplateContext;
+
+import java.util.List;
+import java.util.Map;
 
 public record DecoratorConfig<T extends TemplateContext>(List<TemplateDecorator<T>> defaultDecorators, Map<RegistryKey<Biome>, List<TemplateDecorator<T>>> biomeDecorators) {
 	@SuppressWarnings({ "unchecked", "rawtypes" })

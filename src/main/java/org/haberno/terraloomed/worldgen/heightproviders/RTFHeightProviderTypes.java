@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.registry.Registries;
 import net.minecraft.world.gen.heightprovider.HeightProvider;
 import net.minecraft.world.gen.heightprovider.HeightProviderType;
-import raccoonman.reterraforged.platform.RegistryUtil;
+import org.haberno.terraloomed.platform.RegistryUtil;
 
 public class RTFHeightProviderTypes {
 	public static final HeightProviderType<LegacyCarverHeight> LEGACY_CARVER = register("legacy_carver", LegacyCarverHeight.CODEC);

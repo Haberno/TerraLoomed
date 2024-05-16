@@ -1,9 +1,9 @@
 package org.haberno.terraloomed.worldgen.feature.chance;
 
 import com.mojang.serialization.Codec;
+import org.haberno.terraloomed.platform.RegistryUtil;
+import org.haberno.terraloomed.registries.RTFBuiltInRegistries;
 
-import raccoonman.reterraforged.platform.RegistryUtil;
-import raccoonman.reterraforged.registries.RTFBuiltInRegistries;
 
 public class RTFChanceModifiers {
 

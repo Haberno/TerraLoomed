@@ -2,8 +2,8 @@ package org.haberno.terraloomed.worldgen.noise.module;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
 
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;	
 
 public record LegacyTemperature(float frequency, int power) implements Noise {
 	public static final Codec<LegacyTemperature> CODEC = RecordCodecBuilder.create(instance -> instance.group(

@@ -1,11 +1,12 @@
 package org.haberno.terraloomed.concurrent.pool;
 
+
+import org.haberno.terraloomed.concurrent.Resource;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.IntFunction;
 import java.util.function.Supplier;
-
-import raccoonman.reterraforged.concurrent.Resource;
 
 public class ArrayPool<T> {
 	private int capacity;
@@ -22,7 +23,7 @@ public class ArrayPool<T> {
 
 	public Resource<T[]> get(int arraySize) {
 		synchronized (this.lock) {
-			if (this.pool.size() > 0) {
+			if (!this.pool.isEmpty()) {
 				Item<T> resource = this.pool.remove(this.pool.size() - 1);
 				if (resource.get().length >= arraySize) {
 					return resource.retain();

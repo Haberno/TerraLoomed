@@ -1,9 +1,9 @@
 package org.haberno.terraloomed.tags;
 
 import net.minecraft.registry.tag.TagKey;
-import raccoonman.reterraforged.RTFCommon;
-import raccoonman.reterraforged.registries.RTFRegistries;
-import raccoonman.reterraforged.world.worldgen.surface.rule.LayeredSurfaceRule;
+import org.haberno.terraloomed.RTFCommon;
+import org.haberno.terraloomed.registries.RTFRegistries;
+import org.haberno.terraloomed.worldgen.surface.rule.LayeredSurfaceRule;
 
 public class RTFSurfaceLayerTags {
 	public static final TagKey<LayeredSurfaceRule.Layer> TERRABLENDER = resolve("terrablender");

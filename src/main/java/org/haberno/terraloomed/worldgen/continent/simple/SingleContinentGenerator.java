@@ -1,10 +1,11 @@
 package org.haberno.terraloomed.worldgen.continent.simple;
 
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil.Vec2i;
-import raccoonman.reterraforged.world.worldgen.util.PosUtil;
-import raccoonman.reterraforged.world.worldgen.util.Seed;
+
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil.Vec2i;
+import org.haberno.terraloomed.worldgen.util.PosUtil;
+import org.haberno.terraloomed.worldgen.util.Seed;
 
 public class SingleContinentGenerator extends ContinentGenerator {
     private Vec2i center;

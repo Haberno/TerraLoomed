@@ -2,25 +2,26 @@
   "schemaVersion": 1,
   "id": "terraloomed",
   "version": "${version}",
-
   "name": "TerraLoomed",
+  "accessWidener": "terraloomed.accesswidener",
   "description": "",
   "authors": [],
-  "contact": {},
-
+  "contact": {
+    "repo": "https://github.com/ptirt/TerraLoomed"
+  },
   "license": "All-Rights-Reserved",
-  "icon": "assets/terraloomed/icon.png",
-
   "environment": "*",
-  "entrypoints": {},
-
-      "mixins": [
-        "terraloomed.mixins.json"
-      ],
-
+  "entrypoints": {
+    "main": [
+      "org.haberno.terraloomed.TerraLoomed"
+    ]
+  },
+  "mixins": [
+    "terraloomed.mixins.json"
+  ],
   "depends": {
     "fabricloader": ">=${loader_version}",
-        "fabric": "*",
+    "fabric": "*",
     "minecraft": "${minecraft_version}"
   }
 }

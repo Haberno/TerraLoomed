@@ -1,9 +1,9 @@
 package org.haberno.terraloomed.concurrent.cache.map;
 
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.LongFunction;
 import java.util.function.Predicate;
-import java.util.function.Consumer;
 
 public interface LongMap<T> {
     int size();

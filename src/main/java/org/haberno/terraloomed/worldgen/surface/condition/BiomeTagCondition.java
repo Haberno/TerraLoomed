@@ -9,7 +9,8 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.dynamic.CodecHolder;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.surfacebuilder.MaterialRules;
-import raccoonman.reterraforged.world.worldgen.RTFRandomState;
+import net.minecraft.world.gen.surfacebuilder.MaterialRules.MaterialRuleContext;
+import org.haberno.terraloomed.worldgen.RTFRandomState;
 
 record BiomeTagCondition(TagKey<Biome> tag) implements MaterialRules.MaterialCondition {
 	public static final Codec<BiomeTagCondition> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -18,9 +19,9 @@ record BiomeTagCondition(TagKey<Biome> tag) implements MaterialRules.MaterialCon
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public MaterialRules.BooleanSupplier apply(Context ctx) {
-		if((Object) ctx.randomState instanceof RTFRandomState rtfRandomState) {
-			Impl<Biome> registry = rtfRandomState.registryAccess().lookupOrThrow(RegistryKeys.BIOME);
+	public MaterialRules.BooleanSupplier apply(MaterialRuleContext ctx) {
+		if((Object) ctx.noiseConfig instanceof RTFRandomState rtfRandomState) {
+			Impl<Biome> registry = rtfRandomState.registryAccess().getWrapperOrThrow(RegistryKeys.BIOME);
 			return MaterialRules.biome(registry.getOrThrow(this.tag)
 				.stream()
 				.map((holder) -> holder.getKey().orElseThrow())

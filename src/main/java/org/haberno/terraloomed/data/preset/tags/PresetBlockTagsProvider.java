@@ -1,6 +1,5 @@
 package org.haberno.terraloomed.data.preset.tags;
 
-import java.util.concurrent.CompletableFuture;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.DataOutput;
@@ -8,7 +7,9 @@ import net.minecraft.data.server.tag.ValueLookupTagProvider;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper.WrapperLookup;
 import net.minecraft.registry.tag.BlockTags;
-import raccoonman.reterraforged.tags.RTFBlockTags;
+import org.haberno.terraloomed.tags.RTFBlockTags;
+
+import java.util.concurrent.CompletableFuture;
 
 public class PresetBlockTagsProvider extends ValueLookupTagProvider<Block> {
 	

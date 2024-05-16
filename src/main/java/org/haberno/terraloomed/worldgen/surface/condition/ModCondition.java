@@ -4,7 +4,8 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.dynamic.CodecHolder;
 import net.minecraft.world.gen.surfacebuilder.MaterialRules;
-import raccoonman.reterraforged.platform.ModLoaderUtil;
+import net.minecraft.world.gen.surfacebuilder.MaterialRules.MaterialRuleContext;
+import org.haberno.terraloomed.platform.ModLoaderUtil;
 
 record ModCondition(String modId) implements MaterialRules.MaterialCondition {
 	public static final Codec<ModCondition> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -12,7 +13,7 @@ record ModCondition(String modId) implements MaterialRules.MaterialCondition {
 	).apply(instance, ModCondition::new));
 	
 	@Override
-	public MaterialRules.BooleanSupplier apply(Context t) {
+	public MaterialRules.BooleanSupplier apply(MaterialRuleContext t) {
 		boolean isModLoaded = ModLoaderUtil.isLoaded(this.modId);
 		return () -> isModLoaded;
 	}

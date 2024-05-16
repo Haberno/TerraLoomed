@@ -1,12 +1,13 @@
 package org.haberno.terraloomed.client.gui.screen.page;
 
-import java.util.Optional;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
-import raccoonman.reterraforged.client.gui.widget.Label;
+import org.haberno.terraloomed.client.gui.widget.Label;
+
+import java.util.Optional;
 
 public abstract class LinkedPageScreen extends Screen {
 	public ButtonWidget previousButton,

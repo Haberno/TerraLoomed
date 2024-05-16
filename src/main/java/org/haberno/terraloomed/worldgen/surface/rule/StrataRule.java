@@ -1,7 +1,7 @@
 package org.haberno.terraloomed.worldgen.surface.rule;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.registry.Registries;
@@ -14,34 +14,34 @@ import net.minecraft.util.dynamic.CodecHolder;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.gen.surfacebuilder.MaterialRules;
+import net.minecraft.world.gen.surfacebuilder.MaterialRules.MaterialRuleContext;
+import org.haberno.terraloomed.tags.RTFBlockTags;
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.RTFRandomState;
+import org.haberno.terraloomed.worldgen.heightmap.Levels;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.noise.module.Noises;
+import org.haberno.terraloomed.worldgen.surface.RTFSurfaceSystem;
+import org.haberno.terraloomed.worldgen.tile.Tile;
+import org.haberno.terraloomed.worldgen.util.PosUtil;
 import org.jetbrains.annotations.Nullable;
-import Context;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import raccoonman.reterraforged.tags.RTFBlockTags;
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.RTFRandomState;
-import raccoonman.reterraforged.world.worldgen.heightmap.Levels;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noises;
-import raccoonman.reterraforged.world.worldgen.surface.RTFSurfaceSystem;
-import raccoonman.reterraforged.world.worldgen.surface.rule.StrataRule.Layer;
-import raccoonman.reterraforged.world.worldgen.tile.Tile;
-import raccoonman.reterraforged.world.worldgen.util.PosUtil;
 
-public record StrataRule(Identifier cacheId, int buffer, int iterations, RegistryEntry<Noise> selector, List<org.haberno.map.worldgen.surface.rule.StrataRule.Layer> layers) implements MaterialRules.MaterialRule {
+import java.util.ArrayList;
+import java.util.List;
+
+public record StrataRule(Identifier cacheId, int buffer, int iterations, RegistryEntry<Noise> selector, List<Layer> layers) implements MaterialRules.MaterialRule {
 	public static final Codec<StrataRule> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 		Identifier.CODEC.fieldOf("cache_id").forGetter(StrataRule::cacheId),
 		Codec.INT.fieldOf("buffer").forGetter(StrataRule::buffer),
 		Codec.INT.fieldOf("iterations").forGetter(StrataRule::iterations),
 		Noise.CODEC.fieldOf("selector").forGetter(StrataRule::selector),
-		org.haberno.map.worldgen.surface.rule.StrataRule.Layer.CODEC.listOf().fieldOf("layers").forGetter(StrataRule::layers)
+		Layer.CODEC.listOf().fieldOf("layers").forGetter(StrataRule::layers)
 	).apply(instance, StrataRule::new));
 
 	@Override
-	public Rule apply(Context ctx) {
-		if((Object) ctx.system instanceof RTFSurfaceSystem rtfSurfaceSystem) {
+	public Rule apply(MaterialRuleContext ctx) {
+		if((Object) ctx.surfaceBuilder instanceof RTFSurfaceSystem rtfSurfaceSystem) {
 			return new Rule(ctx, rtfSurfaceSystem.getOrCreateStrata(this.cacheId, this::generate));
 		} else {
 			throw new IllegalStateException();
@@ -63,7 +63,7 @@ public record StrataRule(Identifier cacheId, int buffer, int iterations, Registr
 	
 	private Strata generateStrata(Random random) {
 		List<Stratum> stratum = new ArrayList<>();
-		for(org.haberno.map.worldgen.surface.rule.StrataRule.Layer layer : this.layers) {
+		for(Layer layer : this.layers) {
 			RegistryEntryList<Block> materials = Registries.BLOCK.getEntryList(layer.materials()).orElseThrow();
 			int layerCount = layer.layers(random.nextFloat());
 	        int lastIndex = -1;
@@ -85,7 +85,7 @@ public record StrataRule(Identifier cacheId, int buffer, int iterations, Registr
 	}
 	
 	public class Rule implements MaterialRules.BlockStateRule {
-		private Context context;
+		private MaterialRuleContext context;
 		private List<Strata> strataEntries;
 		private Levels levels;
 		private Tile.Chunk chunk;
@@ -97,11 +97,11 @@ public record StrataRule(Identifier cacheId, int buffer, int iterations, Registr
 		private float[] depthBuffer;
 		private long lastXZ;
 		
-		public Rule(Context context, List<Strata> strataEntries) {
+		public Rule(MaterialRuleContext context, List<Strata> strataEntries) {
 			this.context = context;
 			this.strataEntries = strataEntries;
 			
-			if((Object) context.randomState instanceof RTFRandomState rtfRandomState) {
+			if((Object) context.noiseConfig instanceof RTFRandomState rtfRandomState) {
 				ChunkPos chunkPos = context.chunk.getPos();
 				
 				GeneratorContext generatorContext = rtfRandomState.generatorContext();
@@ -196,15 +196,15 @@ public record StrataRule(Identifier cacheId, int buffer, int iterations, Registr
 	}
 	
 	public record Layer(TagKey<Block> materials, RegistryEntry<Noise> depth, int attempts, int minLayers, int maxLayers, float minDepth, float maxDepth) {
-		public static final Codec<org.haberno.map.worldgen.surface.rule.StrataRule.Layer> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			TagKey.codec(RegistryKeys.BLOCK).fieldOf("materials").forGetter(org.haberno.map.worldgen.surface.rule.StrataRule.Layer::materials),
-			Noise.CODEC.fieldOf("depth").forGetter(org.haberno.map.worldgen.surface.rule.StrataRule.Layer::depth),
-			Codec.INT.fieldOf("attempts").forGetter(org.haberno.map.worldgen.surface.rule.StrataRule.Layer::attempts),
-			Codec.INT.fieldOf("min_layers").forGetter(org.haberno.map.worldgen.surface.rule.StrataRule.Layer::minLayers),
-			Codec.INT.fieldOf("max_layers").forGetter(org.haberno.map.worldgen.surface.rule.StrataRule.Layer::maxLayers),
-			Codec.FLOAT.fieldOf("min_depth").forGetter(org.haberno.map.worldgen.surface.rule.StrataRule.Layer::minDepth),
-			Codec.FLOAT.fieldOf("max_depth").forGetter(org.haberno.map.worldgen.surface.rule.StrataRule.Layer::maxDepth)
-		).apply(instance, org.haberno.map.worldgen.surface.rule.StrataRule.Layer::new));
+		public static final Codec<Layer> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+			TagKey.codec(RegistryKeys.BLOCK).fieldOf("materials").forGetter(Layer::materials),
+			Noise.CODEC.fieldOf("depth").forGetter(Layer::depth),
+			Codec.INT.fieldOf("attempts").forGetter(Layer::attempts),
+			Codec.INT.fieldOf("min_layers").forGetter(Layer::minLayers),
+			Codec.INT.fieldOf("max_layers").forGetter(Layer::maxLayers),
+			Codec.FLOAT.fieldOf("min_depth").forGetter(Layer::minDepth),
+			Codec.FLOAT.fieldOf("max_depth").forGetter(Layer::maxDepth)
+		).apply(instance, Layer::new));
 		
         public int layers(float f) {
             int range = this.maxLayers - this.minLayers;

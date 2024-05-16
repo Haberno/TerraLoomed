@@ -5,8 +5,8 @@ import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.world.gen.carver.ConfiguredCarver;
-import raccoonman.reterraforged.data.preset.settings.CaveSettings;
-import raccoonman.reterraforged.data.preset.settings.Preset;
+import org.haberno.terraloomed.data.preset.settings.CaveSettings;
+import org.haberno.terraloomed.data.preset.settings.Preset;
 
 public class PresetConfiguredCarvers {
 

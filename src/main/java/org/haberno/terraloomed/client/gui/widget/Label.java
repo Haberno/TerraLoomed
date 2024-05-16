@@ -1,11 +1,12 @@
 package org.haberno.terraloomed.client.gui.widget;
 
-import java.util.function.Supplier;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.sound.SoundManager;
 import net.minecraft.text.Text;
+
+import java.util.function.Supplier;
 
 public class Label extends ButtonWidget {
     

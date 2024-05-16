@@ -9,8 +9,8 @@ import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DiskFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noises;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.noise.module.Noises;
 
 public class DiskFeature extends Feature<DiskFeatureConfig> {
     private static final Noise DOMAIN = Noises.simplex(1, 6, 3);

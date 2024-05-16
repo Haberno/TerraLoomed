@@ -1,12 +1,13 @@
 package org.haberno.terraloomed.worldgen.tile.filter;
 
-import raccoonman.reterraforged.data.preset.settings.WorldSettings.ControlPoints;
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.heightmap.Levels;
-import raccoonman.reterraforged.world.worldgen.terrain.TerrainType;
-import raccoonman.reterraforged.world.worldgen.tile.Size;
-import raccoonman.reterraforged.world.worldgen.tile.Tile;
+
+import org.haberno.terraloomed.data.preset.settings.WorldSettings.ControlPoints;
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.heightmap.Levels;
+import org.haberno.terraloomed.worldgen.terrain.TerrainType;
+import org.haberno.terraloomed.worldgen.tile.Size;
+import org.haberno.terraloomed.worldgen.tile.Tile;
 
 public record BeachDetect(Levels levels, ControlPoints transition) implements Filter {
     

@@ -3,6 +3,8 @@ package org.haberno.terraloomed.mixin.terrablender;
 import net.minecraft.world.biome.source.util.MultiNoiseUtil;
 import net.minecraft.world.biome.source.util.MultiNoiseUtil.NoiseValuePoint;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
+import org.haberno.terraloomed.compat.terrablender.TBClimateSampler;
+import org.haberno.terraloomed.compat.terrablender.TBTargetPoint;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Implements;
 import org.spongepowered.asm.mixin.Interface;
@@ -11,8 +13,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import raccoonman.reterraforged.compat.terrablender.TBClimateSampler;
-import raccoonman.reterraforged.compat.terrablender.TBTargetPoint;
 
 @Mixin(MultiNoiseUtil.MultiNoiseSampler.class)
 @Implements(@Interface(iface = TBClimateSampler.class, prefix = "reterraforged$TBClimateSampler$"))

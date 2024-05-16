@@ -1,19 +1,19 @@
 package org.haberno.terraloomed.worldgen.densityfunction;
 
-import java.util.function.Supplier;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.dynamic.CodecHolder;
 import net.minecraft.util.math.ChunkSectionPos;
 import net.minecraft.world.biome.source.BiomeCoords;
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.cell.CellField;
+import org.haberno.terraloomed.worldgen.heightmap.WorldLookup;
+import org.haberno.terraloomed.worldgen.tile.Tile;
+import org.haberno.terraloomed.worldgen.util.PosUtil;
 import org.jetbrains.annotations.Nullable;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.cell.CellField;
-import raccoonman.reterraforged.world.worldgen.heightmap.WorldLookup;
-import raccoonman.reterraforged.world.worldgen.tile.Tile;
-import raccoonman.reterraforged.world.worldgen.util.PosUtil;
+import java.util.function.Supplier;
 
 public record CellSampler(Supplier<GeneratorContext> generatorContext, CellField field) implements MappedFunction {
 	private static final ThreadLocal<Cache2d> LOCAL_CELL = ThreadLocal.withInitial(Cache2d::new);
@@ -97,13 +97,13 @@ public record CellSampler(Supplier<GeneratorContext> generatorContext, CellField
 	}
 	
 	public record Marker(CellField field) implements MappedFunction.Marker {
-		public static final Codec<org.haberno.map.worldgen.densityfunction.CellSampler.Marker> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-				CellField.CODEC.fieldOf("field").forGetter(org.haberno.map.worldgen.densityfunction.CellSampler.Marker::field)
-		).apply(instance, org.haberno.map.worldgen.densityfunction.CellSampler.Marker::new));
+		public static final Codec<Marker> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+				CellField.CODEC.fieldOf("field").forGetter(Marker::field)
+		).apply(instance, Marker::new));
 		
 		@Override
-		public CodecHolder<org.haberno.map.worldgen.densityfunction.CellSampler.Marker> getCodecHolder() {
-			return new CodecHolder<>(REGISTRY_ENTRY_CODEC);
+		public CodecHolder<Marker> getCodecHolder() {
+			return new CodecHolder<>(CODEC);
 		}
 	}
 }

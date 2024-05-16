@@ -1,10 +1,11 @@
 package org.haberno.terraloomed.worldgen.tile.filter;
 
-import raccoonman.reterraforged.data.preset.settings.FilterSettings;
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.heightmap.Levels;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.tile.Tile;
+
+import org.haberno.terraloomed.data.preset.settings.FilterSettings;
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.heightmap.Levels;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.tile.Tile;
 
 public record Smoothing(float smoothingRadius, float smoothingRate, Modifier modifier) implements Filter {
 

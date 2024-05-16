@@ -2,9 +2,8 @@ package org.haberno.terraloomed.worldgen.noise.module;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.noise.function.Interpolation;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.function.Interpolation;
 
 record Billow(float frequency, int octaves, float lacunarity, float gain, Interpolation interpolation, float[] spectralWeights, float min, float max) implements Noise {
 	public static final Codec<Billow> CODEC = RecordCodecBuilder.create(instance -> instance.group(

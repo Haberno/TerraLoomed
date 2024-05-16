@@ -1,15 +1,17 @@
 package org.haberno.terraloomed.worldgen.surface.rule;
 
-import java.util.List;
+import com.mojang.datafixers.util.Pair;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.dynamic.CodecHolder;
 import net.minecraft.world.gen.surfacebuilder.MaterialRules;
-import com.mojang.datafixers.util.Pair;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
-import raccoonman.reterraforged.world.worldgen.util.PosUtil;
+import net.minecraft.world.gen.surfacebuilder.MaterialRules.MaterialRuleContext;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.util.PosUtil;
+
+import java.util.List;
 
 record NoiseRule(RegistryEntry<Noise> noise, List<Pair<Float, MaterialRules.MaterialRule>> rules) implements MaterialRules.MaterialRule {
 	public static final Codec<NoiseRule> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -18,7 +20,7 @@ record NoiseRule(RegistryEntry<Noise> noise, List<Pair<Float, MaterialRules.Mate
 	).apply(instance, NoiseRule::new));
 	
 	@Override
-	public Rule apply(Context ctx) {
+	public Rule apply(MaterialRuleContext ctx) {
 		return new Rule(this.noise.value(), this.rules.stream().map((pair) -> {
 			return Pair.of(pair.getFirst(), pair.getSecond().apply(ctx));
 		}).sorted((p1, p2) -> p2.getFirst().compareTo(p1.getFirst())).toList());

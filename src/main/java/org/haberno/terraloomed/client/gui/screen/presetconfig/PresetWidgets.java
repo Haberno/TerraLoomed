@@ -1,26 +1,26 @@
 package org.haberno.terraloomed.client.gui.screen.presetconfig;
 
-import java.util.Collection;
-import java.util.Optional;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.Consumer;
-import java.util.function.Function;
+import com.google.common.collect.ImmutableList;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.CyclingButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
-import com.google.common.collect.ImmutableList;
-import raccoonman.reterraforged.client.data.RTFTranslationKeys;
-import raccoonman.reterraforged.client.gui.Toasts;
-import raccoonman.reterraforged.client.gui.Tooltips;
-import raccoonman.reterraforged.client.gui.widget.Label;
-import raccoonman.reterraforged.client.gui.widget.Slider;
-import raccoonman.reterraforged.client.gui.widget.Slider.Format;
-import raccoonman.reterraforged.client.gui.widget.ValueButton;
+import org.haberno.terraloomed.client.data.RTFTranslationKeys;
+import org.haberno.terraloomed.client.gui.Toasts;
+import org.haberno.terraloomed.client.gui.Tooltips;
+import org.haberno.terraloomed.client.gui.widget.Label;
+import org.haberno.terraloomed.client.gui.widget.Slider;
+import org.haberno.terraloomed.client.gui.widget.Slider.Format;
+import org.haberno.terraloomed.client.gui.widget.ValueButton;
 
-@Deprecated
+import java.util.Collection;
+import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Consumer;
+import java.util.function.Function;
+
 final class PresetWidgets {
 	
 	public static TextFieldWidget createEditBox(TextRenderer font, Consumer<String> responder, Text prompt) {
@@ -75,7 +75,7 @@ final class PresetWidgets {
 	}
 	
 	public static CyclingButtonWidget<Boolean> createToggle(boolean initial, String text, CyclingButtonWidget.UpdateCallback<Boolean> callback) {
-		CyclingButtonWidget<Boolean> button = CyclingButtonWidget.onOffBuilder(Text.translatable(RTFTranslationKeys.GUI_BUTTON_TRUE), Text.translatable(RTFTranslationKeys.GUI_BUTTON_FALSE)).withInitialValue(initial).create(-1, -1, -1, -1, Text.translatable(text), callback);
+		CyclingButtonWidget<Boolean> button = CyclingButtonWidget.onOffBuilder(Text.translatable(RTFTranslationKeys.GUI_BUTTON_TRUE), Text.translatable(RTFTranslationKeys.GUI_BUTTON_FALSE)).initially(initial).build(-1, -1, -1, -1, Text.translatable(text), callback);
 		button.setTooltip(Tooltips.create(Tooltips.translationKey(text)));
 		return button;
 	}

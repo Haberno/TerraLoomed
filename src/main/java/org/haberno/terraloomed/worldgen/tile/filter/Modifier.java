@@ -1,7 +1,8 @@
 package org.haberno.terraloomed.worldgen.tile.filter;
 
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
+
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
 
 public interface Modifier {
     float getValueModifier(float value);

@@ -4,10 +4,10 @@ import com.mojang.serialization.Codec;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.math.floatprovider.FloatProvider;
 import net.minecraft.util.math.floatprovider.FloatProviderType;
-import raccoonman.reterraforged.platform.RegistryUtil;
+import org.haberno.terraloomed.platform.RegistryUtil;
 
 public class RTFFloatProviderTypes {
-	public static final FloatProviderType<LegacyCanyonYScale> LEGACY_CANYON_Y_SCALE = register("legacy_canyon_y_scale", LegacyCanyonYScale.VALUE_CODEC);
+	public static final FloatProviderType<LegacyCanyonYScale> LEGACY_CANYON_Y_SCALE = register("legacy_canyon_y_scale", LegacyCanyonYScale.CODEC);
 	
 	public static void bootstrap() {
 	}

@@ -1,11 +1,12 @@
 package org.haberno.terraloomed.worldgen.rivermap.river;
 
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil.Vec2f;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil.Vec2i;
-import raccoonman.reterraforged.world.worldgen.noise.module.Line;
-import raccoonman.reterraforged.world.worldgen.util.PosUtil;
-import raccoonman.reterraforged.world.worldgen.util.Variance;
+
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil.Vec2f;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil.Vec2i;
+import org.haberno.terraloomed.worldgen.noise.module.Line;
+import org.haberno.terraloomed.worldgen.util.PosUtil;
+import org.haberno.terraloomed.worldgen.util.Variance;
 
 public class River {
     public static final int VALLEY_WIDTH = 275;

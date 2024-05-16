@@ -1,11 +1,12 @@
 package org.haberno.terraloomed.data.preset;
 
+
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
-import raccoonman.reterraforged.data.preset.settings.ClimateSettings;
-import raccoonman.reterraforged.data.preset.settings.Preset;
-import raccoonman.reterraforged.data.preset.settings.WorldSettings;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.data.preset.settings.ClimateSettings;
+import org.haberno.terraloomed.data.preset.settings.Preset;
+import org.haberno.terraloomed.data.preset.settings.WorldSettings;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
 
 public class PresetClimateNoise {
 	public static final RegistryKey<Noise> BIOME_EDGE_SHAPE = createKey("biome_edge_shape");

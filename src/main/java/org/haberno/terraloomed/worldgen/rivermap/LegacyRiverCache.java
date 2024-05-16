@@ -1,6 +1,7 @@
 package org.haberno.terraloomed.worldgen.rivermap;
 
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
+
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
 
 public class LegacyRiverCache extends RiverCache {
 	

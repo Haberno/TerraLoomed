@@ -1,20 +1,21 @@
 package org.haberno.terraloomed.worldgen.densityfunction;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.common.collect.ImmutableList;
+import com.mojang.datafixers.util.Pair;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.dynamic.CodecHolder;
 import net.minecraft.util.dynamic.Codecs;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
 import net.minecraft.world.gen.densityfunction.DensityFunctionTypes;
-import com.google.common.collect.ImmutableList;
-import com.mojang.datafixers.util.Pair;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public record LinearSplineFunction(DensityFunction input, List<Pair<Double, DensityFunction>> points, double minValue, double maxValue) implements DensityFunction {
-	public static final Codec<LinearSplineFunction> REGISTRY_ENTRY_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+	public static final Codec<LinearSplineFunction> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 		DensityFunction.FUNCTION_CODEC.fieldOf("input").forGetter(LinearSplineFunction::input),
 		Codecs.nonEmptyList(Codec.pair(Codec.DOUBLE, DensityFunction.FUNCTION_CODEC).listOf()).fieldOf("points").forGetter(LinearSplineFunction::points)
 	).apply(instance, LinearSplineFunction::new));
@@ -65,7 +66,7 @@ public record LinearSplineFunction(DensityFunction input, List<Pair<Double, Dens
 
 	@Override
 	public CodecHolder<LinearSplineFunction> getCodecHolder() {
-		return new CodecHolder<>(REGISTRY_ENTRY_CODEC);
+		return new CodecHolder<>(CODEC);
 	}
 
 	public static Builder builder(DensityFunction input) {

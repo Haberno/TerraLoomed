@@ -9,10 +9,10 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.world.dimension.DimensionOptions;
 import net.minecraft.world.gen.placementmodifier.PlacementModifier;
 import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
-import raccoonman.reterraforged.platform.RegistryUtil;
-import raccoonman.reterraforged.world.worldgen.feature.placement.poisson.FastPoissonModifier;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
-import raccoonman.reterraforged.world.worldgen.terrain.Terrain;
+import org.haberno.terraloomed.platform.RegistryUtil;
+import org.haberno.terraloomed.worldgen.feature.placement.poisson.FastPoissonModifier;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.terrain.Terrain;
 
 public class RTFPlacementModifiers {
 	public static final PlacementModifierType<DimensionFilter> DIMENSION_FILTER = register("dimension_filter", DimensionFilter.CODEC);

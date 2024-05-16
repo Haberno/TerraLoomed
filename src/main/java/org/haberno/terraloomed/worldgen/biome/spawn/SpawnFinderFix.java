@@ -1,16 +1,16 @@
 package org.haberno.terraloomed.worldgen.biome.spawn;
 
-import java.util.List;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.source.BiomeCoords;
 import net.minecraft.world.biome.source.util.MultiNoiseUtil.MultiNoiseSampler;
 import net.minecraft.world.biome.source.util.MultiNoiseUtil.NoiseHypercube;
 import net.minecraft.world.biome.source.util.MultiNoiseUtil.NoiseValuePoint;
-import raccoonman.reterraforged.world.worldgen.biome.RTFClimateSampler;
+import org.haberno.terraloomed.worldgen.biome.RTFClimateSampler;
+
+import java.util.List;
 
 // TODO replace this with a mixin once we can get that working
-@Deprecated(forRemoval = true)
 public class SpawnFinderFix {
 	public Result result;
 

@@ -1,14 +1,15 @@
 package org.haberno.terraloomed.worldgen.continent.fancy;
 
-import java.util.Random;
 
-import raccoonman.reterraforged.data.preset.settings.WorldSettings.ControlPoints;
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil.Vec2f;
-import raccoonman.reterraforged.world.worldgen.rivermap.RiverGenerator;
-import raccoonman.reterraforged.world.worldgen.rivermap.Rivermap;
-import raccoonman.reterraforged.world.worldgen.util.PosUtil;
+import org.haberno.terraloomed.data.preset.settings.WorldSettings.ControlPoints;
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil.Vec2f;
+import org.haberno.terraloomed.worldgen.rivermap.RiverGenerator;
+import org.haberno.terraloomed.worldgen.rivermap.Rivermap;
+import org.haberno.terraloomed.worldgen.util.PosUtil;
+
+import java.util.Random;
 
 public class FancyContinent implements RiverGenerator {
 	private Island[] islands;

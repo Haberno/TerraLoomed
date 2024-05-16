@@ -1,6 +1,5 @@
 package org.haberno.terraloomed.data.preset;
 
-import java.util.stream.Stream;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKey;
@@ -11,10 +10,13 @@ import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
 import net.minecraft.util.math.noise.InterpolatedNoiseSampler;
 import net.minecraft.world.biome.source.util.VanillaTerrainParametersCreator;
 import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.gen.OreVeinSampler;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
 import net.minecraft.world.gen.densityfunction.DensityFunctionTypes;
 import net.minecraft.world.gen.noise.NoiseParametersKeys;
 import net.minecraft.world.gen.noise.NoiseRouter;
+
+import java.util.stream.Stream;
 
 public class NoiseRouterData {
     public static final float GLOBAL_OFFSET = -0.50375f;
@@ -137,8 +139,8 @@ public class NoiseRouterData {
     public static DensityFunction entrances(RegistryEntryLookup<DensityFunction> holderGetter, RegistryEntryLookup<DoublePerlinNoiseSampler.NoiseParameters> holderGetter2) {
         DensityFunction densityFunction = DensityFunctionTypes.cacheOnce(DensityFunctionTypes.noise(holderGetter2.getOrThrow(NoiseParametersKeys.SPAGHETTI_3D_RARITY), 2.0, 1.0));
         DensityFunction densityFunction2 = DensityFunctionTypes.noiseInRange(holderGetter2.getOrThrow(NoiseParametersKeys.SPAGHETTI_3D_THICKNESS), -0.065, -0.088);
-        DensityFunction densityFunction3 = DensityFunctionTypes.weirdScaledSampler(densityFunction, holderGetter2.getOrThrow(NoiseParametersKeys.SPAGHETTI_3D_1), DensityFunctions.WeirdScaledSampler.RarityValueMapper.TYPE1);
-        DensityFunction densityFunction4 = DensityFunctionTypes.weirdScaledSampler(densityFunction, holderGetter2.getOrThrow(NoiseParametersKeys.SPAGHETTI_3D_2), DensityFunctions.WeirdScaledSampler.RarityValueMapper.TYPE1);
+        DensityFunction densityFunction3 = DensityFunctionTypes.weirdScaledSampler(densityFunction, holderGetter2.getOrThrow(NoiseParametersKeys.SPAGHETTI_3D_1), DensityFunctionTypes.WeirdScaledSampler.RarityValueMapper.TYPE1);
+        DensityFunction densityFunction4 = DensityFunctionTypes.weirdScaledSampler(densityFunction, holderGetter2.getOrThrow(NoiseParametersKeys.SPAGHETTI_3D_2), DensityFunctionTypes.WeirdScaledSampler.RarityValueMapper.TYPE1);
         DensityFunction densityFunction5 = DensityFunctionTypes.add(DensityFunctionTypes.max(densityFunction3, densityFunction4), densityFunction2).clamp(-1.0, 1.0);
         DensityFunction densityFunction6 = NoiseRouterData.getFunction(holderGetter, SPAGHETTI_ROUGHNESS_FUNCTION);
         DensityFunction densityFunction7 = DensityFunctionTypes.noise(holderGetter2.getOrThrow(NoiseParametersKeys.CAVE_ENTRANCE), 0.75, 0.5);
@@ -172,7 +174,7 @@ public class NoiseRouterData {
 
     private static DensityFunction spaghetti2D(RegistryEntryLookup<DensityFunction> holderGetter, RegistryEntryLookup<DoublePerlinNoiseSampler.NoiseParameters> holderGetter2) {
         DensityFunction densityFunction = DensityFunctionTypes.noise(holderGetter2.getOrThrow(NoiseParametersKeys.SPAGHETTI_2D_MODULATOR), 2.0, 1.0);
-        DensityFunction densityFunction2 = DensityFunctionTypes.weirdScaledSampler(densityFunction, holderGetter2.getOrThrow(NoiseParametersKeys.SPAGHETTI_2D), DensityFunctions.WeirdScaledSampler.RarityValueMapper.TYPE2);
+        DensityFunction densityFunction2 = DensityFunctionTypes.weirdScaledSampler(densityFunction, holderGetter2.getOrThrow(NoiseParametersKeys.SPAGHETTI_2D), DensityFunctionTypes.WeirdScaledSampler.RarityValueMapper.TYPE2);
         DensityFunction densityFunction3 = DensityFunctionTypes.noiseInRange(holderGetter2.getOrThrow(NoiseParametersKeys.SPAGHETTI_2D_ELEVATION), 0.0, Math.floorDiv(-64, 8), 8.0);
         DensityFunction densityFunction4 = NoiseRouterData.getFunction(holderGetter, SPAGHETTI_2D_THICKNESS_MODULATOR);
         DensityFunction densityFunction5 = DensityFunctionTypes.add(densityFunction3, DensityFunctionTypes.yClampedGradient(-64, 320, 8.0, -40.0)).abs();
@@ -218,8 +220,8 @@ public class NoiseRouterData {
         DensityFunction densityFunction14 = DensityFunctionTypes.rangeChoice(densityFunction12, -1000000.0, 1.5625, densityFunction13, NoiseRouterData.underground(holderGetter, holderGetter2, densityFunction12));
         DensityFunction densityFunction15 = DensityFunctionTypes.min(NoiseRouterData.postProcess(NoiseRouterData.slideOverworld(bl2, densityFunction14)), NoiseRouterData.getFunction(holderGetter, NOODLE));
         DensityFunction densityFunction16 = NoiseRouterData.getFunction(holderGetter, Y);
-        int i = Stream.of(OreVeinifier.VeinType.values()).mapToInt(veinType -> veinType.minY).min().orElse(-DimensionType.MIN_HEIGHT * 2);
-        int j = Stream.of(OreVeinifier.VeinType.values()).mapToInt(veinType -> veinType.maxY).max().orElse(-DimensionType.MIN_HEIGHT * 2);
+        int i = Stream.of(OreVeinSampler.VeinType.values()).mapToInt(veinType -> veinType.minY).min().orElse(-DimensionType.MIN_HEIGHT * 2);
+        int j = Stream.of(OreVeinSampler.VeinType.values()).mapToInt(veinType -> veinType.maxY).max().orElse(-DimensionType.MIN_HEIGHT * 2);
         DensityFunction densityFunction17 = NoiseRouterData.yLimitedInterpolatable(densityFunction16, DensityFunctionTypes.noise(holderGetter2.getOrThrow(NoiseParametersKeys.ORE_VEININESS), 1.5, 1.5), i, j, 0);
         float f = 4.0f;
         DensityFunction densityFunction18 = NoiseRouterData.yLimitedInterpolatable(densityFunction16, DensityFunctionTypes.noise(holderGetter2.getOrThrow(NoiseParametersKeys.ORE_VEIN_A), 4.0, 4.0), i, j, 0).abs();

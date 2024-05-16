@@ -1,7 +1,8 @@
 package org.haberno.terraloomed.worldgen.rivermap.lake;
 
-import raccoonman.reterraforged.data.preset.settings.RiverSettings;
-import raccoonman.reterraforged.world.worldgen.heightmap.Levels;
+
+import org.haberno.terraloomed.data.preset.settings.RiverSettings;
+import org.haberno.terraloomed.worldgen.heightmap.Levels;
 
 public class LakeConfig {
     public float depth;

@@ -1,6 +1,7 @@
 package org.haberno.terraloomed.worldgen.continent.fancy;
 
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil.Vec2f;
+
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil.Vec2f;
 
 public class Segment {
 	public Vec2f a;

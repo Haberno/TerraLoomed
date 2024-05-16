@@ -2,8 +2,7 @@ package org.haberno.terraloomed.worldgen.noise.function;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
 
 record SCurveFunction(float lower, float upper) implements CurveFunction {
 	public static final Codec<SCurveFunction> CODEC = RecordCodecBuilder.create(instance -> instance.group(

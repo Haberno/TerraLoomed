@@ -1,8 +1,8 @@
 package org.haberno.terraloomed.client.gui.screen.presetconfig;
 
-import java.awt.Color;
-import java.io.IOException;
-import java.util.Optional;
+import com.google.common.collect.ImmutableList;
+import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.Mouse;
 import net.minecraft.client.font.TextRenderer;
@@ -20,28 +20,29 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
-import raccoonman.reterraforged.RTFCommon;
-import raccoonman.reterraforged.client.data.RTFTranslationKeys;
-import raccoonman.reterraforged.client.gui.screen.page.BisectedPage;
-import raccoonman.reterraforged.client.gui.screen.presetconfig.PresetListPage.PresetEntry;
-import raccoonman.reterraforged.client.gui.widget.Slider;
-import raccoonman.reterraforged.client.gui.widget.ValueButton;
-import raccoonman.reterraforged.concurrent.cache.CacheManager;
-import raccoonman.reterraforged.config.PerformanceConfig;
-import raccoonman.reterraforged.data.preset.PresetData;
-import raccoonman.reterraforged.data.preset.settings.Preset;
-import raccoonman.reterraforged.data.preset.settings.WorldSettings;
-import raccoonman.reterraforged.registries.RTFRegistries;
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.biome.spawn.SpawnType;
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.heightmap.Levels;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.tile.Tile;
-import raccoonman.reterraforged.world.worldgen.util.PosUtil;
+import org.haberno.terraloomed.RTFCommon;
+import org.haberno.terraloomed.client.data.RTFTranslationKeys;
+import org.haberno.terraloomed.client.gui.screen.page.BisectedPage;
+import org.haberno.terraloomed.client.gui.screen.presetconfig.PresetListPage.PresetEntry;
+import org.haberno.terraloomed.client.gui.widget.Slider;
+import org.haberno.terraloomed.client.gui.widget.ValueButton;
+import org.haberno.terraloomed.concurrent.cache.CacheManager;
+import org.haberno.terraloomed.config.PerformanceConfig;
+import org.haberno.terraloomed.data.preset.PresetData;
+import org.haberno.terraloomed.data.preset.settings.Preset;
+import org.haberno.terraloomed.data.preset.settings.WorldSettings;
+import org.haberno.terraloomed.registries.RTFRegistries;
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.biome.spawn.SpawnType;
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.heightmap.Levels;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.tile.Tile;
+import org.haberno.terraloomed.worldgen.util.PosUtil;
+
+import java.awt.*;
+import java.io.IOException;
+import java.util.Optional;
 
 public abstract class PresetEditorPage extends BisectedPage<PresetConfigScreen, ClickableWidget, ClickableWidget> {
 	private Slider zoom;
@@ -79,10 +80,11 @@ public abstract class PresetEditorPage extends BisectedPage<PresetConfigScreen, 
 		this.renderMode = PresetWidgets.createCycle(ImmutableList.copyOf(RenderMode.values()), this.renderMode != null ? this.renderMode.getValue() : RenderMode.BIOME_TYPE, Optional.empty(), (button, value) -> {
 			this.regenerate();
 		}, RenderMode::name);
-		this.seed = PresetWidgets.createRandomButton(RTFTranslationKeys.GUI_BUTTON_SEED, (int) this.screen.getSettings().options().seed(), (i) -> {
+		this.seed = PresetWidgets.createRandomButton(RTFTranslationKeys.GUI_BUTTON_SEED, (int) this.screen.getSettings().generatorOptions().getSeed(), (i) -> {
 			this.screen.setSeed(i);
 			this.regenerate();
 		});
+
 
 		this.preview = new Preview();
 		this.preview.regenerate();
@@ -121,7 +123,7 @@ public abstract class PresetEditorPage extends BisectedPage<PresetConfigScreen, 
 	    public static final int SIZE = (1 << 4) << FACTOR;
 	    private static final float[] LEGEND_SCALES = { 1, 0.9F, 0.75F, 0.6F };
 	    private NativeImageBackedTexture texture = new NativeImageBackedTexture(new NativeImage(SIZE, SIZE, false));
-	    private Identifier textureId = MinecraftClient.getInstance().getTextureManager().registerTexture(RTFCommon.MOD_ID + "-preview-framebuffer", this.texture); 
+	    private Identifier textureId = MinecraftClient.getInstance().getTextureManager().registerDynamicTexture(RTFCommon.MOD_ID + "-preview-framebuffer", this.texture);
 	    private Tile tile;
 	    private int centerX, centerZ;
 	    
@@ -139,7 +141,7 @@ public abstract class PresetEditorPage extends BisectedPage<PresetConfigScreen, 
 	        	if(b instanceof Preview self) {
 			        if (self.updateLegend((int) mouse.getX(), (int) mouse.getY()) && !self.hoveredCoords.isEmpty()) {
 			            self.playDownSound(MinecraftClient.getInstance().getSoundManager());
-			            PresetEditorPage.this.screen.minecraft.keyboardHandler.setClipboard(self.hoveredCoords);
+			            PresetEditorPage.this.screen.client.keyboard.setClipboard(self.hoveredCoords);
 			        }
 	        	}
 	        }, DEFAULT_NARRATION_SUPPLIER);
@@ -183,9 +185,9 @@ public abstract class PresetEditorPage extends BisectedPage<PresetConfigScreen, 
 	        NativeImage pixels = this.texture.getImage();
 	        this.tile.iterate((cell, x, z) -> {
 	            if (x < stroke || z < stroke || x >= width - stroke || z >= width - stroke) {
-	                pixels.setPixelRGBA(x, z, Color.BLACK.getRGB());
+	                pixels.setColor(x, z, Color.BLACK.getRGB());
 	            } else {
-	                pixels.setPixelRGBA(x, z, renderMode.getColor(cell, levels));
+	                pixels.setColor(x, z, renderMode.getColor(cell, levels));
 	            }
 	        });
 	        this.texture.upload();
@@ -198,7 +200,7 @@ public abstract class PresetEditorPage extends BisectedPage<PresetConfigScreen, 
 	    }
 
 	    @Override
-	    public void render(DrawContext guiGraphics, int mx, int my, float partialTicks) {
+	    public void renderWidget(DrawContext guiGraphics, int mx, int my, float partialTicks) {
 	    	int x = this.getX();
 	    	int y = this.getY();
 	    	
@@ -246,7 +248,7 @@ public abstract class PresetEditorPage extends BisectedPage<PresetConfigScreen, 
 	    }
 
 	    private float getLegendScale() {
-	        int index = PresetEditorPage.this.screen.minecraft.options.guiScale().get() - 1;
+	        int index = PresetEditorPage.this.screen.client.options.guiScale.getValue() - 1;
 	        if (index < 0 || index >= LEGEND_SCALES.length) {
 	            // index=-1 == GuiScale(AUTO) which is the same as GuiScale(4)
 	            // values above 4 don't exist but who knows what mods might try set it to

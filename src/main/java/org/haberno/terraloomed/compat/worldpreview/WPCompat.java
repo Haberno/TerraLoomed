@@ -1,6 +1,7 @@
 package org.haberno.terraloomed.compat.worldpreview;
 
-import raccoonman.reterraforged.platform.ModLoaderUtil;
+
+import org.haberno.terraloomed.platform.ModLoaderUtil;
 
 public class WPCompat {
 	

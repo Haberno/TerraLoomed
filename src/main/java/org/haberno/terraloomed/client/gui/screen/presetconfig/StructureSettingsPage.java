@@ -1,7 +1,5 @@
 package org.haberno.terraloomed.client.gui.screen.presetconfig;
 
-import java.util.Optional;
-import java.util.Set;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.structure.StructureSet;
 import net.minecraft.structure.StructureSet.WeightedEntry;
@@ -9,13 +7,13 @@ import net.minecraft.text.Text;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.dimension.DimensionOptionsRegistryHolder;
 import net.minecraft.world.gen.structure.Structure;
-import raccoonman.reterraforged.client.data.RTFTranslationKeys;
-import raccoonman.reterraforged.client.gui.screen.page.LinkedPageScreen.Page;
-import raccoonman.reterraforged.client.gui.screen.presetconfig.PresetListPage.PresetEntry;
-import raccoonman.reterraforged.client.gui.widget.Slider;
-import raccoonman.reterraforged.client.gui.widget.ValueButton;
-import raccoonman.reterraforged.data.preset.settings.Preset;
-import raccoonman.reterraforged.data.preset.settings.StructureSettings;
+import org.haberno.terraloomed.client.data.RTFTranslationKeys;
+import org.haberno.terraloomed.client.gui.screen.page.LinkedPageScreen.Page;
+import org.haberno.terraloomed.client.gui.screen.presetconfig.PresetListPage.PresetEntry;
+import org.haberno.terraloomed.data.preset.settings.Preset;
+
+import java.util.Optional;
+import java.util.Set;
 
 public class StructureSettingsPage extends PresetEditorPage {
 

@@ -1,11 +1,11 @@
 package org.haberno.terraloomed.platform;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.fabricmc.loader.api.FabricLoader;
 
 public class ModLoaderUtil {
-	
-	@ExpectPlatform
+
 	public static boolean isLoaded(String modId) {
-		throw new IllegalStateException();
+		return FabricLoader.getInstance().isModLoaded(modId);
+
 	}
 }

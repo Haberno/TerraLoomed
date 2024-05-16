@@ -1,6 +1,5 @@
 package org.haberno.terraloomed.worldgen.feature.template;
 
-import java.util.function.BiPredicate;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.ai.pathing.NavigationType;
@@ -9,6 +8,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.feature.TreeFeature;
+
+import java.util.function.BiPredicate;
 
 public class BlockUtils {
 

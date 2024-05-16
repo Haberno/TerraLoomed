@@ -1,8 +1,5 @@
 package org.haberno.terraloomed.mixin;
 
-import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.function.Predicate;
 import net.minecraft.block.BlockState;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.math.BlockPos;
@@ -12,13 +9,16 @@ import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.HeightLimitView;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.StructureAccessor;
-import net.minecraft.world.gen.chunk.Blender;
-import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
-import net.minecraft.world.gen.chunk.GenerationShapeConfig;
-import net.minecraft.world.gen.chunk.NoiseChunkGenerator;
-import net.minecraft.world.gen.chunk.VerticalBlockSample;
+import net.minecraft.world.gen.chunk.*;
 import net.minecraft.world.gen.noise.NoiseConfig;
 import org.apache.commons.lang3.mutable.MutableObject;
+import org.haberno.terraloomed.data.preset.settings.WorldSettings;
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.RTFRandomState;
+import org.haberno.terraloomed.worldgen.WorldGenFlags;
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.surface.SurfaceRegion;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,17 +27,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import raccoonman.reterraforged.data.preset.settings.WorldSettings;
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.RTFRandomState;
-import raccoonman.reterraforged.world.worldgen.WorldGenFlags;
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.surface.SurfaceRegion;
+
+import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.function.Predicate;
 
 @Mixin(value = NoiseChunkGenerator.class, priority = 9001 /* we need this so we don't break noisium */)
 class MixinNoiseBasedChunkGenerator {
-	
+
 	@Shadow
 	@Final
     private RegistryEntry<ChunkGeneratorSettings> settings;
@@ -55,11 +52,11 @@ class MixinNoiseBasedChunkGenerator {
 	@Redirect(
 		at = @At(
 			value = "INVOKE",
-			target = "Lnet/minecraft/world/level/levelgen/NoiseSettings;height()I"
+			target = "Lnet/minecraft/world/gen/chunk/GenerationShapeConfig;height()I"
 		),
-		method = { "fillFromNoise", "populateNoise" }
+		method = { "populateNoise" }
 	)
-    public int fillFromNoise(GenerationShapeConfig settings, Executor executor, Blender blender, NoiseConfig randomState, StructureAccessor structureManager, Chunk chunkAccess2) {
+    public int populateNoise(GenerationShapeConfig settings, Executor executor, Blender blender, NoiseConfig randomState, StructureAccessor structureManager, Chunk chunkAccess2) {
 		GeneratorContext generatorContext;
 		ChunkPos chunkPos = chunkAccess2.getPos();
 		if((Object) randomState instanceof RTFRandomState rtfRandomState && (generatorContext = rtfRandomState.generatorContext()) != null) {
@@ -72,12 +69,12 @@ class MixinNoiseBasedChunkGenerator {
 	@Redirect(
 		at = @At(
 			value = "INVOKE",
-			target = "Lnet/minecraft/world/level/levelgen/NoiseSettings;height()I"
+			target = "Lnet/minecraft/world/gen/chunk/GenerationShapeConfig;height()I"
 		),
 		require = 2,
-		method = { "iterateNoiseColumn", "sampleHeightmap" }
+		method = { "sampleHeightmap" }
 	)
-    private int iterateNoiseColumn(GenerationShapeConfig settings, HeightLimitView levelHeightAccessor, NoiseConfig randomState, int blockX, int blockZ, @Nullable MutableObject<VerticalBlockSample> mutableObject, @Nullable Predicate<BlockState> predicate) {
+    private int sampleHeightmap(GenerationShapeConfig settings, HeightLimitView levelHeightAccessor, NoiseConfig randomState, int blockX, int blockZ, @Nullable MutableObject<VerticalBlockSample> mutableObject, @Nullable Predicate<BlockState> predicate) {
 		GeneratorContext generatorContext;
 		if((Object) randomState instanceof RTFRandomState rtfRandomState && (generatorContext = rtfRandomState.generatorContext()) != null) {
 			return generatorContext.lookup.getGenerationHeight(ChunkSectionPos.getSectionCoord(blockX), ChunkSectionPos.getSectionCoord(blockZ), this.settings.value(), !WorldGenFlags.fastLookups());
@@ -88,9 +85,9 @@ class MixinNoiseBasedChunkGenerator {
 	
 	@Inject(
 		at = @At("TAIL"),
-		method = "addDebugScreenInfo"
+		method = "getDebugHudText"
 	)
-    private void addDebugScreenInfo(List<String> list, NoiseConfig randomState, BlockPos blockPos, CallbackInfo callback) {
+    private void getDebugHudText(List<String> list, NoiseConfig randomState, BlockPos blockPos, CallbackInfo callback) {
 		@Nullable
 		GeneratorContext generatorContext;
 		if((Object) randomState instanceof RTFRandomState rtfRandomState && (generatorContext = rtfRandomState.generatorContext()) != null) {

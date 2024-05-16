@@ -1,10 +1,11 @@
 package org.haberno.terraloomed.client.gui.screen.presetconfig;
 
-import java.awt.Color;
 
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.heightmap.Levels;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.heightmap.Levels;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+
+import java.awt.*;
 
 public enum RenderMode {
     BIOME_TYPE {

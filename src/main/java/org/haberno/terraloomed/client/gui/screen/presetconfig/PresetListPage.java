@@ -1,5 +1,35 @@
 package org.haberno.terraloomed.client.gui.screen.presetconfig;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonWriter;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.DataResult.PartialResult;
+import com.mojang.serialization.JsonOps;
+import io.netty.util.internal.StringUtil;
+import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.gui.widget.ClickableWidget;
+import net.minecraft.client.gui.widget.TextFieldWidget;
+import net.minecraft.client.toast.SystemToast;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.JsonHelper;
+import net.minecraft.util.Util;
+import org.apache.commons.compress.utils.FileNameUtils;
+import org.haberno.terraloomed.RTFCommon;
+import org.haberno.terraloomed.client.data.RTFTranslationKeys;
+import org.haberno.terraloomed.client.gui.Toasts;
+import org.haberno.terraloomed.client.gui.screen.page.BisectedPage;
+import org.haberno.terraloomed.client.gui.screen.page.LinkedPageScreen.Page;
+import org.haberno.terraloomed.client.gui.screen.presetconfig.PresetListPage.PresetEntry;
+import org.haberno.terraloomed.client.gui.widget.Label;
+import org.haberno.terraloomed.client.gui.widget.WidgetList;
+import org.haberno.terraloomed.client.gui.widget.WidgetList.Entry;
+import org.haberno.terraloomed.data.preset.settings.BuiltinPresets;
+import org.haberno.terraloomed.data.preset.settings.Preset;
+import org.haberno.terraloomed.platform.ConfigUtil;
+import org.jetbrains.annotations.Nullable;
+
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
@@ -11,39 +41,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
-import org.apache.commons.compress.utils.FileNameUtils;
-import org.haberno.map.client.gui.screen.presetconfig.PresetListPage.PresetEntry;
-import org.jetbrains.annotations.Nullable;
-
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonWriter;
-import com.mojang.serialization.DataResult;
-import com.mojang.serialization.DataResult.PartialResult;
-import com.mojang.serialization.JsonOps;
-
-import io.netty.util.internal.StringUtil;
-import net.minecraft.client.gui.components.toasts.SystemToast.SystemToastIds;
-import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.gui.widget.ClickableWidget;
-import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.JsonHelper;
-import raccoonman.reterraforged.RTFCommon;
-import raccoonman.reterraforged.client.data.RTFTranslationKeys;
-import raccoonman.reterraforged.client.gui.Toasts;
-import raccoonman.reterraforged.client.gui.screen.page.BisectedPage;
-import raccoonman.reterraforged.client.gui.screen.page.LinkedPageScreen.Page;
-import raccoonman.reterraforged.client.gui.screen.presetconfig.PresetListPage.PresetEntry;
-import raccoonman.reterraforged.client.gui.widget.Label;
-import raccoonman.reterraforged.client.gui.widget.WidgetList;
-import raccoonman.reterraforged.client.gui.widget.WidgetList.Entry;
-import raccoonman.reterraforged.data.preset.settings.BuiltinPresets;
-import raccoonman.reterraforged.data.preset.settings.Preset;
-import raccoonman.reterraforged.platform.ConfigUtil;
-
-class PresetListPage extends BisectedPage<PresetConfigScreen, org.haberno.map.client.gui.screen.presetconfig.PresetListPage.PresetEntry, ClickableWidget> {
+class PresetListPage extends BisectedPage<PresetConfigScreen, PresetEntry, ClickableWidget> {
 	private static final Path PRESET_PATH = ConfigUtil.rtf("presets");
 	private static final Path EXPORT_PATH = ConfigUtil.rtf("exports");
 	private static final Path LEGACY_PRESET_PATH = ConfigUtil.legacy("presets");
@@ -78,50 +76,50 @@ class PresetListPage extends BisectedPage<PresetConfigScreen, org.haberno.map.cl
 	public void init() {
 		super.init();
 		
-		this.input = PresetWidgets.createEditBox(this.screen.font, (text) -> {
+		this.input = PresetWidgets.createEditBox(this.screen.client.textRenderer, (text) -> {
 			boolean isValid = this.isValidPresetName(text);
 			final int white = 14737632;
 			final int red = 0xFFFF3F30;
 			this.createPreset.active = isValid;
-			this.input.setTextColor(isValid ? white : red);
-		}, Text.translatable(RTFTranslationKeys.GUI_INPUT_PROMPT).withStyle(Formatting.DARK_GRAY));
+			this.input.setEditableColor(isValid ? white : red);
+		}, Text.translatable(RTFTranslationKeys.GUI_INPUT_PROMPT).formatted(Formatting.DARK_GRAY));
 		this.createPreset = PresetWidgets.createThrowingButton(RTFTranslationKeys.GUI_BUTTON_CREATE, () -> {
-			new PresetEntry(Component.literal(this.input.getValue()), BuiltinPresets.makeLegacyDefault(), false, this).save();
+			new PresetEntry(Text.literal(this.input.getText()), BuiltinPresets.makeLegacyDefault(), false, this).save();
 			this.rebuildPresets();
-			this.input.setValue(StringUtil.EMPTY_STRING);
+			this.input.setText(StringUtil.EMPTY_STRING);
 		});
 		this.createPreset.active = this.isValidPresetName(this.input.getText());
 		this.copyPreset = PresetWidgets.createThrowingButton(RTFTranslationKeys.GUI_BUTTON_COPY, () -> {
-			PresetEntry preset = this.left.getSelected().getWidget();
+			PresetEntry preset = this.left.getSelectedOrNull().getWidget();
 			String name = preset.getName().getString();
 			int counter = 1;
 			String uniqueName;
 			while(Files.exists(PRESET_PATH.resolve((uniqueName = name + " (" + counter + ")") + ".json"))) { 
 				counter++;
 			}
-			new PresetEntry(Component.literal(uniqueName), preset.getPreset().copy(), false, this).save();
+			new PresetEntry(Text.literal(uniqueName), preset.getPreset().copy(), false, this).save();
 			this.rebuildPresets();
 		});
 		this.deletePreset = PresetWidgets.createThrowingButton(RTFTranslationKeys.GUI_BUTTON_DELETE, () -> {
-			PresetEntry preset = this.left.getSelected().getWidget();
+			PresetEntry preset = this.left.getSelectedOrNull().getWidget();
 			Files.delete(preset.getPath());
 			this.rebuildPresets();
 		});
 		this.openPresetFolder = PresetWidgets.createThrowingButton(RTFTranslationKeys.GUI_BUTTON_OPEN_PRESET_FOLDER, () -> {
-			Util.getPlatform().openUri(PRESET_PATH.toUri());
+			Util.getOperatingSystem().open(PRESET_PATH.toUri());
 			this.rebuildPresets();
 		});
 		this.openExportFolder = PresetWidgets.createThrowingButton(RTFTranslationKeys.GUI_BUTTON_OPEN_EXPORT_FOLDER, () -> {
-			Util.getPlatform().openUri(EXPORT_PATH.toUri());
+			Util.getOperatingSystem().open(EXPORT_PATH.toUri());
 			this.rebuildPresets();
 		});
 		this.exportAsDatapack = PresetWidgets.createThrowingButton(RTFTranslationKeys.GUI_BUTTON_EXPORT_AS_DATAPACK, () -> {
-			PresetEntry preset = this.left.getSelected().getWidget();
+			PresetEntry preset = this.left.getSelectedOrNull().getWidget();
 			Path path = EXPORT_PATH.resolve(preset.getName().getString() + ".zip");
 			this.screen.exportAsDatapack(path, preset);
 			this.rebuildPresets();
 			
-			Toasts.notify(RTFTranslationKeys.GUI_BUTTON_EXPORT_SUCCESS, Component.literal(path.toString()), SystemToastIds.WORLD_BACKUP);
+			Toasts.notify(RTFTranslationKeys.GUI_BUTTON_EXPORT_SUCCESS, Text.literal(path.toString()), SystemToast.Type.WORLD_BACKUP);
 		});
 
 		this.right.addWidget(this.input);
@@ -148,7 +146,7 @@ class PresetListPage extends BisectedPage<PresetConfigScreen, org.haberno.map.cl
 
 	@Override
 	public Optional<Page> next() {
-		return Optional.ofNullable(this.left).map(WidgetList::getSelected).map((e) -> {
+		return Optional.ofNullable(this.left).map(WidgetList::getSelectedOrNull).map((e) -> {
 			PresetEntry entry = e.getWidget();
 			if(entry.isBuiltin()) {
 				entry = new PresetEntry(entry.name, entry.preset.copy(), true, (b) -> {});
@@ -161,7 +159,7 @@ class PresetListPage extends BisectedPage<PresetConfigScreen, org.haberno.map.cl
 	public void onDone() {
 		super.onDone();
 		
-		Entry<org.haberno.map.client.gui.screen.presetconfig.PresetListPage.PresetEntry> selected = this.left.getSelected();
+		Entry<PresetEntry> selected = this.left.getSelectedOrNull();
 		if(selected != null) {
 			try {
 				this.screen.applyPreset(selected.getWidget());
@@ -171,7 +169,7 @@ class PresetListPage extends BisectedPage<PresetConfigScreen, org.haberno.map.cl
 		}
 	}
 	
-	private void selectPreset(@Nullable org.haberno.map.client.gui.screen.presetconfig.PresetListPage.PresetEntry entry) {
+	private void selectPreset(@Nullable PresetEntry entry) {
 		boolean active = entry != null;
 		
 		this.screen.doneButton.active = active;
@@ -184,16 +182,16 @@ class PresetListPage extends BisectedPage<PresetConfigScreen, org.haberno.map.cl
 	private void rebuildPresets() throws IOException {
 		this.selectPreset(null);
 		
-		List<org.haberno.map.client.gui.screen.presetconfig.PresetListPage.PresetEntry> entries = new ArrayList<>();
+		List<PresetEntry> entries = new ArrayList<>();
 		entries.addAll(this.listPresets(PRESET_PATH));
 		entries.addAll(this.listPresets(LEGACY_PRESET_PATH));
 
-		entries.add(new org.haberno.map.client.gui.screen.presetconfig.PresetListPage.PresetEntry(Text.translatable(RTFTranslationKeys.GUI_DEFAULT_PRESET_NAME).withStyle(Formatting.GRAY), BuiltinPresets.makeDefault(), true, this));
-		entries.add(new org.haberno.map.client.gui.screen.presetconfig.PresetListPage.PresetEntry(Text.translatable(RTFTranslationKeys.GUI_DEFAULT_LEGACY_PRESET_NAME).withStyle(Formatting.GRAY), BuiltinPresets.makeLegacyDefault(), true, this));
-		entries.add(new org.haberno.map.client.gui.screen.presetconfig.PresetListPage.PresetEntry(Text.translatable(RTFTranslationKeys.GUI_BEAUTIFUL_PRESET_NAME).withStyle(Formatting.GRAY), BuiltinPresets.makeLegacyBeautiful(), true, this));
-		entries.add(new org.haberno.map.client.gui.screen.presetconfig.PresetListPage.PresetEntry(Text.translatable(RTFTranslationKeys.GUI_HUGE_BIOMES_PRESET_NAME).withStyle(Formatting.GRAY), BuiltinPresets.makeLegacyHugeBiomes(), true, this));
-		entries.add(new org.haberno.map.client.gui.screen.presetconfig.PresetListPage.PresetEntry(Text.translatable(RTFTranslationKeys.GUI_LITE_PRESET_NAME).withStyle(Formatting.GRAY), BuiltinPresets.makeLegacyLite(), true, this));
-		entries.add(new org.haberno.map.client.gui.screen.presetconfig.PresetListPage.PresetEntry(Text.translatable(RTFTranslationKeys.GUI_VANILLAISH_PRESET_NAME).withStyle(Formatting.GRAY), BuiltinPresets.makeLegacyVanillaish(), true, this));
+		entries.add(new PresetEntry(Text.translatable(RTFTranslationKeys.GUI_DEFAULT_PRESET_NAME).formatted(Formatting.GRAY), BuiltinPresets.makeDefault(), true, this));
+		entries.add(new PresetEntry(Text.translatable(RTFTranslationKeys.GUI_DEFAULT_LEGACY_PRESET_NAME).formatted(Formatting.GRAY), BuiltinPresets.makeLegacyDefault(), true, this));
+		entries.add(new PresetEntry(Text.translatable(RTFTranslationKeys.GUI_BEAUTIFUL_PRESET_NAME).formatted(Formatting.GRAY), BuiltinPresets.makeLegacyBeautiful(), true, this));
+		entries.add(new PresetEntry(Text.translatable(RTFTranslationKeys.GUI_HUGE_BIOMES_PRESET_NAME).formatted(Formatting.GRAY), BuiltinPresets.makeLegacyHugeBiomes(), true, this));
+		entries.add(new PresetEntry(Text.translatable(RTFTranslationKeys.GUI_LITE_PRESET_NAME).formatted(Formatting.GRAY), BuiltinPresets.makeLegacyLite(), true, this));
+		entries.add(new PresetEntry(Text.translatable(RTFTranslationKeys.GUI_VANILLAISH_PRESET_NAME).formatted(Formatting.GRAY), BuiltinPresets.makeLegacyVanillaish(), true, this));
 		this.left.replaceEntries(entries.stream().map(WidgetList.Entry::new).toList());
 	}
 	
@@ -207,8 +205,8 @@ class PresetListPage extends BisectedPage<PresetConfigScreen, org.haberno.map.cl
 		}).findAny().isPresent();
 	}
 	
-	private List<org.haberno.map.client.gui.screen.presetconfig.PresetListPage.PresetEntry> listPresets(Path path) throws IOException	{
-		List<org.haberno.map.client.gui.screen.presetconfig.PresetListPage.PresetEntry> presets = new ArrayList<>();
+	private List<PresetEntry> listPresets(Path path) throws IOException	{
+		List<PresetEntry> presets = new ArrayList<>();
 		if(Files.exists(path)) {
 			for(Path presetPath : Files.list(path)
 				.filter(Files::isRegularFile)
@@ -223,7 +221,7 @@ class PresetListPage extends BisectedPage<PresetConfigScreen, org.haberno.map.cl
 						continue;
 					}
 					Preset preset = result.result().get();
-					presets.add(new org.haberno.map.client.gui.screen.presetconfig.PresetListPage.PresetEntry(Text.literal(base), preset, false, this));
+					presets.add(new PresetEntry(Text.literal(base), preset, false, this));
 				}
 			}
 		}
@@ -235,7 +233,7 @@ class PresetListPage extends BisectedPage<PresetConfigScreen, org.haberno.map.cl
 		private Preset preset;
 		private boolean builtin;
 		
-		public PresetEntry(Text name, Preset preset, boolean builtin, OnPress onPress) {
+		public PresetEntry(Text name, Preset preset, boolean builtin, PressAction onPress) {
 			super(-1, -1, -1, -1, onPress, name);
 			
 			this.name = name;

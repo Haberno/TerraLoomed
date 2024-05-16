@@ -7,10 +7,9 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.carver.ConfiguredCarver;
 import net.minecraft.world.gen.feature.PlacedFeature;
-import raccoonman.reterraforged.RTFCommon;
-import raccoonman.reterraforged.data.preset.settings.MiscellaneousSettings;
-import raccoonman.reterraforged.data.preset.settings.Preset;
-import raccoonman.reterraforged.world.worldgen.biome.RTFBiomes;
+import org.haberno.terraloomed.RTFCommon;
+import org.haberno.terraloomed.data.preset.settings.MiscellaneousSettings;
+import org.haberno.terraloomed.data.preset.settings.Preset;
 
 public final class PresetBiomeData {
     public static final RegistryKey<Biome> BRYCE = createKey("bryce");

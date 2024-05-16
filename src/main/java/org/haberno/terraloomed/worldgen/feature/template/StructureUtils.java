@@ -1,12 +1,13 @@
 package org.haberno.terraloomed.worldgen.feature.template;
 
-import java.util.Map;
+import it.unimi.dsi.fastutil.longs.LongSet;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.structure.Structure;
-import it.unimi.dsi.fastutil.longs.LongSet;
+
+import java.util.Map;
 
 public class StructureUtils {
 

@@ -1,11 +1,8 @@
 package org.haberno.terraloomed.worldgen.feature;
 
-import java.util.function.Predicate;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.GrassBlock;
-import net.minecraft.block.SnowBlock;
-import net.minecraft.block.SpreadableBlock;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.block.*;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.math.BlockPos;
@@ -19,35 +16,35 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import net.minecraft.world.gen.noise.NoiseConfig;
-import org.haberno.map.worldgen.feature.ErodeSnowFeature.Config;
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.RTFRandomState;
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.feature.ErodeSnowFeature.Config;
+import org.haberno.terraloomed.worldgen.heightmap.Levels;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.noise.module.Noises;
+import org.haberno.terraloomed.worldgen.terrain.TerrainType;
+import org.haberno.terraloomed.worldgen.tile.Tile;
 import org.jetbrains.annotations.Nullable;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.RTFRandomState;
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.feature.ErodeSnowFeature.Config;
-import raccoonman.reterraforged.world.worldgen.heightmap.Levels;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noises;
-import raccoonman.reterraforged.world.worldgen.terrain.TerrainType;
-import raccoonman.reterraforged.world.worldgen.tile.Tile;
 
-public class ErodeSnowFeature extends Feature<org.haberno.map.worldgen.feature.ErodeSnowFeature.Config> {
+import java.util.function.Predicate;
+
+public class ErodeSnowFeature extends Feature<Config> {
     private static final float MIN = min(SnowBlock.LAYERS);
     private static final float MAX = max(SnowBlock.LAYERS);
 
-	public ErodeSnowFeature(Codec<org.haberno.map.worldgen.feature.ErodeSnowFeature.Config> codec) {
+	public ErodeSnowFeature(Codec<Config> codec) {
 		super(codec);
 	}
 
 	@Override
-	public boolean generate(FeatureContext<org.haberno.map.worldgen.feature.ErodeSnowFeature.Config> placeContext) {
+	public boolean generate(FeatureContext<Config> placeContext) {
 		StructureWorldAccess level = placeContext.getWorld();
 		NoiseConfig randomState = level.toServerWorld().getChunkManager().getNoiseConfig();
-		
+
+
 		@Nullable
 		GeneratorContext generatorContext;
 		if((Object) randomState instanceof RTFRandomState rtfRandomState && (generatorContext = rtfRandomState.generatorContext()) != null) {
@@ -57,11 +54,11 @@ public class ErodeSnowFeature extends Feature<org.haberno.map.worldgen.feature.E
 			int chunkZ = chunkPos.z;
 			Chunk chunk = level.getChunk(chunkX, chunkZ);
 			Tile.Chunk tileChunk = generatorContext.cache.provideAtChunk(chunkX, chunkZ).getChunkReader(chunkX, chunkZ);
-			raccoonman.reterraforged.world.worldgen.heightmap.Heightmap heightmap = generatorContext.localHeightmap.get();
+			org.haberno.terraloomed.worldgen.heightmap.Heightmap heightmap = generatorContext.localHeightmap.get();
 			Levels levels = heightmap.levels();
 			Noise rand = Noises.white(heightmap.climate().randomSeed(), 1);
 			BlockPos.Mutable pos = new BlockPos.Mutable();
-			org.haberno.map.worldgen.feature.ErodeSnowFeature.Config config = placeContext.getConfig();
+			Config config = placeContext.getConfig();
 			
 			for(int x = 0; x < 16; x++) {
 				for(int z = 0; z < 16; z++) {
@@ -121,7 +118,7 @@ public class ErodeSnowFeature extends Feature<org.haberno.map.worldgen.feature.E
 		}
 	}
 
-    private static boolean snowErosion(org.haberno.map.worldgen.feature.ErodeSnowFeature.Config config, float x, float z, float steepness, float height) {
+    private static boolean snowErosion(Config config, float x, float z, float steepness, float height) {
         return /*steepness > erodeConfig.rockSteepness() ||*/ (steepness * 0.55F > config.steepness());// && height > config.height() || (steepness > erodeConfig.dirtSteepness() && height > ColumnDecorator.sampleNoise(x, z, erodeConfig.dirtVar(), erodeConfig.dirtMin()));
     }
 
@@ -197,13 +194,13 @@ public class ErodeSnowFeature extends Feature<org.haberno.map.worldgen.feature.E
     }
 
 	public record Config(float steepness, float height, boolean erode, boolean smooth, float slopeModifier, float heightModifier) implements FeatureConfig {
-		public static final Codec<org.haberno.map.worldgen.feature.ErodeSnowFeature.Config> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			Codec.FLOAT.fieldOf("steepness").forGetter(org.haberno.map.worldgen.feature.ErodeSnowFeature.Config::steepness),
-			Codec.FLOAT.fieldOf("height").forGetter(org.haberno.map.worldgen.feature.ErodeSnowFeature.Config::height),
-			Codec.BOOL.fieldOf("erode").forGetter(org.haberno.map.worldgen.feature.ErodeSnowFeature.Config::erode),
-			Codec.BOOL.fieldOf("smooth").forGetter(org.haberno.map.worldgen.feature.ErodeSnowFeature.Config::smooth),
-			Codec.FLOAT.fieldOf("slope_modifier").forGetter(org.haberno.map.worldgen.feature.ErodeSnowFeature.Config::slopeModifier),
-			Codec.FLOAT.fieldOf("height_modifier").forGetter(org.haberno.map.worldgen.feature.ErodeSnowFeature.Config::heightModifier)
-		).apply(instance, org.haberno.map.worldgen.feature.ErodeSnowFeature.Config::new));
+		public static final Codec<Config> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+			Codec.FLOAT.fieldOf("steepness").forGetter(Config::steepness),
+			Codec.FLOAT.fieldOf("height").forGetter(Config::height),
+			Codec.BOOL.fieldOf("erode").forGetter(Config::erode),
+			Codec.BOOL.fieldOf("smooth").forGetter(Config::smooth),
+			Codec.FLOAT.fieldOf("slope_modifier").forGetter(Config::slopeModifier),
+			Codec.FLOAT.fieldOf("height_modifier").forGetter(Config::heightModifier)
+		).apply(instance, Config::new));
 	}
 }

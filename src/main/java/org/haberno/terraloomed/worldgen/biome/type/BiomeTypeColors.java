@@ -1,6 +1,6 @@
 package org.haberno.terraloomed.worldgen.biome.type;
 
-import java.awt.Color;
+import java.awt.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;

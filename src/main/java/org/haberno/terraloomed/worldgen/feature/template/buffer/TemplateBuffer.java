@@ -4,10 +4,10 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.WorldAccess;
-import raccoonman.reterraforged.world.worldgen.feature.template.paste.PasteConfig;
-import raccoonman.reterraforged.world.worldgen.feature.template.placement.TemplatePlacement;
-import raccoonman.reterraforged.world.worldgen.feature.template.template.BlockInfo;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.feature.template.paste.PasteConfig;
+import org.haberno.terraloomed.worldgen.feature.template.placement.TemplatePlacement;
+import org.haberno.terraloomed.worldgen.feature.template.template.BlockInfo;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
 
 public class TemplateBuffer extends PasteBuffer {
     private WorldAccess world;
@@ -33,7 +33,7 @@ public class TemplateBuffer extends PasteBuffer {
             return;
         }
 
-        if (!config.pasteAir() && block.state().is(Blocks.AIR)) {
+        if (!config.pasteAir() && block.state().isOf(Blocks.AIR)) {
             return;
         }
 

@@ -1,13 +1,14 @@
 package org.haberno.terraloomed.data.preset;
 
-import java.util.OptionalLong;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.dimension.DimensionTypes;
-import raccoonman.reterraforged.data.preset.settings.Preset;
-import raccoonman.reterraforged.data.preset.settings.WorldSettings;
+import org.haberno.terraloomed.data.preset.settings.Preset;
+import org.haberno.terraloomed.data.preset.settings.WorldSettings;
+
+import java.util.OptionalLong;
 
 public final class PresetDimensionTypes {
 	

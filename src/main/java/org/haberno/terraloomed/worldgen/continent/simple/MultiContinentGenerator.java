@@ -1,7 +1,8 @@
 package org.haberno.terraloomed.worldgen.continent.simple;
 
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.util.Seed;
+
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.util.Seed;
 
 public class MultiContinentGenerator extends ContinentGenerator {
 	

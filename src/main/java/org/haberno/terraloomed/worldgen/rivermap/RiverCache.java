@@ -1,11 +1,12 @@
 package org.haberno.terraloomed.worldgen.rivermap;
 
-import java.util.concurrent.TimeUnit;
 
-import raccoonman.reterraforged.concurrent.cache.Cache;
-import raccoonman.reterraforged.concurrent.cache.CacheManager;
-import raccoonman.reterraforged.concurrent.cache.map.StampedLongMap;
-import raccoonman.reterraforged.world.worldgen.util.PosUtil;
+import org.haberno.terraloomed.concurrent.cache.Cache;
+import org.haberno.terraloomed.concurrent.cache.CacheManager;
+import org.haberno.terraloomed.concurrent.cache.map.StampedLongMap;
+import org.haberno.terraloomed.worldgen.util.PosUtil;
+
+import java.util.concurrent.TimeUnit;
 
 public class RiverCache {
     protected RiverGenerator generator;

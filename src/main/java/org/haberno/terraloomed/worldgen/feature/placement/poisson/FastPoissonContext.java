@@ -1,7 +1,8 @@
 package org.haberno.terraloomed.worldgen.feature.placement.poisson;
 
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
+
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
 
 public record FastPoissonContext(int radius, float jitter, float frequency, Noise density) {
 

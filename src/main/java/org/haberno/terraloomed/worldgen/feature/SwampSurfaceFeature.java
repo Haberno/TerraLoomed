@@ -13,21 +13,20 @@ import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.util.FeatureContext;
-import org.haberno.map.worldgen.feature.SwampSurfaceFeature.Config;
-import raccoonman.reterraforged.world.worldgen.feature.SwampSurfaceFeature.Config;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noises;
+import org.haberno.terraloomed.worldgen.feature.SwampSurfaceFeature.Config;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.noise.module.Noises;
 
-public class SwampSurfaceFeature extends Feature<org.haberno.map.worldgen.feature.SwampSurfaceFeature.Config> {
+public class SwampSurfaceFeature extends Feature<Config> {
 	private static final Noise MATERIAL_NOISE = makeMaterialNoise();
 	
-	public SwampSurfaceFeature(Codec<org.haberno.map.worldgen.feature.SwampSurfaceFeature.Config> codec) {
+	public SwampSurfaceFeature(Codec<Config> codec) {
 		super(codec);
 	}
 
 	@Override
-	public boolean generate(FeatureContext<org.haberno.map.worldgen.feature.SwampSurfaceFeature.Config> ctx) {
-		org.haberno.map.worldgen.feature.SwampSurfaceFeature.Config config = ctx.getConfig();
+	public boolean generate(FeatureContext<Config> ctx) {
+		Config config = ctx.getConfig();
 		BlockPos origin = ctx.getOrigin();
 		StructureWorldAccess level = ctx.getWorld();
 		ChunkGenerator generator = ctx.getGenerator();
@@ -71,7 +70,7 @@ public class SwampSurfaceFeature extends Feature<org.haberno.map.worldgen.featur
 		return true;
 	}
 
-    private static BlockState getMaterial(int x, int y, int z, int waterY, org.haberno.map.worldgen.feature.SwampSurfaceFeature.Config config) {
+    private static BlockState getMaterial(int x, int y, int z, int waterY, Config config) {
         float value = MATERIAL_NOISE.compute(x, z, 0);
         if (value > 0.6F) {
             if (value < 0.75F && y < waterY) {
@@ -88,10 +87,10 @@ public class SwampSurfaceFeature extends Feature<org.haberno.map.worldgen.featur
     }
     
     public record Config(BlockState clayMaterial, BlockState gravelMaterial, BlockState dirtMaterial) implements FeatureConfig {
-    	public static final Codec<org.haberno.map.worldgen.feature.SwampSurfaceFeature.Config> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-    		BlockState.CODEC.fieldOf("clay_material").forGetter(org.haberno.map.worldgen.feature.SwampSurfaceFeature.Config::clayMaterial),
-    		BlockState.CODEC.fieldOf("gravel_material").forGetter(org.haberno.map.worldgen.feature.SwampSurfaceFeature.Config::gravelMaterial),
-    		BlockState.CODEC.fieldOf("dirt_material").forGetter(org.haberno.map.worldgen.feature.SwampSurfaceFeature.Config::dirtMaterial)
-    	).apply(instance, org.haberno.map.worldgen.feature.SwampSurfaceFeature.Config::new));
+    	public static final Codec<Config> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    		BlockState.CODEC.fieldOf("clay_material").forGetter(Config::clayMaterial),
+    		BlockState.CODEC.fieldOf("gravel_material").forGetter(Config::gravelMaterial),
+    		BlockState.CODEC.fieldOf("dirt_material").forGetter(Config::dirtMaterial)
+    	).apply(instance, Config::new));
     }
 }

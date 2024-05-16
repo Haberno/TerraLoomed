@@ -1,23 +1,20 @@
 package org.haberno.terraloomed.mixin.terrablender;
 
-import java.util.List;
 import net.minecraft.world.biome.source.util.MultiNoiseUtil;
-import net.minecraft.world.gen.chunk.AquiferSampler;
-import net.minecraft.world.gen.chunk.Blender;
-import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
-import net.minecraft.world.gen.chunk.ChunkNoiseSampler;
-import net.minecraft.world.gen.chunk.GenerationShapeConfig;
+import net.minecraft.world.gen.chunk.*;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
 import net.minecraft.world.gen.densityfunction.DensityFunctionTypes;
 import net.minecraft.world.gen.noise.NoiseConfig;
 import net.minecraft.world.gen.noise.NoiseRouter;
+import org.haberno.terraloomed.compat.terrablender.TBClimateSampler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import raccoonman.reterraforged.compat.terrablender.TBClimateSampler;
+
+import java.util.List;
 
 @Mixin(ChunkNoiseSampler.class)
 public class MixinNoiseChunk {
@@ -33,9 +30,9 @@ public class MixinNoiseChunk {
 	
 	@Inject(
 		at = @At("RETURN"),
-		method = "cachedClimateSampler"
+		method = "createMultiNoiseSampler"
 	)
-	private void cachedClimateSampler(NoiseRouter noiseRouter, List<MultiNoiseUtil.NoiseHypercube> list, CallbackInfoReturnable<MultiNoiseUtil.MultiNoiseSampler> callback) {
+	private void createMultiNoiseSampler(NoiseRouter noiseRouter, List<MultiNoiseUtil.NoiseHypercube> list, CallbackInfoReturnable<MultiNoiseUtil.MultiNoiseSampler> callback) {
     	if((Object) callback.getReturnValue() instanceof TBClimateSampler cachedSampler && (Object) this.randomState.getMultiNoiseSampler() instanceof TBClimateSampler globalSampler) {
     		DensityFunction uniqueness = globalSampler.getUniqueness();
 

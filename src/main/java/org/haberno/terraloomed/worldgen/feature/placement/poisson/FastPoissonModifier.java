@@ -1,7 +1,7 @@
 package org.haberno.terraloomed.worldgen.feature.placement.poisson;
 
-import java.util.Random;
-import java.util.stream.Stream;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.StructureWorldAccess;
@@ -10,13 +10,14 @@ import net.minecraft.world.gen.feature.FeaturePlacementContext;
 import net.minecraft.world.gen.noise.NoiseConfig;
 import net.minecraft.world.gen.placementmodifier.PlacementModifier;
 import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import raccoonman.reterraforged.world.worldgen.RTFRandomState;
-import raccoonman.reterraforged.world.worldgen.feature.placement.RTFPlacementModifiers;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noises;
-import raccoonman.reterraforged.world.worldgen.tile.Tile;
+import org.haberno.terraloomed.worldgen.RTFRandomState;
+import org.haberno.terraloomed.worldgen.feature.placement.RTFPlacementModifiers;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.noise.module.Noises;
+import org.haberno.terraloomed.worldgen.tile.Tile;
+
+import java.util.Random;
+import java.util.stream.Stream;
 
 public class FastPoissonModifier extends PlacementModifier {
 	public static final Codec<FastPoissonModifier> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -52,7 +53,7 @@ public class FastPoissonModifier extends PlacementModifier {
 	}
 	
 	@Override
-	public Stream<BlockPos> getCount(FeaturePlacementContext ctx, net.minecraft.util.math.random.Random random, BlockPos pos) {
+	public Stream<BlockPos> getPositions(FeaturePlacementContext ctx, net.minecraft.util.math.random.Random random, BlockPos pos) {
 		StructureWorldAccess level = ctx.getWorld();
 		Chunk chunk = ctx.getWorld().getChunk(pos);
 		long levelSeed = level.getSeed();

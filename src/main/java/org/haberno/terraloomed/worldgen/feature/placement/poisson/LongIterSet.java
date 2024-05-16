@@ -1,9 +1,10 @@
 package org.haberno.terraloomed.worldgen.feature.placement.poisson;
 
 import it.unimi.dsi.fastutil.longs.LongArrays;
-import java.util.Random;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import it.unimi.dsi.fastutil.longs.LongSet;
+
+import java.util.Random;
 
 public class LongIterSet {
 	public static long NULL = Long.MAX_VALUE;
@@ -16,7 +17,7 @@ public class LongIterSet {
 		this.size = 0;
 		this.index = -1;
 		this.order = new long[32];
-		this.points = (LongSet) new LongOpenHashSet(32);
+		this.points = new LongOpenHashSet(32);
 	}
 
 	public boolean contains(long value) {

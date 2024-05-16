@@ -1,20 +1,22 @@
 package org.haberno.terraloomed.compat.terrablender;
 
+import com.google.common.base.Suppliers;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.util.dynamic.CodecHolder;
+import net.minecraft.world.gen.surfacebuilder.MaterialRules;
+import net.minecraft.world.gen.surfacebuilder.MaterialRules.BlockStateRule;
+import net.minecraft.world.gen.surfacebuilder.MaterialRules.MaterialRuleContext;
+import org.haberno.terraloomed.worldgen.surface.rule.RTFSurfaceRules;
+import terrablender.api.SurfaceRuleManager;
+import terrablender.api.SurfaceRuleManager.RuleCategory;
+import terrablender.worldgen.surface.NamespacedSurfaceRuleSource;
+
 import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
-import net.minecraft.util.dynamic.CodecHolder;
-import net.minecraft.world.gen.surfacebuilder.MaterialRules;
-import SurfaceRule;
-import com.google.common.base.Suppliers;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import raccoonman.reterraforged.world.worldgen.surface.rule.RTFSurfaceRules;
-import terrablender.api.SurfaceRuleManager;
-import terrablender.api.SurfaceRuleManager.RuleCategory;
-import terrablender.worldgen.surface.NamespacedSurfaceRuleSource;
 
 public class TBSurfaceRules {
 
@@ -43,7 +45,7 @@ public class TBSurfaceRules {
 		}
 		
 		@Override
-		public SurfaceRule apply(Context ctx) {
+		public BlockStateRule apply(MaterialRuleContext ctx) {
 			if(this.rules.get() instanceof NamespacedSurfaceRuleSource ruleSource) {
 				return ruleSource.sources().get(this.modId).apply(ctx);
 			} else {

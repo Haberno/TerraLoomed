@@ -25,10 +25,9 @@
 package org.haberno.terraloomed.worldgen.feature.placement.poisson;
 
 import com.mojang.serialization.Codec;
-
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
-import raccoonman.reterraforged.world.worldgen.tile.Tile;
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.tile.Tile;
 
 public class BiomeVariance implements Noise {
     public static final BiomeVariance NONE = new BiomeVariance(null, 0.0F) {

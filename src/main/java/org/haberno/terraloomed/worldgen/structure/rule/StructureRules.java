@@ -4,9 +4,9 @@ import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.world.gen.structure.Structure;
-import raccoonman.reterraforged.platform.RegistryUtil;
-import raccoonman.reterraforged.registries.RTFBuiltInRegistries;
-import raccoonman.reterraforged.world.worldgen.terrain.Terrain;
+import org.haberno.terraloomed.platform.RegistryUtil;
+import org.haberno.terraloomed.registries.RTFBuiltInRegistries;
+import org.haberno.terraloomed.worldgen.terrain.Terrain;
 
 public class StructureRules {
 

@@ -1,11 +1,12 @@
 package org.haberno.terraloomed.worldgen.terrain.populator;
 
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil.Vec2f;
-import raccoonman.reterraforged.world.worldgen.rivermap.lake.LakeConfig;
-import raccoonman.reterraforged.world.worldgen.terrain.TerrainType;
-import raccoonman.reterraforged.world.worldgen.util.Boundsf;
+
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil.Vec2f;
+import org.haberno.terraloomed.worldgen.rivermap.lake.LakeConfig;
+import org.haberno.terraloomed.worldgen.terrain.TerrainType;
+import org.haberno.terraloomed.worldgen.util.Boundsf;
 
 public class LakePopulator {
     protected float valley;

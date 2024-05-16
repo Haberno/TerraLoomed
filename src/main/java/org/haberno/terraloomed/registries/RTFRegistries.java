@@ -3,17 +3,17 @@ package org.haberno.terraloomed.registries;
 import com.mojang.serialization.Codec;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
-import raccoonman.reterraforged.RTFCommon;
-import raccoonman.reterraforged.data.preset.settings.Preset;
-import raccoonman.reterraforged.world.worldgen.biome.modifier.BiomeModifier;
-import raccoonman.reterraforged.world.worldgen.feature.chance.ChanceModifier;
-import raccoonman.reterraforged.world.worldgen.feature.template.decorator.TemplateDecorator;
-import raccoonman.reterraforged.world.worldgen.feature.template.placement.TemplatePlacement;
-import raccoonman.reterraforged.world.worldgen.noise.domain.Domain;
-import raccoonman.reterraforged.world.worldgen.noise.function.CurveFunction;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
-import raccoonman.reterraforged.world.worldgen.structure.rule.StructureRule;
-import raccoonman.reterraforged.world.worldgen.surface.rule.LayeredSurfaceRule;
+import org.haberno.terraloomed.RTFCommon;
+import org.haberno.terraloomed.data.preset.settings.Preset;
+import org.haberno.terraloomed.worldgen.biome.modifier.BiomeModifier;
+import org.haberno.terraloomed.worldgen.feature.chance.ChanceModifier;
+import org.haberno.terraloomed.worldgen.feature.template.decorator.TemplateDecorator;
+import org.haberno.terraloomed.worldgen.feature.template.placement.TemplatePlacement;
+import org.haberno.terraloomed.worldgen.noise.domain.Domain;
+import org.haberno.terraloomed.worldgen.noise.function.CurveFunction;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.structure.rule.StructureRule;
+import org.haberno.terraloomed.worldgen.surface.rule.LayeredSurfaceRule;
 
 public class RTFRegistries {
 	public static final RegistryKey<Registry<Codec<? extends Noise>>> NOISE_TYPE = createKey("worldgen/noise_type");

@@ -1,9 +1,10 @@
 package org.haberno.terraloomed.worldgen.tile.filter;
 
-import raccoonman.reterraforged.world.worldgen.heightmap.Heightmap;
-import raccoonman.reterraforged.world.worldgen.heightmap.Levels;
-import raccoonman.reterraforged.world.worldgen.tile.Size;
-import raccoonman.reterraforged.world.worldgen.tile.Tile;
+
+import org.haberno.terraloomed.worldgen.heightmap.Heightmap;
+import org.haberno.terraloomed.worldgen.heightmap.Levels;
+import org.haberno.terraloomed.worldgen.tile.Size;
+import org.haberno.terraloomed.worldgen.tile.Tile;
 
 public record PostProcessing(Heightmap heightmap, Levels levels) implements Filter {
      

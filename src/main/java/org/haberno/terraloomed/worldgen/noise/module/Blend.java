@@ -2,9 +2,8 @@ package org.haberno.terraloomed.worldgen.noise.module;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.noise.function.Interpolation;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.function.Interpolation;
 
 record Blend(Noise alpha, Noise lower, Noise upper, float mid, float range, Interpolation interpolation) implements Noise {
 	public static final Codec<Blend> CODEC = RecordCodecBuilder.create(instance -> instance.group(

@@ -2,10 +2,9 @@ package org.haberno.terraloomed.worldgen.noise.domain;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise.Visitor;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.noise.module.Noise.Visitor;
 
 record DirectionWarp(Noise direction, Noise strength) implements Domain {
 	public static final Codec<DirectionWarp> CODEC = RecordCodecBuilder.create(instance -> instance.group(

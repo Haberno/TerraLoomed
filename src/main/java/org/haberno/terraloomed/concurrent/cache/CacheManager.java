@@ -1,13 +1,14 @@
 package org.haberno.terraloomed.concurrent.cache;
 
+
+import org.haberno.terraloomed.concurrent.cache.map.LongMap;
+import org.haberno.terraloomed.concurrent.cache.map.StampedBoundLongMap;
+
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.IntFunction;
-
-import raccoonman.reterraforged.concurrent.cache.map.LongMap;
-import raccoonman.reterraforged.concurrent.cache.map.StampedBoundLongMap;
 
 public class CacheManager {
 	private static final List<Cache<?>> CACHES = Collections.synchronizedList(new LinkedList<>());

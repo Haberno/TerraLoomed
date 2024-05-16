@@ -11,6 +11,13 @@ import net.minecraft.world.gen.densityfunction.DensityFunction;
 import net.minecraft.world.gen.densityfunction.DensityFunctionTypes;
 import net.minecraft.world.gen.noise.NoiseConfig;
 import net.minecraft.world.gen.noise.NoiseRouter;
+import org.haberno.terraloomed.data.preset.settings.Preset;
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.RTFRandomState;
+import org.haberno.terraloomed.worldgen.WorldGenFlags;
+import org.haberno.terraloomed.worldgen.densityfunction.CellSampler;
+import org.haberno.terraloomed.worldgen.densityfunction.CellSampler.Cache2d;
+import org.haberno.terraloomed.worldgen.tile.Tile;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,13 +27,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import raccoonman.reterraforged.data.preset.settings.Preset;
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.RTFRandomState;
-import raccoonman.reterraforged.world.worldgen.WorldGenFlags;
-import raccoonman.reterraforged.world.worldgen.densityfunction.CellSampler;
-import raccoonman.reterraforged.world.worldgen.densityfunction.CellSampler.Cache2d;
-import raccoonman.reterraforged.world.worldgen.tile.Tile;
 
 @Mixin(ChunkNoiseSampler.class)
 class MixinNoiseChunk {
@@ -39,31 +39,31 @@ class MixinNoiseChunk {
 	
 	@Shadow
     @Final
-    private DensityFunction initialDensityNoJaggedness;
+    private DensityFunction initialDensityWithoutJaggedness;
     
 	@Shadow
     @Final
-	int firstNoiseX;
+	int startBiomeX;
 	
 	@Shadow
     @Final
-    int firstNoiseZ;
+    int startBiomeZ;
 	
 	@Shadow
     @Final
-	private int cellCountXZ;
+	private int horizontalCellCount;
 	
 	@Shadow
-	private int cellCountY;
+	private int verticalCellCount;
 	
 	@Shadow
     @Final
-    private int cellHeight;
+    private int verticalCellBlockCount;
 	
 	@Redirect(
 		at = @At(
 			value = "INVOKE",
-			target = "Lnet/minecraft/world/level/levelgen/RandomState;router()Lnet/minecraft/world/level/levelgen/NoiseRouter;"
+			target = "Lnet/minecraft/world/gen/noise/NoiseConfig;getNoiseRouter()Lnet/minecraft/world/gen/noise/NoiseRouter;"
 		),
 		method = "<init>"
 	)
@@ -83,7 +83,7 @@ class MixinNoiseChunk {
 				this.generationHeight = generatorContext.lookup.getGenerationHeight(this.chunkX, this.chunkZ, noiseGeneratorSettings, cache);
 //			}
 			
-			this.cellCountY = Math.min(this.cellCountY, this.generationHeight / this.cellHeight);
+			this.verticalCellCount = Math.min(this.verticalCellCount, this.generationHeight / this.verticalCellBlockCount);
 			this.cache2d = new Cache2d();
 			
 			if(cache) {

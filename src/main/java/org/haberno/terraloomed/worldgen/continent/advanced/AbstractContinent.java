@@ -1,14 +1,15 @@
 package org.haberno.terraloomed.worldgen.continent.advanced;
 
-import raccoonman.reterraforged.data.preset.settings.WorldSettings;
-import raccoonman.reterraforged.data.preset.settings.WorldSettings.ControlPoints;
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.continent.SimpleContinent;
-import raccoonman.reterraforged.world.worldgen.continent.simple.SimpleRiverGenerator;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.rivermap.RiverCache;
-import raccoonman.reterraforged.world.worldgen.util.PosUtil;
-import raccoonman.reterraforged.world.worldgen.util.Seed;
+
+import org.haberno.terraloomed.data.preset.settings.WorldSettings;
+import org.haberno.terraloomed.data.preset.settings.WorldSettings.ControlPoints;
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.continent.SimpleContinent;
+import org.haberno.terraloomed.worldgen.continent.simple.SimpleRiverGenerator;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.rivermap.RiverCache;
+import org.haberno.terraloomed.worldgen.util.PosUtil;
+import org.haberno.terraloomed.worldgen.util.Seed;
 
 public abstract class AbstractContinent implements SimpleContinent {
     protected int seed;

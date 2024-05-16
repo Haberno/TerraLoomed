@@ -2,7 +2,7 @@ package org.haberno.terraloomed.worldgen.noise.function;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.util.StringIdentifiable;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
 
 public enum Interpolation implements CurveFunction, StringIdentifiable {
     LINEAR("LINEAR") {

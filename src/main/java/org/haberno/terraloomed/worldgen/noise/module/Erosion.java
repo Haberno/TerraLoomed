@@ -1,11 +1,12 @@
 package org.haberno.terraloomed.worldgen.noise.module;
 
-import java.util.Arrays;
-import net.minecraft.util.StringIdentifiable;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil.Vec2f;
+import net.minecraft.util.StringIdentifiable;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil.Vec2f;
+
+import java.util.Arrays;
 
 public record Erosion(Noise input, int seed, int octaves, float strength, float gridSize, float amplitude, float lacunarity, float distanceFallOff, BlendMode blendMode, ThreadLocal<float[]> cache) implements Noise {
 	public static final Codec<Erosion> CODEC = RecordCodecBuilder.create(instance -> instance.group(

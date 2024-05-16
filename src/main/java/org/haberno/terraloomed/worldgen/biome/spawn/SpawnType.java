@@ -1,14 +1,15 @@
 package org.haberno.terraloomed.worldgen.biome.spawn;
 
-import java.util.List;
+import com.google.common.collect.ImmutableList;
+import com.mojang.serialization.Codec;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.source.util.MultiNoiseUtil;
 import net.minecraft.world.biome.source.util.MultiNoiseUtil.NoiseHypercube;
-import com.google.common.collect.ImmutableList;
-import com.mojang.serialization.Codec;
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.util.PosUtil;
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.util.PosUtil;
+
+import java.util.List;
 
 public enum SpawnType implements StringIdentifiable {
     CONTINENT_CENTER("CONTINENT_CENTER") {

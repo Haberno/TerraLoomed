@@ -1,11 +1,12 @@
 package org.haberno.terraloomed.worldgen.tile;
 
-import java.util.Arrays;
 
-import raccoonman.reterraforged.concurrent.Resource;
-import raccoonman.reterraforged.concurrent.cache.SafeCloseable;
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.cell.CellLookup;
+import org.haberno.terraloomed.concurrent.Resource;
+import org.haberno.terraloomed.concurrent.cache.SafeCloseable;
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.cell.CellLookup;
+
+import java.util.Arrays;
 
 public class Tile implements SafeCloseable, CellLookup {
 	private int x, z;

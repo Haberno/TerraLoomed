@@ -1,9 +1,8 @@
 package org.haberno.terraloomed.worldgen.feature.placement.poisson;
 
 import com.mojang.serialization.Codec;
-
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
 
 public class DensityNoise implements Noise {
     private BiomeVariance biome;

@@ -2,8 +2,8 @@ package org.haberno.terraloomed.worldgen.noise.function;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.util.StringIdentifiable;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
 
 public enum CellFunction implements StringIdentifiable {
     CELL_VALUE("CELL_VALUE") {

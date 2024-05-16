@@ -1,18 +1,19 @@
 package org.haberno.terraloomed.worldgen.continent.simple;
 
+
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.continent.SimpleContinent;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.rivermap.gen.GenWarp;
+import org.haberno.terraloomed.worldgen.rivermap.river.BaseRiverGenerator;
+import org.haberno.terraloomed.worldgen.rivermap.river.Network;
+import org.haberno.terraloomed.worldgen.rivermap.river.River;
+import org.haberno.terraloomed.worldgen.rivermap.river.RiverWarp;
+import org.haberno.terraloomed.worldgen.terrain.populator.RiverPopulator;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.continent.SimpleContinent;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.rivermap.gen.GenWarp;
-import raccoonman.reterraforged.world.worldgen.rivermap.river.BaseRiverGenerator;
-import raccoonman.reterraforged.world.worldgen.rivermap.river.Network;
-import raccoonman.reterraforged.world.worldgen.rivermap.river.River;
-import raccoonman.reterraforged.world.worldgen.rivermap.river.RiverWarp;
-import raccoonman.reterraforged.world.worldgen.terrain.populator.RiverPopulator;
 
 public class SimpleRiverGenerator extends BaseRiverGenerator<SimpleContinent> {
 	

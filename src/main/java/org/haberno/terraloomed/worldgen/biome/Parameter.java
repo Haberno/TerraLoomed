@@ -1,7 +1,8 @@
 package org.haberno.terraloomed.worldgen.biome;
 
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noises;
+
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.noise.module.Noises;
 
 public interface Parameter {
 	float min();

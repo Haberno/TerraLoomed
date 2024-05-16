@@ -1,12 +1,13 @@
 package org.haberno.terraloomed.worldgen.continent.infinite;
 
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.continent.SimpleContinent;
-import raccoonman.reterraforged.world.worldgen.continent.simple.SimpleRiverGenerator;
-import raccoonman.reterraforged.world.worldgen.rivermap.LegacyRiverCache;
-import raccoonman.reterraforged.world.worldgen.rivermap.RiverCache;
-import raccoonman.reterraforged.world.worldgen.rivermap.Rivermap;
+
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.continent.SimpleContinent;
+import org.haberno.terraloomed.worldgen.continent.simple.SimpleRiverGenerator;
+import org.haberno.terraloomed.worldgen.rivermap.LegacyRiverCache;
+import org.haberno.terraloomed.worldgen.rivermap.RiverCache;
+import org.haberno.terraloomed.worldgen.rivermap.Rivermap;
 
 public class InfiniteContinentGenerator implements SimpleContinent {
 	private RiverCache riverCache;

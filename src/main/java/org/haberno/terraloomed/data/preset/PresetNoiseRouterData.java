@@ -1,21 +1,23 @@
 package org.haberno.terraloomed.data.preset;
 
-import java.util.stream.Stream;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
 import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.gen.OreVeinSampler;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
 import net.minecraft.world.gen.densityfunction.DensityFunctionTypes;
 import net.minecraft.world.gen.densityfunction.DensityFunctions;
 import net.minecraft.world.gen.noise.NoiseParametersKeys;
 import net.minecraft.world.gen.noise.NoiseRouter;
-import raccoonman.reterraforged.data.preset.settings.Preset;
-import raccoonman.reterraforged.data.preset.settings.WorldSettings;
-import raccoonman.reterraforged.world.worldgen.cell.CellField;
-import raccoonman.reterraforged.world.worldgen.densityfunction.RTFDensityFunctions;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.data.preset.settings.Preset;
+import org.haberno.terraloomed.data.preset.settings.WorldSettings;
+import org.haberno.terraloomed.worldgen.cell.CellField;
+import org.haberno.terraloomed.worldgen.densityfunction.RTFDensityFunctions;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
+
+import java.util.stream.Stream;
 
 public class PresetNoiseRouterData {
 	private static final float SCALER = 128.0F;
@@ -35,7 +37,7 @@ public class PresetNoiseRouterData {
         ctx.register(DensityFunctions.EROSION_OVERWORLD, RTFDensityFunctions.cell(CellField.EROSION));
         ctx.register(DensityFunctions.RIDGES_OVERWORLD, RTFDensityFunctions.cell(CellField.WEIRDNESS));
         
-        DensityFunction offset = DensityFunctions.registerAndGetHolder(ctx, DensityFunctions.OFFSET_OVERWORLD, DensityFunctionTypes.add(DensityFunctionTypes.constant(DensityFunctions.GLOBAL_OFFSET - 0.5F), DensityFunctionTypes.mul(RTFDensityFunctions.clampToNearestUnit(RTFDensityFunctions.cell(CellField.HEIGHT), properties.terrainScaler()), DensityFunctionTypes.constant(2.0D))));
+        DensityFunction offset = DensityFunctions.registerAndGetHolder(ctx, DensityFunctions.OFFSET_OVERWORLD, DensityFunctionTypes.add(DensityFunctionTypes.constant(DensityFunctions.field_37690 - 0.5F), DensityFunctionTypes.mul(RTFDensityFunctions.clampToNearestUnit(RTFDensityFunctions.cell(CellField.HEIGHT), properties.terrainScaler()), DensityFunctionTypes.constant(2.0D))));
         ctx.register(DensityFunctions.DEPTH_OVERWORLD, DensityFunctionTypes.add(DensityFunctionTypes.yClampedGradient(-worldDepth, worldHeight, yGradientRange(-worldDepth), yGradientRange(worldHeight)), offset));
         ctx.register(DensityFunctions.BASE_3D_NOISE_OVERWORLD, DensityFunctionTypes.zero());
         ctx.register(DensityFunctions.JAGGEDNESS_OVERWORLD, jaggednessPerformanceHack());
@@ -62,8 +64,8 @@ public class PresetNoiseRouterData {
         DensityFunction slopedCheeseRange = DensityFunctionTypes.mul(DensityFunctionTypes.rangeChoice(slopedCheese, -1000000.0D, 1.5625D, entrances, DensityFunctionTypes.interpolated(slideOverworld(underground(densityFunctions, noiseParams, slopedCheese), -worldDepth))), DensityFunctionTypes.constant(0.64)).squeeze();
         DensityFunction finalDensity = DensityFunctionTypes.min(slopedCheeseRange, DensityFunctions.entryHolder(densityFunctions, DensityFunctions.CAVES_NOODLE_OVERWORLD));
         DensityFunction y = DensityFunctions.entryHolder(densityFunctions, DensityFunctions.Y);
-        int minY = Stream.of(OreVeinifier.VeinType.values()).mapToInt(veinType -> veinType.minY).min().orElse(-DimensionType.MIN_HEIGHT * 2);
-        int maxY = Stream.of(OreVeinifier.VeinType.values()).mapToInt(veinType -> veinType.maxY).max().orElse(-DimensionType.MIN_HEIGHT * 2);
+        int minY = Stream.of(OreVeinSampler.VeinType.values()).mapToInt(veinType -> veinType.minY).min().orElse(-DimensionType.MIN_HEIGHT * 2);
+        int maxY = Stream.of(OreVeinSampler.VeinType.values()).mapToInt(veinType -> veinType.maxY).max().orElse(-DimensionType.MIN_HEIGHT * 2);
         DensityFunction oreVeininess = DensityFunctions.verticalRangeChoice(y, DensityFunctionTypes.noise(noiseParams.getOrThrow(NoiseParametersKeys.ORE_VEININESS), 1.5, 1.5), minY, maxY, 0);
         DensityFunction oreVeinA = DensityFunctions.verticalRangeChoice(y, DensityFunctionTypes.noise(noiseParams.getOrThrow(NoiseParametersKeys.ORE_VEIN_A), 4.0, 4.0), minY, maxY, 0).abs();
         DensityFunction oreVeinB = DensityFunctions.verticalRangeChoice(y, DensityFunctionTypes.noise(noiseParams.getOrThrow(NoiseParametersKeys.ORE_VEIN_B), 4.0, 4.0), minY, maxY, 0).abs();
@@ -88,7 +90,7 @@ public class PresetNoiseRouterData {
 
     private static DensityFunction spaghetti2D(int minY, int maxY, RegistryEntryLookup<DensityFunction> densityFunctions, RegistryEntryLookup<DoublePerlinNoiseSampler.NoiseParameters> noiseParams) {
         DensityFunction modulator = DensityFunctionTypes.noise(noiseParams.getOrThrow(NoiseParametersKeys.SPAGHETTI_2D_MODULATOR), 2.0, 1.0);
-        DensityFunction sampler = DensityFunctionTypes.weirdScaledSampler(modulator, noiseParams.getOrThrow(NoiseParametersKeys.SPAGHETTI_2D), DensityFunctions.WeirdScaledSampler.RarityValueMapper.TYPE2);
+        DensityFunction sampler = DensityFunctionTypes.weirdScaledSampler(modulator, noiseParams.getOrThrow(NoiseParametersKeys.SPAGHETTI_2D), DensityFunctionTypes.WeirdScaledSampler.RarityValueMapper.TYPE2);
         DensityFunction elevation = DensityFunctionTypes.noiseInRange(noiseParams.getOrThrow(NoiseParametersKeys.SPAGHETTI_2D_ELEVATION), 0.0, Math.floorDiv(minY, 8), 8.0);
         DensityFunction thicknessModulator = DensityFunctions.entryHolder(densityFunctions, DensityFunctions.CAVES_SPAGHETTI_2D_THICKNESS_MODULATOR_OVERWORLD);
         DensityFunction elevationGradient = DensityFunctionTypes.add(elevation, DensityFunctionTypes.yClampedGradient(minY, maxY, minY / -8.0D, maxY / -8.0D)).abs();

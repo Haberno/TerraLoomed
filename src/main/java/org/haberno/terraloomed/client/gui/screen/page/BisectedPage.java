@@ -2,9 +2,9 @@ package org.haberno.terraloomed.client.gui.screen.page;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ClickableWidget;
-import raccoonman.reterraforged.client.gui.ColumnAlignment;
-import raccoonman.reterraforged.client.gui.screen.page.LinkedPageScreen.Page;
-import raccoonman.reterraforged.client.gui.widget.WidgetList;
+import org.haberno.terraloomed.client.gui.ColumnAlignment;
+import org.haberno.terraloomed.client.gui.screen.page.LinkedPageScreen.Page;
+import org.haberno.terraloomed.client.gui.widget.WidgetList;
 
 public abstract class BisectedPage<S extends Screen, L extends ClickableWidget, R extends ClickableWidget> implements Page {
 	protected S screen;
@@ -26,7 +26,7 @@ public abstract class BisectedPage<S extends Screen, L extends ClickableWidget, 
 		final int padding = 30;
 		final int slotHeight = 25;
 		WidgetList<T> list = new WidgetList<>(this.screen.client, columnWidth, height, padding, height - padding, slotHeight);
-		list.setLeftPos(left);
+		list.setX(left); //Haberno todo
 		return list;
 	}
 }

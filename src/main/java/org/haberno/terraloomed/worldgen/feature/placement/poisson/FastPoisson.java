@@ -1,13 +1,13 @@
 package org.haberno.terraloomed.worldgen.feature.placement.poisson;
 
-import java.util.Random;
-
 import it.unimi.dsi.fastutil.longs.LongArrayList;
 import it.unimi.dsi.fastutil.longs.LongList;
 import it.unimi.dsi.fastutil.longs.LongLists;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil.Vec2f;
-import raccoonman.reterraforged.world.worldgen.util.PosUtil;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil.Vec2f;
+import org.haberno.terraloomed.worldgen.util.PosUtil;
+
+import java.util.Random;
 
 public class FastPoisson {
     public static final ThreadLocal<FastPoisson> LOCAL_POISSON = ThreadLocal.withInitial(FastPoisson::new);

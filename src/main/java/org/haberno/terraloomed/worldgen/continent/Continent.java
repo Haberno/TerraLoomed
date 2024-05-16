@@ -1,8 +1,9 @@
 package org.haberno.terraloomed.worldgen.continent;
 
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.cell.CellPopulator;
-import raccoonman.reterraforged.world.worldgen.rivermap.Rivermap;
+
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.cell.CellPopulator;
+import org.haberno.terraloomed.worldgen.rivermap.Rivermap;
 
 public interface Continent extends CellPopulator {
     float getEdgeValue(float x, float z);

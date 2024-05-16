@@ -4,9 +4,9 @@ import net.minecraft.registry.Registries;
 import net.minecraft.world.gen.feature.DiskFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
-import raccoonman.reterraforged.platform.RegistryUtil;
-import raccoonman.reterraforged.world.worldgen.feature.chance.ChanceFeature;
-import raccoonman.reterraforged.world.worldgen.feature.template.TemplateFeature;
+import org.haberno.terraloomed.platform.RegistryUtil;
+import org.haberno.terraloomed.worldgen.feature.chance.ChanceFeature;
+import org.haberno.terraloomed.worldgen.feature.template.TemplateFeature;
 
 public class RTFFeatures {
 	public static final Feature<TemplateFeature.Config<?>> TEMPLATE = register("template", new TemplateFeature(TemplateFeature.Config.CODEC));

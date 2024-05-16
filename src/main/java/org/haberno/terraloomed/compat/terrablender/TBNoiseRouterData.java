@@ -5,8 +5,8 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
-import raccoonman.reterraforged.world.worldgen.cell.CellField;
-import raccoonman.reterraforged.world.worldgen.densityfunction.RTFDensityFunctions;
+import org.haberno.terraloomed.worldgen.cell.CellField;
+import org.haberno.terraloomed.worldgen.densityfunction.RTFDensityFunctions;
 import terrablender.core.TerraBlender;
 
 public class TBNoiseRouterData {

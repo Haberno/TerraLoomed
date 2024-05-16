@@ -1,15 +1,16 @@
 package org.haberno.terraloomed.worldgen.feature.template.placement;
 
-import java.util.function.Function;
+import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldAccess;
-import com.mojang.serialization.Codec;
-import raccoonman.reterraforged.registries.RTFBuiltInRegistries;
-import raccoonman.reterraforged.world.worldgen.feature.template.template.Dimensions;
-import raccoonman.reterraforged.world.worldgen.feature.template.template.TemplateContext;
+import org.haberno.terraloomed.registries.RTFBuiltInRegistries;
+import org.haberno.terraloomed.worldgen.feature.template.template.Dimensions;
+import org.haberno.terraloomed.worldgen.feature.template.template.TemplateContext;
+
+import java.util.function.Function;
 
 public interface TemplatePlacement<T extends TemplateContext> {
-    public static final Codec<TemplatePlacement<?>> CODEC = RTFBuiltInRegistries.TEMPLATE_PLACEMENT_TYPE.byNameCodec().dispatch(TemplatePlacement::codec, Function.identity());
+    public static final Codec<TemplatePlacement<?>> CODEC = RTFBuiltInRegistries.TEMPLATE_PLACEMENT_TYPE.getCodec().dispatch(TemplatePlacement::codec, Function.identity());
     
     boolean canPlaceAt(WorldAccess world, BlockPos pos, Dimensions dimensions);
 

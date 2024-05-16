@@ -1,12 +1,13 @@
 package org.haberno.terraloomed.data.preset.settings;
 
-import java.util.function.BiFunction;
-import net.minecraft.util.StringIdentifiable;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noises;
+import net.minecraft.util.StringIdentifiable;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.noise.module.Noises;
+
+import java.util.function.BiFunction;
 
 public class ClimateSettings {
 	public static final Codec<ClimateSettings> CODEC = RecordCodecBuilder.create(instance -> instance.group(

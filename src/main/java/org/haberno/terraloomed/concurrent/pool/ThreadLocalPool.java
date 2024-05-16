@@ -1,11 +1,11 @@
 package org.haberno.terraloomed.concurrent.pool;
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import org.haberno.terraloomed.concurrent.Resource;
+
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import raccoonman.reterraforged.concurrent.Resource;
 
 public class ThreadLocalPool<T> {
     private int size;

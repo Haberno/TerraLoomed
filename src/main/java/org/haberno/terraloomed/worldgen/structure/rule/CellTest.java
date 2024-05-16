@@ -1,20 +1,20 @@
 package org.haberno.terraloomed.worldgen.structure.rule;
 
-import java.util.List;
-import java.util.Set;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.gen.noise.NoiseConfig;
-import org.jetbrains.annotations.Nullable;
-
 import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.RTFRandomState;
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.heightmap.WorldLookup;
-import raccoonman.reterraforged.world.worldgen.terrain.Terrain;
-import raccoonman.reterraforged.world.worldgen.terrain.TerrainType;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.gen.noise.NoiseConfig;
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.RTFRandomState;
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.heightmap.WorldLookup;
+import org.haberno.terraloomed.worldgen.terrain.Terrain;
+import org.haberno.terraloomed.worldgen.terrain.TerrainType;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+import java.util.Set;
 
 record CellTest(float cutoff, Set<Terrain> terrainTypeBlacklist) implements StructureRule {
 	public static final Codec<CellTest> CODEC = RecordCodecBuilder.create(instance -> instance.group(

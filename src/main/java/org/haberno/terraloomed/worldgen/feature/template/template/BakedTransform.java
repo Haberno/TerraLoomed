@@ -1,8 +1,9 @@
 package org.haberno.terraloomed.worldgen.feature.template.template;
 
-import java.util.function.IntFunction;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
+
+import java.util.function.IntFunction;
 
 public abstract class BakedTransform<T> {
     public static final int MIRRORS = BlockMirror.values().length;

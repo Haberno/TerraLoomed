@@ -6,7 +6,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.gen.feature.FeaturePlacementContext;
 import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.cell.Cell;
 
 class MacroBiomeFilter extends CellFilter {
 	public static final Codec<MacroBiomeFilter> CODEC = RecordCodecBuilder.create(instance -> instance.group(

@@ -1,24 +1,19 @@
 package org.haberno.terraloomed.worldgen.terrain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-import java.util.function.BiFunction;
-
 import com.google.common.collect.ImmutableSet;
+import org.haberno.terraloomed.data.preset.settings.TerrainSettings;
+import org.haberno.terraloomed.worldgen.biome.Erosion;
+import org.haberno.terraloomed.worldgen.cell.CellPopulator;
+import org.haberno.terraloomed.worldgen.heightmap.Levels;
+import org.haberno.terraloomed.worldgen.heightmap.RegionConfig;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.noise.module.Noises;
+import org.haberno.terraloomed.worldgen.terrain.populator.Populators;
+import org.haberno.terraloomed.worldgen.terrain.populator.TerrainPopulator;
+import org.haberno.terraloomed.worldgen.util.Seed;
 
-import raccoonman.reterraforged.data.preset.settings.TerrainSettings;
-import raccoonman.reterraforged.world.worldgen.biome.Erosion;
-import raccoonman.reterraforged.world.worldgen.cell.CellPopulator;
-import raccoonman.reterraforged.world.worldgen.heightmap.Levels;
-import raccoonman.reterraforged.world.worldgen.heightmap.RegionConfig;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noises;
-import raccoonman.reterraforged.world.worldgen.terrain.populator.Populators;
-import raccoonman.reterraforged.world.worldgen.terrain.populator.TerrainPopulator;
-import raccoonman.reterraforged.world.worldgen.util.Seed;
+import java.util.*;
+import java.util.function.BiFunction;
 
 public class TerrainProvider {
 	

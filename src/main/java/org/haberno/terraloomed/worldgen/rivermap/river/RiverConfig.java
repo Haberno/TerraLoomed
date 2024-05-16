@@ -1,7 +1,8 @@
 package org.haberno.terraloomed.worldgen.rivermap.river;
 
-import raccoonman.reterraforged.world.worldgen.heightmap.Levels;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
+
+import org.haberno.terraloomed.worldgen.heightmap.Levels;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
 
 public class RiverConfig {
     public int order;

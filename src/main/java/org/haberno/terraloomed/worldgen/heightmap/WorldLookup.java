@@ -2,14 +2,14 @@ package org.haberno.terraloomed.worldgen.heightmap;
 
 import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
 import net.minecraft.world.gen.chunk.GenerationShapeConfig;
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.WorldGenFlags;
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.cell.noise.CellSampler;
+import org.haberno.terraloomed.worldgen.terrain.TerrainType;
+import org.haberno.terraloomed.worldgen.tile.Tile;
+import org.haberno.terraloomed.worldgen.tile.TileCache;
 import org.jetbrains.annotations.Nullable;
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.WorldGenFlags;
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.cell.noise.CellSampler;
-import raccoonman.reterraforged.world.worldgen.terrain.TerrainType;
-import raccoonman.reterraforged.world.worldgen.tile.Tile;
-import raccoonman.reterraforged.world.worldgen.tile.TileCache;
 
 public class WorldLookup {
 	private GeneratorContext context;

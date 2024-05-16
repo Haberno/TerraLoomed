@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.registry.tag.TagKey;
-import raccoonman.reterraforged.tags.RTFBlockTags;
+import org.haberno.terraloomed.tags.RTFBlockTags;
 
 public class MiscellaneousSettings {
 	public static final Codec<MiscellaneousSettings> CODEC = RecordCodecBuilder.create(instance -> instance.group(

@@ -6,13 +6,14 @@ import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.dynamic.CodecHolder;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.surfacebuilder.MaterialRules;
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
+import net.minecraft.world.gen.surfacebuilder.MaterialRules.MaterialRuleContext;
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.cell.Cell;
 
 public class HeightModificationDetection extends CellCondition {
 	private Target target;
 	
-	private HeightModificationDetection(Context context, Target target) {
+	private HeightModificationDetection(MaterialRuleContext context, Target target) {
 		super(context);
 		
 		this.target = target;
@@ -29,7 +30,7 @@ public class HeightModificationDetection extends CellCondition {
 		).apply(instance, Source::new));
 		
 		@Override
-		public HeightModificationDetection apply(Context ctx) {
+		public HeightModificationDetection apply(MaterialRuleContext ctx) {
 			return new HeightModificationDetection(ctx, this.target);
 		}
 
@@ -43,8 +44,8 @@ public class HeightModificationDetection extends CellCondition {
 		STRUCTURE_BEARDIFIER("structure_beardifier") {
 			
 			@Override
-			public boolean test(Cell cell, int blockX, int blockZ, Context surfaceContext, GeneratorContext generatorContext) {
-				return surfaceContext.blockY == surfaceContext.chunk.getHeight(Heightmap.Type.WORLD_SURFACE_WG, blockX & 0xF, blockZ & 0xF) && surfaceContext.blockY != generatorContext.levels.scale(cell.height);
+			public boolean test(Cell cell, int blockX, int blockZ, MaterialRuleContext surfaceContext, GeneratorContext generatorContext) {
+				return surfaceContext.blockY == surfaceContext.chunk.sampleHeightmap(Heightmap.Type.WORLD_SURFACE_WG, blockX & 0xF, blockZ & 0xF) && surfaceContext.blockY != generatorContext.levels.scale(cell.height);
 			}
 		};
 
@@ -61,6 +62,6 @@ public class HeightModificationDetection extends CellCondition {
 			return this.name;
 		}
 		
-		public abstract boolean test(Cell cell, int blockX, int blockZ, Context surfaceContext, GeneratorContext generatorContext);
+		public abstract boolean test(Cell cell, int blockX, int blockZ, MaterialRuleContext surfaceContext, GeneratorContext generatorContext);
 	}
 }

@@ -1,9 +1,10 @@
 package org.haberno.terraloomed.client.gui.widget;
 
-import java.util.function.Supplier;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
+
+import java.util.function.Supplier;
 
 public class ValueButton<T> extends ButtonWidget {
 	private Text name;

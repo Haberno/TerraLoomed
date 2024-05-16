@@ -1,22 +1,19 @@
 package org.haberno.terraloomed.worldgen.continent.fancy;
 
+
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil.Vec2f;
+import org.haberno.terraloomed.worldgen.rivermap.Rivermap;
+import org.haberno.terraloomed.worldgen.rivermap.gen.GenWarp;
+import org.haberno.terraloomed.worldgen.rivermap.river.*;
+import org.haberno.terraloomed.worldgen.terrain.populator.RiverPopulator;
+import org.haberno.terraloomed.worldgen.util.PosUtil;
+import org.haberno.terraloomed.worldgen.util.Variance;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil.Vec2f;
-import raccoonman.reterraforged.world.worldgen.rivermap.Rivermap;
-import raccoonman.reterraforged.world.worldgen.rivermap.gen.GenWarp;
-import raccoonman.reterraforged.world.worldgen.rivermap.river.BaseRiverGenerator;
-import raccoonman.reterraforged.world.worldgen.rivermap.river.Network;
-import raccoonman.reterraforged.world.worldgen.rivermap.river.River;
-import raccoonman.reterraforged.world.worldgen.rivermap.river.RiverConfig;
-import raccoonman.reterraforged.world.worldgen.rivermap.river.RiverWarp;
-import raccoonman.reterraforged.world.worldgen.terrain.populator.RiverPopulator;
-import raccoonman.reterraforged.world.worldgen.util.PosUtil;
-import raccoonman.reterraforged.world.worldgen.util.Variance;
 
 public class FancyRiverGenerator extends BaseRiverGenerator<FancyContinentGenerator> {
 	private static final Variance MAIN_PADDING = Variance.of(0.05F, 0.1F);
@@ -34,8 +31,8 @@ public class FancyRiverGenerator extends BaseRiverGenerator<FancyContinentGenera
 		GenWarp warp = GenWarp.make((int) id, this.continentScale);
 		List<Network> networks = new ArrayList<>(32);
 		List<Network.Builder> roots = new ArrayList<>(16);
-		for (Island island : ((FancyContinentGenerator) this.continent).getSource().getIslands()) {
-			this.generateRoots(((FancyContinentGenerator) this.continent).getSource(), island, random, warp, roots);
+		for (Island island : this.continent.getSource().getIslands()) {
+			this.generateRoots(this.continent.getSource(), island, random, warp, roots);
 			for (Network.Builder river : roots) {
 				networks.add(river.build());
 			}
@@ -73,7 +70,7 @@ public class FancyRiverGenerator extends BaseRiverGenerator<FancyContinentGenera
 			}
 			float startX = segment.a.x() + dx * progress;
 			float startZ = segment.a.y() + dy * progress;
-			float radiusScale = NoiseUtil	.lerp(segment.scaleA, segment.scaleB, progress);
+			float radiusScale = NoiseUtil.lerp(segment.scaleA, segment.scaleB, progress);
 			float radius = island.coast() * radiusScale;
 			int dir = random.nextBoolean() ? -1 : 1;
 			float dirX = nx * dir + FancyRiverGenerator.MAIN_JITTER.next(random);

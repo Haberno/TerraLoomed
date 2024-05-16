@@ -1,19 +1,18 @@
 package org.haberno.terraloomed.worldgen.biome.type;
 
-import java.awt.Color;
+import com.google.common.collect.ImmutableList;
+import com.mojang.datafixers.util.Pair;
+import org.haberno.terraloomed.worldgen.biome.Humidity;
+import org.haberno.terraloomed.worldgen.biome.Temperature;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil.Vec2f;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.collect.ImmutableList;
-import com.mojang.datafixers.util.Pair;
-
-import raccoonman.reterraforged.world.worldgen.biome.Humidity;
-import raccoonman.reterraforged.world.worldgen.biome.Temperature;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil.Vec2f;
-
 public enum BiomeType {
-    TROPICAL_RAINFOREST(new Color(7, 83, 48), new Color(7, 83, 48), range(Temperature.LEVEL_3, Temperature.LEVEL_3, Humidity.LEVEL_3, Humidity.LEVEL_4)), 
+    TROPICAL_RAINFOREST(new Color(7, 83, 48), new Color(7, 83, 48), range(Temperature.LEVEL_3, Temperature.LEVEL_3, Humidity.LEVEL_3, Humidity.LEVEL_4)),
     SAVANNA(new Color(151, 165, 39), new Color(151, 165, 39), range(Temperature.LEVEL_3, Temperature.LEVEL_3, Humidity.LEVEL_0, Humidity.LEVEL_1)),
     DESERT(new Color(200, 113, 55), new Color(200, 113, 55), range(Temperature.LEVEL_4, Temperature.LEVEL_4, Humidity.LEVEL_0, Humidity.LEVEL_4)), 
     TEMPERATE_RAINFOREST(new Color(10, 84, 109), new Color(10, 160, 65), constant(Temperature.LEVEL_2, Humidity.LEVEL_4)), 

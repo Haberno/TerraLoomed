@@ -1,0 +1,44 @@
+accessWidener v2 named
+
+accessible field net/minecraft/client/gui/screen/Screen client Lnet/minecraft/client/MinecraftClient;
+
+accessible class net/minecraft/world/gen/OreVeinSampler$VeinType
+accessible field net/minecraft/world/gen/OreVeinSampler$VeinType minY I
+accessible field net/minecraft/world/gen/OreVeinSampler$VeinType maxY I
+accessible method net/minecraft/world/biome/source/util/MultiNoiseUtil$NoiseHypercube getSquaredDistance (Lnet/minecraft/world/biome/source/util/MultiNoiseUtil$NoiseValuePoint;)J
+accessible field net/minecraft/world/gen/noise/NoiseConfig randomDeriver Lnet/minecraft/util/math/random/RandomSplitter;
+accessible class net/minecraft/world/gen/surfacebuilder/MaterialRules$MaterialRuleContext
+accessible field net/minecraft/world/gen/surfacebuilder/MaterialRules$MaterialRuleContext noiseConfig Lnet/minecraft/world/gen/noise/NoiseConfig;
+accessible field net/minecraft/world/gen/surfacebuilder/MaterialRules$MaterialRuleContext surfaceBuilder Lnet/minecraft/world/gen/surfacebuilder/SurfaceBuilder;
+accessible field net/minecraft/world/gen/surfacebuilder/MaterialRules$MaterialRuleContext chunk Lnet/minecraft/world/chunk/Chunk;
+accessible field net/minecraft/world/gen/surfacebuilder/MaterialRules$MaterialRuleContext stoneDepthAbove I
+accessible class net/minecraft/world/gen/surfacebuilder/MaterialRules$BlockStateRule
+accessible class net/minecraft/world/gen/surfacebuilder/MaterialRules$HorizontalLazyAbstractPredicate
+accessible field net/minecraft/world/gen/surfacebuilder/MaterialRules$MaterialRuleContext blockX I
+accessible field net/minecraft/world/gen/surfacebuilder/MaterialRules$MaterialRuleContext blockZ I
+accessible field net/minecraft/world/gen/surfacebuilder/MaterialRules$MaterialRuleContext blockY I
+accessible class net/minecraft/world/gen/surfacebuilder/MaterialRules$BooleanSupplier
+accessible method net/minecraft/command/argument/ArgumentTypes register (Lnet/minecraft/registry/Registry;Ljava/lang/String;Ljava/lang/Class;Lnet/minecraft/command/argument/serialize/ArgumentSerializer;)Lnet/minecraft/command/argument/serialize/ArgumentSerializer;
+accessible field net/minecraft/world/gen/densityfunction/DensityFunctions BASE_3D_NOISE_OVERWORLD Lnet/minecraft/registry/RegistryKey;
+accessible field net/minecraft/world/gen/densityfunction/DensityFunctions CAVES_NOODLE_OVERWORLD Lnet/minecraft/registry/RegistryKey;
+accessible field net/minecraft/world/gen/densityfunction/DensityFunctions CAVES_SPAGHETTI_2D_OVERWORLD Lnet/minecraft/registry/RegistryKey;
+accessible field net/minecraft/world/gen/densityfunction/DensityFunctions SLOPED_CHEESE_OVERWORLD Lnet/minecraft/registry/RegistryKey;
+accessible field net/minecraft/world/gen/densityfunction/DensityFunctions CAVES_SPAGHETTI_ROUGHNESS_FUNCTION_OVERWORLD Lnet/minecraft/registry/RegistryKey;
+accessible field net/minecraft/world/gen/densityfunction/DensityFunctions CAVES_PILLARS_OVERWORLD Lnet/minecraft/registry/RegistryKey;
+accessible field net/minecraft/world/gen/densityfunction/DensityFunctions CAVES_ENTRANCES_OVERWORLD Lnet/minecraft/registry/RegistryKey;
+accessible field net/minecraft/world/gen/densityfunction/DensityFunctions CAVES_SPAGHETTI_2D_THICKNESS_MODULATOR_OVERWORLD Lnet/minecraft/registry/RegistryKey;
+accessible method net/minecraft/world/gen/densityfunction/DensityFunctions entryHolder (Lnet/minecraft/registry/RegistryEntryLookup;Lnet/minecraft/registry/RegistryKey;)Lnet/minecraft/world/gen/densityfunction/DensityFunction;
+accessible method net/minecraft/world/gen/densityfunction/DensityFunctions verticalRangeChoice (Lnet/minecraft/world/gen/densityfunction/DensityFunction;Lnet/minecraft/world/gen/densityfunction/DensityFunction;III)Lnet/minecraft/world/gen/densityfunction/DensityFunction;
+accessible method net/minecraft/world/gen/densityfunction/DensityFunctions createInitialDensityFunction (Lnet/minecraft/world/gen/densityfunction/DensityFunction;Lnet/minecraft/world/gen/densityfunction/DensityFunction;)Lnet/minecraft/world/gen/densityfunction/DensityFunction;
+accessible class net/minecraft/world/gen/densityfunction/DensityFunctionTypes$WeirdScaledSampler
+accessible field net/minecraft/world/gen/densityfunction/DensityFunctions Y Lnet/minecraft/registry/RegistryKey;
+accessible method net/minecraft/world/gen/densityfunction/DensityFunctions registerAndGetHolder (Lnet/minecraft/registry/Registerable;Lnet/minecraft/registry/RegistryKey;Lnet/minecraft/world/gen/densityfunction/DensityFunction;)Lnet/minecraft/world/gen/densityfunction/DensityFunction;
+accessible class net/minecraft/world/gen/surfacebuilder/MaterialRules$BiomeMaterialCondition
+accessible method net/minecraft/client/gui/widget/EntryListWidget replaceEntries (Ljava/util/Collection;)V
+accessible method net/minecraft/client/gui/screen/world/CreateWorldScreen getScannedPack (Lnet/minecraft/resource/DataConfiguration;)Lcom/mojang/datafixers/util/Pair;
+accessible method net/minecraft/client/gui/screen/world/CreateWorldScreen applyDataPacks (Lnet/minecraft/resource/ResourcePackManager;ZLjava/util/function/Consumer;)V
+accessible field net/minecraft/client/option/GameOptions guiScale Lnet/minecraft/client/option/SimpleOption;
+accessible method net/minecraft/client/gui/widget/ClickableWidget render (Lnet/minecraft/client/gui/DrawContext;IIF)V
+accessible class net/minecraft/data/DataGenerator$Pack
+accessible method net/minecraft/data/DataGenerator$Pack <init> (Lnet/minecraft/data/DataGenerator;ZLjava/lang/String;Lnet/minecraft/data/DataOutput;)V
+accessible method net/minecraft/registry/RegistryBuilder createWrapperLookup (Lnet/minecraft/registry/DynamicRegistryManager;Ljava/util/stream/Stream;)Lnet/minecraft/registry/RegistryWrapper$WrapperLookup;

@@ -1,6 +1,7 @@
 package org.haberno.terraloomed.concurrent;
 
-import raccoonman.reterraforged.concurrent.cache.SafeCloseable;
+
+import org.haberno.terraloomed.concurrent.cache.SafeCloseable;
 
 public interface Resource<T> extends SafeCloseable {
     public static final Resource<?> NONE = new Resource<>() {

@@ -2,9 +2,9 @@ package org.haberno.terraloomed.worldgen;
 
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
+import org.haberno.terraloomed.data.preset.settings.Preset;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
 import org.jetbrains.annotations.Nullable;
-import raccoonman.reterraforged.data.preset.settings.Preset;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
 
 public interface RTFRandomState {
 	void initialize(DynamicRegistryManager registryAccess);

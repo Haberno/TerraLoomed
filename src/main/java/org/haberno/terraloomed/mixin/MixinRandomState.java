@@ -1,14 +1,5 @@
 package org.haberno.terraloomed.mixin;
 
-import org.jetbrains.annotations.Nullable;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Implements;
-import org.spongepowered.asm.mixin.Interface;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
-
 import com.google.common.base.Suppliers;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.RegistryEntryLookup;
@@ -21,22 +12,26 @@ import net.minecraft.world.gen.densityfunction.DensityFunction;
 import net.minecraft.world.gen.noise.NoiseConfig;
 import net.minecraft.world.gen.noise.NoiseRouter;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-import raccoonman.reterraforged.RTFCommon;
-import raccoonman.reterraforged.compat.terrablender.TBClimateSampler;
-import raccoonman.reterraforged.compat.terrablender.TBCompat;
-import raccoonman.reterraforged.compat.terrablender.TBNoiseRouterData;
-import raccoonman.reterraforged.concurrent.ThreadPools;
-import raccoonman.reterraforged.concurrent.cache.CacheManager;
-import raccoonman.reterraforged.config.PerformanceConfig;
-import raccoonman.reterraforged.data.preset.PresetData;
-import raccoonman.reterraforged.data.preset.settings.Preset;
-import raccoonman.reterraforged.registries.RTFRegistries;
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.RTFRandomState;
-import raccoonman.reterraforged.world.worldgen.densityfunction.CellSampler;
-import raccoonman.reterraforged.world.worldgen.densityfunction.NoiseSampler;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noises;
+import org.haberno.terraloomed.RTFCommon;
+import org.haberno.terraloomed.compat.terrablender.TBClimateSampler;
+import org.haberno.terraloomed.compat.terrablender.TBCompat;
+import org.haberno.terraloomed.compat.terrablender.TBNoiseRouterData;
+import org.haberno.terraloomed.concurrent.ThreadPools;
+import org.haberno.terraloomed.concurrent.cache.CacheManager;
+import org.haberno.terraloomed.config.PerformanceConfig;
+import org.haberno.terraloomed.data.preset.PresetData;
+import org.haberno.terraloomed.data.preset.settings.Preset;
+import org.haberno.terraloomed.registries.RTFRegistries;
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.RTFRandomState;
+import org.haberno.terraloomed.worldgen.densityfunction.CellSampler;
+import org.haberno.terraloomed.worldgen.densityfunction.NoiseSampler;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.noise.module.Noises;
+import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(NoiseConfig.class)
 @Implements(@Interface(iface = RTFRandomState.class, prefix = "reterraforged$RTFRandomState$"))
@@ -47,7 +42,7 @@ class MixinRandomState {
 	@Shadow
 	@Final
     private SurfaceBuilder surfaceSystem;
-	
+
 	@Nullable
 	private Preset preset;
 	@Nullable
@@ -67,7 +62,7 @@ class MixinRandomState {
 	@Redirect(
 		at = @At(
 			value = "INVOKE",
-			target = "Lnet/minecraft/world/level/levelgen/NoiseRouter;mapAll(Lnet/minecraft/world/level/levelgen/DensityFunction$Visitor;)Lnet/minecraft/world/level/levelgen/NoiseRouter;"
+			target = "Lnet/minecraft/world/gen/noise/NoiseRouter;apply(Lnet/minecraft/world/gen/densityfunction/DensityFunction$DensityFunctionVisitor;)Lnet/minecraft/world/gen/noise/NoiseRouter;"
 		),
 		method = "<init>",
 		require = 1
@@ -104,11 +99,11 @@ class MixinRandomState {
 		
 		if((Object) this.sampler instanceof TBClimateSampler tbClimateSampler && TBCompat.isEnabled()) {
 			functions.getOptional(TBNoiseRouterData.UNIQUENESS).ifPresent((uniqueness) -> {
-				tbClimateSampler.setUniqueness(uniqueness.value().mapAll(this.densityFunctionWrapper));
+				tbClimateSampler.setUniqueness(uniqueness.value().apply(this.densityFunctionWrapper));
 			});
 		}
 		
-		presets.get(PresetData.PRESET).ifPresent((presetHolder) -> {
+		presets.getOptional(PresetData.PRESET).ifPresent((presetHolder) -> {
 			this.preset = presetHolder.value();
 
 			if(this.hasContext) {

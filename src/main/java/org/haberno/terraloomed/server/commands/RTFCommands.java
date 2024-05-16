@@ -1,11 +1,11 @@
 package org.haberno.terraloomed.server.commands;
 
-import java.util.function.BiConsumer;
+import com.mojang.brigadier.CommandDispatcher;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.server.command.ServerCommandSource;
-import com.mojang.brigadier.CommandDispatcher;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
+import java.util.function.BiConsumer;
 
 public class RTFCommands {
 
@@ -14,8 +14,7 @@ public class RTFCommands {
 		register(ExportHeightmapCommand::register);
 	}
 	
-	@ExpectPlatform
 	public static void register(BiConsumer<CommandDispatcher<ServerCommandSource>, CommandRegistryAccess> register) {
-		throw new UnsupportedOperationException();
+		CommandRegistrationCallback.EVENT.register((dispatcher, buildContext, environment) -> register.accept(dispatcher, buildContext));
 	}
 }

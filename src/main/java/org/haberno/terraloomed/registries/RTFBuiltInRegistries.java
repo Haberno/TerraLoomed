@@ -2,15 +2,15 @@ package org.haberno.terraloomed.registries;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.registry.Registry;
-import raccoonman.reterraforged.platform.RegistryUtil;
-import raccoonman.reterraforged.world.worldgen.biome.modifier.BiomeModifier;
-import raccoonman.reterraforged.world.worldgen.feature.chance.ChanceModifier;
-import raccoonman.reterraforged.world.worldgen.feature.template.decorator.TemplateDecorator;
-import raccoonman.reterraforged.world.worldgen.feature.template.placement.TemplatePlacement;
-import raccoonman.reterraforged.world.worldgen.noise.domain.Domain;
-import raccoonman.reterraforged.world.worldgen.noise.function.CurveFunction;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
-import raccoonman.reterraforged.world.worldgen.structure.rule.StructureRule;
+import org.haberno.terraloomed.platform.RegistryUtil;
+import org.haberno.terraloomed.worldgen.biome.modifier.BiomeModifier;
+import org.haberno.terraloomed.worldgen.feature.chance.ChanceModifier;
+import org.haberno.terraloomed.worldgen.feature.template.decorator.TemplateDecorator;
+import org.haberno.terraloomed.worldgen.feature.template.placement.TemplatePlacement;
+import org.haberno.terraloomed.worldgen.noise.domain.Domain;
+import org.haberno.terraloomed.worldgen.noise.function.CurveFunction;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.structure.rule.StructureRule;
 
 public class RTFBuiltInRegistries {
 	public static final Registry<Codec<? extends Noise>> NOISE_TYPE = RegistryUtil.createRegistry(RTFRegistries.NOISE_TYPE);

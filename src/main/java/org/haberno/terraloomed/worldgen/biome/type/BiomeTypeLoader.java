@@ -1,13 +1,13 @@
 package org.haberno.terraloomed.worldgen.biome.type;
 
-import java.awt.Color;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
+
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil.Vec2f;
 
 import javax.imageio.ImageIO;
-
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil.Vec2f;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class BiomeTypeLoader {
     private static BiomeTypeLoader instance;

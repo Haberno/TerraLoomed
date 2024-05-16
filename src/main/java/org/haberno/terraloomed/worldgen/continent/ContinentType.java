@@ -2,13 +2,13 @@ package org.haberno.terraloomed.worldgen.continent;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.util.StringIdentifiable;
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.continent.advanced.AdvancedContinentGenerator;
-import raccoonman.reterraforged.world.worldgen.continent.fancy.FancyContinentGenerator;
-import raccoonman.reterraforged.world.worldgen.continent.infinite.InfiniteContinentGenerator;
-import raccoonman.reterraforged.world.worldgen.continent.simple.MultiContinentGenerator;
-import raccoonman.reterraforged.world.worldgen.continent.simple.SingleContinentGenerator;
-import raccoonman.reterraforged.world.worldgen.util.Seed;
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.continent.advanced.AdvancedContinentGenerator;
+import org.haberno.terraloomed.worldgen.continent.fancy.FancyContinentGenerator;
+import org.haberno.terraloomed.worldgen.continent.infinite.InfiniteContinentGenerator;
+import org.haberno.terraloomed.worldgen.continent.simple.MultiContinentGenerator;
+import org.haberno.terraloomed.worldgen.continent.simple.SingleContinentGenerator;
+import org.haberno.terraloomed.worldgen.util.Seed;
 
 public enum ContinentType implements StringIdentifiable {
     MULTI {

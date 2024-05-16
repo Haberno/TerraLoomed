@@ -1,16 +1,5 @@
 package org.haberno.terraloomed.client.gui.screen.presetconfig;
 
-import java.io.IOException;
-import java.net.URI;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
-import java.util.Map;
-
-import org.apache.commons.io.file.PathUtils;
-
 import com.google.common.collect.ImmutableMap;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.gui.screen.world.CreateWorldScreen;
@@ -19,11 +8,17 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.resource.ResourcePackManager;
 import net.minecraft.world.gen.GeneratorOptions;
-import raccoonman.reterraforged.RTFCommon;
-import raccoonman.reterraforged.client.gui.screen.page.LinkedPageScreen;
-import raccoonman.reterraforged.client.gui.screen.presetconfig.PresetListPage.PresetEntry;
-import raccoonman.reterraforged.data.RTFDataGen;
-import raccoonman.reterraforged.data.preset.settings.Preset;
+import org.apache.commons.io.file.PathUtils;
+import org.haberno.terraloomed.RTFCommon;
+import org.haberno.terraloomed.client.gui.screen.page.LinkedPageScreen;
+import org.haberno.terraloomed.client.gui.screen.presetconfig.PresetListPage.PresetEntry;
+import org.haberno.terraloomed.data.RTFDataGen;
+import org.haberno.terraloomed.data.preset.settings.Preset;
+
+import java.io.IOException;
+import java.net.URI;
+import java.nio.file.*;
+import java.util.Map;
 
 //FIXME pressing the create world screen before the pack is copied will fuck the game up (surprisingly noone seems to have run into this?)
 public class PresetConfigScreen extends LinkedPageScreen {
@@ -35,10 +30,10 @@ public class PresetConfigScreen extends LinkedPageScreen {
 	}
 	
 	@Override
-	public void onClose() {
-		super.onClose();
+	public void close() {
+		super.close();
 
-		this.minecraft.setScreen(this.parent);
+		this.client.setScreen(this.parent);
 	}
 	
 	public void setSeed(long seed) {
@@ -52,7 +47,7 @@ public class PresetConfigScreen extends LinkedPageScreen {
 		return this.parent.getWorldCreator().getGeneratorOptionsHolder();
 	}
 
-	public void applyPreset(PresetEntry preset) throws IOException {		
+	public void applyPreset(PresetEntry preset) throws IOException {
 		Pair<Path, ResourcePackManager> path = this.parent.getScannedPack(this.parent.getWorldCreator().getGeneratorOptionsHolder().dataConfiguration());
 		Path exportPath = path.getFirst().resolve("reterraforged-preset.zip");
 		this.exportAsDatapack(exportPath, preset);

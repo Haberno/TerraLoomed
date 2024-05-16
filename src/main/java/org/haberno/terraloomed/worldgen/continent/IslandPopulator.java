@@ -1,10 +1,10 @@
 package org.haberno.terraloomed.worldgen.continent;
 
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.cell.CellPopulator;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
 
-@Deprecated(forRemoval = true)
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.cell.CellPopulator;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+
 public record IslandPopulator(CellPopulator ocean, CellPopulator coast, CellPopulator land, float coastPoint, float inlandPoint) implements CellPopulator {
 	public static final float DEFAULT_INLAND_POINT = 0.0F;
 	public static final float DEFAULT_COAST_POINT = DEFAULT_INLAND_POINT + 0.1F;

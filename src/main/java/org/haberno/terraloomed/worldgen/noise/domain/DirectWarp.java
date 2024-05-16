@@ -1,8 +1,7 @@
 package org.haberno.terraloomed.worldgen.noise.domain;
 
 import com.mojang.serialization.Codec;
-
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise.Visitor;
+import org.haberno.terraloomed.worldgen.noise.module.Noise.Visitor;
 
 public record DirectWarp() implements Domain {
 	public static final Codec<DirectWarp> CODEC = Codec.unit(DirectWarp::new);

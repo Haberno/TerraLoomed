@@ -1,7 +1,8 @@
 package org.haberno.terraloomed.worldgen.tile.filter;
 
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.tile.Tile;
+
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.tile.Tile;
 
 public interface Filter {
 	void apply(Tile map, int regionX, int regionZ, int iterationsPerChunks);

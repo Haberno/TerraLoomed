@@ -5,13 +5,14 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.dynamic.CodecHolder;
 import net.minecraft.world.gen.surfacebuilder.MaterialRules;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
+import net.minecraft.world.gen.surfacebuilder.MaterialRules.MaterialRuleContext;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
 
 public class NoiseCondition extends MaterialRules.HorizontalLazyAbstractPredicate {
 	private Noise noise;
 	private float threshold;
 	
-	private NoiseCondition(Context context, Noise noise, float threshold) {
+	private NoiseCondition(MaterialRuleContext context, Noise noise, float threshold) {
 		super(context);
 		
 		this.noise = noise;
@@ -30,7 +31,7 @@ public class NoiseCondition extends MaterialRules.HorizontalLazyAbstractPredicat
 		).apply(instance, Source::new));
 		
 		@Override
-		public NoiseCondition apply(Context ctx) {
+		public NoiseCondition apply(MaterialRuleContext ctx) {
 			return new NoiseCondition(ctx, this.noise.value(), this.threshold);
 		}
 

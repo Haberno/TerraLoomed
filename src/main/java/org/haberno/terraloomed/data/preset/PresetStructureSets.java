@@ -2,8 +2,7 @@ package org.haberno.terraloomed.data.preset;
 
 import net.minecraft.registry.Registerable;
 import net.minecraft.structure.StructureSet;
-import raccoonman.reterraforged.data.preset.settings.Preset;
-import raccoonman.reterraforged.data.preset.settings.StructureSettings;
+import org.haberno.terraloomed.data.preset.settings.Preset;
 
 public class PresetStructureSets {
 

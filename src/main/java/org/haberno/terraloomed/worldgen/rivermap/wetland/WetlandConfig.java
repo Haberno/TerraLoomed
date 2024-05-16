@@ -1,8 +1,9 @@
 package org.haberno.terraloomed.worldgen.rivermap.wetland;
 
-import raccoonman.reterraforged.data.preset.settings.RiverSettings;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.util.Variance;
+
+import org.haberno.terraloomed.data.preset.settings.RiverSettings;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.util.Variance;
 
 public class WetlandConfig {
     public int skipSize;

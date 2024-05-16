@@ -1,17 +1,18 @@
 package org.haberno.terraloomed.client.gui.screen.presetconfig;
 
-import java.util.Optional;
 import net.minecraft.text.Text;
-import raccoonman.reterraforged.client.data.RTFTranslationKeys;
-import raccoonman.reterraforged.client.gui.screen.page.LinkedPageScreen.Page;
-import raccoonman.reterraforged.client.gui.screen.presetconfig.PresetListPage.PresetEntry;
-import raccoonman.reterraforged.client.gui.widget.Slider;
-import raccoonman.reterraforged.client.gui.widget.ValueButton;
-import raccoonman.reterraforged.data.preset.settings.Preset;
-import raccoonman.reterraforged.data.preset.settings.RiverSettings;
-import raccoonman.reterraforged.data.preset.settings.RiverSettings.Lake;
-import raccoonman.reterraforged.data.preset.settings.RiverSettings.River;
-import raccoonman.reterraforged.data.preset.settings.RiverSettings.Wetland;
+import org.haberno.terraloomed.client.data.RTFTranslationKeys;
+import org.haberno.terraloomed.client.gui.screen.page.LinkedPageScreen.Page;
+import org.haberno.terraloomed.client.gui.screen.presetconfig.PresetListPage.PresetEntry;
+import org.haberno.terraloomed.client.gui.widget.Slider;
+import org.haberno.terraloomed.client.gui.widget.ValueButton;
+import org.haberno.terraloomed.data.preset.settings.Preset;
+import org.haberno.terraloomed.data.preset.settings.RiverSettings;
+import org.haberno.terraloomed.data.preset.settings.RiverSettings.Lake;
+import org.haberno.terraloomed.data.preset.settings.RiverSettings.River;
+import org.haberno.terraloomed.data.preset.settings.RiverSettings.Wetland;
+
+import java.util.Optional;
 
 class RiverSettingsPage extends PresetEditorPage {
 	private ValueButton<Integer> seedOffset;

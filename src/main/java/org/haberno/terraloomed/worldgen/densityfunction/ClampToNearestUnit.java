@@ -41,7 +41,7 @@ record ClampToNearestUnit(DensityFunction function, int resolution) implements D
 
 	@Override
 	public CodecHolder<ClampToNearestUnit> getCodecHolder() {
-		return new CodecHolder<>(REGISTRY_ENTRY_CODEC);
+		return new CodecHolder<ClampToNearestUnit>(CODEC);
 	}
 	
 	private double computeClamped(double value) {

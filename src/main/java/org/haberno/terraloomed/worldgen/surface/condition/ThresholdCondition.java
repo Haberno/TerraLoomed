@@ -1,13 +1,15 @@
 package org.haberno.terraloomed.worldgen.surface.condition;
 
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
+
+import net.minecraft.world.gen.surfacebuilder.MaterialRules.MaterialRuleContext;
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
 
 abstract class ThresholdCondition extends CellCondition {
 	private Noise threshold;
 	private Noise variance;
 	
-	public ThresholdCondition(Context context, Noise threshold, Noise variance) {
+	public ThresholdCondition(MaterialRuleContext context, Noise threshold, Noise variance) {
 		super(context);
 		
 		this.threshold = threshold;

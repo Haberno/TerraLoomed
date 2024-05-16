@@ -1,13 +1,15 @@
 package org.haberno.terraloomed.client.gui.screen.presetconfig;
 
-import java.util.Optional;
 import net.minecraft.text.Text;
-import raccoonman.reterraforged.client.data.RTFTranslationKeys;
-import raccoonman.reterraforged.client.gui.screen.page.LinkedPageScreen.Page;
-import raccoonman.reterraforged.client.gui.screen.presetconfig.PresetListPage.PresetEntry;
-import raccoonman.reterraforged.client.gui.widget.Slider;
-import raccoonman.reterraforged.data.preset.settings.Preset;
-import raccoonman.reterraforged.data.preset.settings.SurfaceSettings;
+import net.minecraft.util.math.MathHelper;
+import org.haberno.terraloomed.client.data.RTFTranslationKeys;
+import org.haberno.terraloomed.client.gui.screen.page.LinkedPageScreen.Page;
+import org.haberno.terraloomed.client.gui.screen.presetconfig.PresetListPage.PresetEntry;
+import org.haberno.terraloomed.client.gui.widget.Slider;
+import org.haberno.terraloomed.data.preset.settings.Preset;
+import org.haberno.terraloomed.data.preset.settings.SurfaceSettings;
+
+import java.util.Optional;
 
 public class SurfaceSettingsPage extends PresetEditorPage {
 	private Slider rockVariance;
@@ -60,7 +62,7 @@ public class SurfaceSettingsPage extends PresetEditorPage {
 			return value;
 		});
 		this.dirtSteepness = PresetWidgets.createFloatSlider(erosion.dirtSteepness, 0.0F, 1.0F, RTFTranslationKeys.GUI_SLIDER_DIRT_STEEPNESS, (slider, value) -> {
-			value = Mth.clamp(value, this.screeSteepness.getValue(), this.rockSteepness.getValue());
+			value = MathHelper.clamp(value, this.screeSteepness.getValue(), this.rockSteepness.getValue());
 			erosion.dirtSteepness = (float) slider.scaleValue(value);
 			return value;
 		});

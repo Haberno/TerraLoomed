@@ -47,11 +47,11 @@ public class NoiseUtil {
     }
     
     public static float clamp(float value, float min, float max) {
-        return (value < min) ? min : ((value > max) ? max : value);
+        return (value < min) ? min : (Math.min(value, max));
     }
 
     public static double clamp(double value, double min, double max) {
-        return (value < min) ? min : ((value > max) ? max : value);
+        return (value < min) ? min : (Math.min(value, max));
     }
     
     public static float dist2(float x1, float y1, float x2, float y2) {

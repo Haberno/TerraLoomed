@@ -3,9 +3,9 @@ package org.haberno.terraloomed.worldgen.feature.template.placement;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldAccess;
-import raccoonman.reterraforged.world.worldgen.feature.template.BlockUtils;
-import raccoonman.reterraforged.world.worldgen.feature.template.decorator.TreeContext;
-import raccoonman.reterraforged.world.worldgen.feature.template.template.Dimensions;
+import org.haberno.terraloomed.worldgen.feature.template.BlockUtils;
+import org.haberno.terraloomed.worldgen.feature.template.decorator.TreeContext;
+import org.haberno.terraloomed.worldgen.feature.template.template.Dimensions;
 
 record TreePlacement() implements TemplatePlacement<TreeContext> {
 	public static final Codec<TreePlacement> CODEC = Codec.unit(TreePlacement::new);

@@ -1,17 +1,18 @@
 package org.haberno.terraloomed.worldgen.surface.condition;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
+import com.mojang.serialization.Codec;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.surfacebuilder.MaterialRules;
-import com.mojang.serialization.Codec;
-import raccoonman.reterraforged.platform.RegistryUtil;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noises;
-import raccoonman.reterraforged.world.worldgen.terrain.Terrain;
+import org.haberno.terraloomed.platform.RegistryUtil;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.noise.module.Noises;
+import org.haberno.terraloomed.worldgen.terrain.Terrain;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class RTFSurfaceConditions {
 

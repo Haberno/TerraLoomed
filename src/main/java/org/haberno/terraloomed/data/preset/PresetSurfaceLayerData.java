@@ -1,6 +1,5 @@
 package org.haberno.terraloomed.data.preset;
 
-import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registerable;
@@ -9,22 +8,16 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.gen.surfacebuilder.MaterialRules;
-import com.mojang.datafixers.util.Pair;
-import raccoonman.reterraforged.RTFCommon;
-import raccoonman.reterraforged.compat.terrablender.TBCompat;
-import raccoonman.reterraforged.compat.terrablender.TBSurfaceRules;
-import raccoonman.reterraforged.data.preset.settings.Preset;
-import raccoonman.reterraforged.data.preset.settings.SurfaceSettings;
-import raccoonman.reterraforged.data.preset.settings.WorldSettings;
-import raccoonman.reterraforged.registries.RTFRegistries;
-import raccoonman.reterraforged.tags.RTFBiomeTags;
-import raccoonman.reterraforged.tags.RTFSurfaceLayerTags;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
-import raccoonman.reterraforged.world.worldgen.surface.condition.RTFSurfaceConditions;
-import raccoonman.reterraforged.world.worldgen.surface.rule.LayeredSurfaceRule;
-import raccoonman.reterraforged.world.worldgen.surface.rule.RTFSurfaceRules;
-import raccoonman.reterraforged.world.worldgen.util.Scaling;
-import terrablender.core.TerraBlender;
+import org.haberno.terraloomed.RTFCommon;
+import org.haberno.terraloomed.data.preset.settings.Preset;
+import org.haberno.terraloomed.data.preset.settings.SurfaceSettings;
+import org.haberno.terraloomed.data.preset.settings.WorldSettings;
+import org.haberno.terraloomed.registries.RTFRegistries;
+import org.haberno.terraloomed.tags.RTFBiomeTags;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.surface.condition.RTFSurfaceConditions;
+import org.haberno.terraloomed.worldgen.surface.rule.LayeredSurfaceRule;
+import org.haberno.terraloomed.worldgen.util.Scaling;
 
 public class PresetSurfaceLayerData {
 	private static final MaterialRules.MaterialRule ORANGE_TERRACOTTA = makeStateRule(Blocks.ORANGE_TERRACOTTA);
@@ -146,36 +139,7 @@ public class PresetSurfaceLayerData {
     	);
     }
 
-    private static LayeredSurfaceRule.Layer makeForest(RegistryEntryLookup<Noise> noise) {
-		return LayeredSurfaceRule.layer(
-			MaterialRules.condition(
-				MaterialRules.biome(BiomeKeys.FOREST, BiomeKeys.DARK_FOREST),
-				RTFSurfaceRules.noise(
-					noise.getOrThrow(PresetSurfaceNoise.FOREST), 
-					List.of(
-						Pair.of(0.65F, PODZOL),
-						Pair.of(0.725F, DIRT)
-		    		)
-		    	)
-			)
-    	);
-    }
-    
 
-    private static LayeredSurfaceRule.Layer makeRiverBank(RegistryEntryLookup<Noise> noise) {
-		return LayeredSurfaceRule.layer(
-			MaterialRules.condition(
-				RTFSurfaceConditions.riverBank(0.002F),
-				RTFSurfaceRules.noise(
-					noise.getOrThrow(PresetSurfaceNoise.RIVER_BANK), 
-					List.of(
-						Pair.of(0.35F, GRAVEL),
-						Pair.of(0.425F, COARSE_DIRT)
-		    		)
-		    	)
-			)
-    	);
-    }
 	
     private static MaterialRules.MaterialCondition erosionBiomeCheck() {
     	return MaterialRules.not(RTFSurfaceConditions.biomeTag(RTFBiomeTags.EROSION_BLACKLIST));

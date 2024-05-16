@@ -2,10 +2,9 @@ package org.haberno.terraloomed.worldgen.noise.module;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.noise.function.CellFunction;
-import raccoonman.reterraforged.world.worldgen.noise.function.DistanceFunction;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.function.CellFunction;
+import org.haberno.terraloomed.worldgen.noise.function.DistanceFunction;
 
 record Worley(float frequency, float distance, CellFunction cellFunction, DistanceFunction distanceFunction, Noise lookup, float min, float max) implements Noise {
 	public static final Codec<Worley> CODEC = RecordCodecBuilder.create(instance -> instance.group(

@@ -1,7 +1,5 @@
 package org.haberno.terraloomed.worldgen.feature.placement;
 
-import java.util.List;
-
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.registry.RegistryKey;
@@ -15,6 +13,8 @@ import net.minecraft.world.dimension.DimensionOptions;
 import net.minecraft.world.gen.feature.FeaturePlacementContext;
 import net.minecraft.world.gen.placementmodifier.AbstractConditionalPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
+
+import java.util.List;
 
 class DimensionFilter extends AbstractConditionalPlacementModifier {
 	public static final Codec<DimensionFilter> CODEC = RecordCodecBuilder.create(instance -> instance.group(

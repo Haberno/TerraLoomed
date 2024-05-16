@@ -1,9 +1,10 @@
 package org.haberno.terraloomed.worldgen.terrain.populator;
 
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.cell.CellPopulator;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
-import raccoonman.reterraforged.world.worldgen.terrain.Terrain;
+
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.cell.CellPopulator;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.terrain.Terrain;
 
 public record OceanPopulator(Terrain terrainType, Noise height) implements CellPopulator {
 

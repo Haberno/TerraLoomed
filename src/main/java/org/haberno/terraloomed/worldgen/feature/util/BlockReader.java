@@ -7,7 +7,6 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 
-@Deprecated(forRemoval = true)
 public class BlockReader implements BlockView {
 	private BlockState state;
 	

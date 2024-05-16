@@ -2,8 +2,7 @@ package org.haberno.terraloomed.worldgen.noise.module;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
 
 public record Cubic(float frequency, int octaves, float lacunarity, float gain, float minValue, float maxValue) implements Noise {
 	public static final Codec<Cubic> CODEC = RecordCodecBuilder.create(instance -> instance.group(

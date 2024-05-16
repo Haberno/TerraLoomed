@@ -1,15 +1,16 @@
 package org.haberno.terraloomed.mixin;
 
-import java.util.List;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.source.util.MultiNoiseUtil;
 import net.minecraft.world.biome.source.util.MultiNoiseUtil.MultiNoiseSampler;
 import net.minecraft.world.biome.source.util.MultiNoiseUtil.NoiseHypercube;
+import org.haberno.terraloomed.worldgen.biome.spawn.SpawnFinderFix;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import raccoonman.reterraforged.world.worldgen.biome.spawn.SpawnFinderFix;
+
+import java.util.List;
 
 // FIXME the mixin that we should actually be using just refuses to work for some reason
 
@@ -17,8 +18,8 @@ import raccoonman.reterraforged.world.worldgen.biome.spawn.SpawnFinderFix;
 @Mixin(MultiNoiseUtil.class)
 class MixinSpawnFinder {
 
-	@Inject(at = @At("HEAD"), method = "findSpawnPosition", cancellable = true)
-    private static void findSpawnPosition(List<NoiseHypercube> list, MultiNoiseSampler sampler, CallbackInfoReturnable<BlockPos> callback) {
+	@Inject(at = @At("HEAD"), method = "findFittestPosition", cancellable = true)
+    private static void findFittestPosition(List<NoiseHypercube> list, MultiNoiseSampler sampler, CallbackInfoReturnable<BlockPos> callback) {
     	callback.setReturnValue(new SpawnFinderFix(list, sampler).result.location());
     }
 //	@ModifyArg(

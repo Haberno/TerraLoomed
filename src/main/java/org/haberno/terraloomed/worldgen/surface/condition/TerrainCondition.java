@@ -1,18 +1,20 @@
 package org.haberno.terraloomed.worldgen.surface.condition;
 
-import java.util.List;
-import java.util.Set;
-import net.minecraft.util.dynamic.CodecHolder;
-import net.minecraft.world.gen.surfacebuilder.MaterialRules;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.terrain.Terrain;
+import net.minecraft.util.dynamic.CodecHolder;
+import net.minecraft.world.gen.surfacebuilder.MaterialRules;
+import net.minecraft.world.gen.surfacebuilder.MaterialRules.MaterialRuleContext;
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.terrain.Terrain;
+
+import java.util.List;
+import java.util.Set;
 
 class TerrainCondition extends CellCondition {
 	private Set<Terrain> terrain;
 	
-	public TerrainCondition(Context context, Set<Terrain> terrain) {
+	public TerrainCondition(MaterialRuleContext context, Set<Terrain> terrain) {
 		super(context);
 		
 		this.terrain = terrain;
@@ -29,7 +31,7 @@ class TerrainCondition extends CellCondition {
 		).apply(instance, Source::new));
 
 		@Override
-		public TerrainCondition apply(Context ctx) {
+		public TerrainCondition apply(MaterialRuleContext ctx) {
 			return new TerrainCondition(ctx, this.terrain);
 		}
 

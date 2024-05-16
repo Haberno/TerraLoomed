@@ -1,8 +1,7 @@
 package org.haberno.terraloomed.worldgen.noise.module;
 
 import com.mojang.serialization.Codec;
-
-import raccoonman.reterraforged.world.worldgen.util.PosUtil;
+import org.haberno.terraloomed.worldgen.util.PosUtil;
 
 @Deprecated
 public record Cache2d(Noise noise, ThreadLocal<Cached> cache) implements Noise {

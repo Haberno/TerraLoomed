@@ -2,11 +2,10 @@ package org.haberno.terraloomed.data.preset.settings;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-
-import raccoonman.reterraforged.world.worldgen.biome.spawn.SpawnType;
-import raccoonman.reterraforged.world.worldgen.continent.ContinentType;
-import raccoonman.reterraforged.world.worldgen.continent.IslandPopulator;
-import raccoonman.reterraforged.world.worldgen.noise.function.DistanceFunction;
+import org.haberno.terraloomed.worldgen.biome.spawn.SpawnType;
+import org.haberno.terraloomed.worldgen.continent.ContinentType;
+import org.haberno.terraloomed.worldgen.continent.IslandPopulator;
+import org.haberno.terraloomed.worldgen.noise.function.DistanceFunction;
 
 public class WorldSettings {
 	public static final Codec<WorldSettings> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -144,7 +143,6 @@ public class WorldSettings {
         	return new Properties(this.spawnType, this.worldHeight, this.worldDepth, this.seaLevel, this.lavaLevel);
         }
         
-        @Deprecated
         public int terrainScaler() {
         	return Math.min(this.worldHeight, 256);
         }

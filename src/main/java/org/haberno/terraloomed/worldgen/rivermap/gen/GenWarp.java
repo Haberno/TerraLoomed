@@ -1,7 +1,8 @@
 package org.haberno.terraloomed.worldgen.rivermap.gen;
 
-import raccoonman.reterraforged.world.worldgen.noise.domain.Domain;
-import raccoonman.reterraforged.world.worldgen.noise.domain.Domains;
+
+import org.haberno.terraloomed.worldgen.noise.domain.Domain;
+import org.haberno.terraloomed.worldgen.noise.domain.Domains;
 
 public record GenWarp(Domain lake, Domain river) {
     public static final GenWarp EMPTY = new GenWarp(Domains.direct(), Domains.direct());

@@ -5,12 +5,13 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.dynamic.CodecHolder;
 import net.minecraft.world.gen.surfacebuilder.MaterialRules;
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
+import net.minecraft.world.gen.surfacebuilder.MaterialRules.MaterialRuleContext;
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
 
 class HeightCondition extends ThresholdCondition {
 	
-	public HeightCondition(Context context, Noise threshold, Noise variance) {
+	public HeightCondition(MaterialRuleContext context, Noise threshold, Noise variance) {
 		super(context, threshold, variance);
 	}
 
@@ -26,7 +27,7 @@ class HeightCondition extends ThresholdCondition {
 		).apply(instance, Source::new));
 
 		@Override
-		public HeightCondition apply(Context ctx) {
+		public HeightCondition apply(MaterialRuleContext ctx) {
 			return new HeightCondition(ctx, this.threshold.value(), this.variance.value());
 		}
 

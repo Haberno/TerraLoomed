@@ -1,10 +1,10 @@
 package org.haberno.terraloomed.mixin.terrablender;
 
 import net.minecraft.world.biome.source.util.MultiNoiseUtil;
+import org.haberno.terraloomed.compat.terrablender.TBTargetPoint;
 import org.spongepowered.asm.mixin.Implements;
 import org.spongepowered.asm.mixin.Interface;
 import org.spongepowered.asm.mixin.Mixin;
-import raccoonman.reterraforged.compat.terrablender.TBTargetPoint;
 
 @Mixin(MultiNoiseUtil.NoiseValuePoint.class)
 @Implements(@Interface(iface = TBTargetPoint.class, prefix = "reterraforged$TBTargetPoint$"))

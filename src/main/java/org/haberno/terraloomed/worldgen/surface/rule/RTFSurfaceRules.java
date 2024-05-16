@@ -1,17 +1,17 @@
 package org.haberno.terraloomed.worldgen.surface.rule;
 
-import java.util.List;
+import com.mojang.datafixers.util.Pair;
+import com.mojang.serialization.Codec;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.surfacebuilder.MaterialRules;
-import com.mojang.datafixers.util.Pair;
-import com.mojang.serialization.Codec;
-import raccoonman.reterraforged.compat.terrablender.TBSurfaceRules;
-import raccoonman.reterraforged.platform.RegistryUtil;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
-import raccoonman.reterraforged.world.worldgen.surface.rule.StrataRule.Layer;
+import org.haberno.terraloomed.platform.RegistryUtil;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.surface.rule.StrataRule.Layer;
+
+import java.util.List;
 
 public class RTFSurfaceRules {
 

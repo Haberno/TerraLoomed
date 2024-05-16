@@ -1,9 +1,10 @@
 package org.haberno.terraloomed.worldgen.biome.modifier;
 
+import com.mojang.serialization.Codec;
+import net.minecraft.util.StringIdentifiable;
+
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.util.StringIdentifiable;
-import com.mojang.serialization.Codec;
 
 public enum Order implements StringIdentifiable {
 	PREPEND("prepend") {

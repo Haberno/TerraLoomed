@@ -7,8 +7,9 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.dynamic.CodecHolder;
 import net.minecraft.world.gen.surfacebuilder.MaterialRules;
-import raccoonman.reterraforged.registries.RTFRegistries;
-import raccoonman.reterraforged.world.worldgen.RTFRandomState;
+import net.minecraft.world.gen.surfacebuilder.MaterialRules.MaterialRuleContext;
+import org.haberno.terraloomed.registries.RTFRegistries;
+import org.haberno.terraloomed.worldgen.RTFRandomState;
 
 public record LayeredSurfaceRule(TagKey<Layer> layers) implements MaterialRules.MaterialRule {
 	public static final Codec<LayeredSurfaceRule> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -16,9 +17,9 @@ public record LayeredSurfaceRule(TagKey<Layer> layers) implements MaterialRules.
 	).apply(instance, LayeredSurfaceRule::new));
 		
 	@Override
-	public MaterialRules.BlockStateRule apply(Context ctx) {
-		if((Object) ctx.randomState instanceof RTFRandomState rtfRandomState) {
-			Impl<Layer> layerLookup = rtfRandomState.registryAccess().lookupOrThrow(RTFRegistries.SURFACE_LAYERS);
+	public MaterialRules.BlockStateRule apply(MaterialRuleContext ctx) {
+		if((Object) ctx.noiseConfig instanceof RTFRandomState rtfRandomState) {
+			Impl<Layer> layerLookup = rtfRandomState.registryAccess().getWrapperOrThrow(RTFRegistries.SURFACE_LAYERS);
 			return MaterialRules.sequence(layerLookup.getOrThrow(this.layers).stream().map(Layer::unwrapRule).toArray(MaterialRules.MaterialRule[]::new)).apply(ctx);
 		} else {
 			throw new IllegalStateException();

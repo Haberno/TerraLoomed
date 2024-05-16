@@ -1,18 +1,16 @@
 package org.haberno.terraloomed.mixin.plugin;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Stream;
-
+import com.google.common.collect.ImmutableList;
+import org.haberno.terraloomed.RTFCommon;
+import org.haberno.terraloomed.compat.terrablender.TBCompat;
+import org.haberno.terraloomed.compat.worldpreview.WPCompat;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
-import com.google.common.collect.ImmutableList;
-
-import raccoonman.reterraforged.RTFCommon;
-import raccoonman.reterraforged.compat.terrablender.TBCompat;
-import raccoonman.reterraforged.compat.worldpreview.WPCompat;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Stream;
 
 public class MixinPlugin implements IMixinConfigPlugin {
 	private static final String MIXIN_PACKAGE_PREFIX = "raccoonman.reterraforged.mixin.";

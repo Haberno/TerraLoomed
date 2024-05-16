@@ -1,14 +1,12 @@
 package org.haberno.terraloomed.worldgen.cell.noise;
 
-import org.jetbrains.annotations.Nullable;
-
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.cell.CellField;
-import raccoonman.reterraforged.world.worldgen.noise.module.MappedNoise;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.cell.CellField;
+import org.haberno.terraloomed.worldgen.noise.module.MappedNoise;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
+import org.jetbrains.annotations.Nullable;
 
 public class CellSampler implements MappedNoise {
 	public CellField field;

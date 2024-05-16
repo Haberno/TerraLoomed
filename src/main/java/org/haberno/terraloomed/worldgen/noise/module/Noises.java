@@ -1,23 +1,20 @@
 package org.haberno.terraloomed.worldgen.noise.module;
 
-import java.util.function.Function;
-import net.minecraft.registry.entry.RegistryEntry;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
-import raccoonman.reterraforged.platform.RegistryUtil;
-import raccoonman.reterraforged.registries.RTFBuiltInRegistries;
-import raccoonman.reterraforged.world.worldgen.cell.CellField;
-import raccoonman.reterraforged.world.worldgen.cell.noise.CellSampler;
-import raccoonman.reterraforged.world.worldgen.noise.domain.Domain;
-import raccoonman.reterraforged.world.worldgen.noise.domain.Domains;
-import raccoonman.reterraforged.world.worldgen.noise.function.CellFunction;
-import raccoonman.reterraforged.world.worldgen.noise.function.CurveFunction;
-import raccoonman.reterraforged.world.worldgen.noise.function.DistanceFunction;
-import raccoonman.reterraforged.world.worldgen.noise.function.EdgeFunction;
-import raccoonman.reterraforged.world.worldgen.noise.function.Interpolation;
+import net.minecraft.registry.entry.RegistryEntry;
+import org.haberno.terraloomed.platform.RegistryUtil;
+import org.haberno.terraloomed.registries.RTFBuiltInRegistries;
+import org.haberno.terraloomed.worldgen.cell.CellField;
+import org.haberno.terraloomed.worldgen.cell.noise.CellSampler;
+import org.haberno.terraloomed.worldgen.noise.domain.Domain;
+import org.haberno.terraloomed.worldgen.noise.domain.Domains;
+import org.haberno.terraloomed.worldgen.noise.function.*;
+
+import java.util.function.Function;
 
 public class Noises {
-    private static final Codec<Noise> CODEC = RTFBuiltInRegistries.NOISE_TYPE.byNameCodec().dispatch(Noise::codec, Function.identity());
+    private static final Codec<Noise> CODEC = RTFBuiltInRegistries.NOISE_TYPE.getCodec().dispatch(Noise::codec, Function.identity());
     public static final float MAX_REASONABLE_NOISE_VALUE = 1000000.0F;
     public static final Codec<Float> NOISE_VALUE_CODEC = Codec.floatRange(-MAX_REASONABLE_NOISE_VALUE, MAX_REASONABLE_NOISE_VALUE);
     public static final Codec<Noise> DIRECT_CODEC = Codec.either(NOISE_VALUE_CODEC, CODEC).xmap(either -> either.map(Noises::constant, Function.identity()), noise -> {

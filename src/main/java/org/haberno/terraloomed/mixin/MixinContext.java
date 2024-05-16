@@ -1,27 +1,25 @@
 package org.haberno.terraloomed.mixin;
 
-import java.util.HashSet;
-import java.util.Set;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkSection;
+import net.minecraft.world.gen.surfacebuilder.MaterialRules.MaterialRuleContext;
+import org.haberno.terraloomed.worldgen.surface.RTFSurfaceContext;
+import org.haberno.terraloomed.worldgen.surface.SurfaceRegion;
 import org.jetbrains.annotations.Nullable;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Implements;
-import org.spongepowered.asm.mixin.Interface;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import raccoonman.reterraforged.world.worldgen.surface.RTFSurfaceContext;
-import raccoonman.reterraforged.world.worldgen.surface.SurfaceRegion;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Implements(@Interface(iface = RTFSurfaceContext.class, prefix = "reterraforged$RTFSurfaceContext$"))
-@Mixin(Context.class)
+@Mixin(MaterialRuleContext.class)
 abstract class MixinContext {
 	@Shadow
 	@Final

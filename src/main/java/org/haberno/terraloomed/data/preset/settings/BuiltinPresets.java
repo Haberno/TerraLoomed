@@ -1,22 +1,23 @@
 package org.haberno.terraloomed.data.preset.settings;
 
-import raccoonman.reterraforged.data.preset.settings.ClimateSettings.BiomeNoise;
-import raccoonman.reterraforged.data.preset.settings.ClimateSettings.BiomeShape;
-import raccoonman.reterraforged.data.preset.settings.ClimateSettings.RangeValue;
-import raccoonman.reterraforged.data.preset.settings.FilterSettings.Erosion;
-import raccoonman.reterraforged.data.preset.settings.FilterSettings.Smoothing;
-import raccoonman.reterraforged.data.preset.settings.RiverSettings.Lake;
-import raccoonman.reterraforged.data.preset.settings.RiverSettings.River;
-import raccoonman.reterraforged.data.preset.settings.RiverSettings.Wetland;
-import raccoonman.reterraforged.data.preset.settings.TerrainSettings.General;
-import raccoonman.reterraforged.data.preset.settings.TerrainSettings.Terrain;
-import raccoonman.reterraforged.data.preset.settings.WorldSettings.Continent;
-import raccoonman.reterraforged.data.preset.settings.WorldSettings.ControlPoints;
-import raccoonman.reterraforged.data.preset.settings.WorldSettings.Properties;
-import raccoonman.reterraforged.world.worldgen.biome.spawn.SpawnType;
-import raccoonman.reterraforged.world.worldgen.continent.ContinentType;
-import raccoonman.reterraforged.world.worldgen.continent.IslandPopulator;
-import raccoonman.reterraforged.world.worldgen.noise.function.DistanceFunction;
+import org.haberno.terraloomed.data.preset.settings.ClimateSettings.BiomeNoise;
+import org.haberno.terraloomed.data.preset.settings.ClimateSettings.BiomeShape;
+import org.haberno.terraloomed.data.preset.settings.ClimateSettings.RangeValue;
+import org.haberno.terraloomed.data.preset.settings.FilterSettings.Erosion;
+import org.haberno.terraloomed.data.preset.settings.FilterSettings.Smoothing;
+import org.haberno.terraloomed.data.preset.settings.RiverSettings.Lake;
+import org.haberno.terraloomed.data.preset.settings.RiverSettings.River;
+import org.haberno.terraloomed.data.preset.settings.RiverSettings.Wetland;
+import org.haberno.terraloomed.data.preset.settings.TerrainSettings.General;
+import org.haberno.terraloomed.data.preset.settings.TerrainSettings.Terrain;
+import org.haberno.terraloomed.data.preset.settings.WorldSettings.Continent;
+import org.haberno.terraloomed.data.preset.settings.WorldSettings.ControlPoints;
+import org.haberno.terraloomed.data.preset.settings.WorldSettings.Properties;
+import org.haberno.terraloomed.worldgen.biome.spawn.SpawnType;
+import org.haberno.terraloomed.worldgen.continent.ContinentType;
+import org.haberno.terraloomed.worldgen.continent.IslandPopulator;
+import org.haberno.terraloomed.worldgen.noise.function.DistanceFunction;
+
 
 //1.07, 4.975
 //1.095, 5
@@ -27,13 +28,13 @@ public class BuiltinPresets {
 		return new Preset(
 			new WorldSettings(
 				new Continent(ContinentType.MULTI_IMPROVED, DistanceFunction.EUCLIDEAN, 3000, 0.7F, 0.25F, 0.25F, 5, 0.26F, 4.33F),
-				new ControlPoints(IslandPopulator.DEFAULT_INLAND_POINT, IslandPopulator.DEFAULT_COAST_POINT, 0.1F, 0.25F, 0.327F, 0.448F, 0.502F, 1.327F, 2.758F), 
+				new ControlPoints(IslandPopulator.DEFAULT_INLAND_POINT, IslandPopulator.DEFAULT_COAST_POINT, 0.1F, 0.25F, 0.327F, 0.448F, 0.502F, 1.327F, 2.758F),
 				new Properties(SpawnType.CONTINENT_CENTER, 512, 64, 63, -54)
 			), 
 			new SurfaceSettings(new SurfaceSettings.Erosion(30, 1024, 40, 95, 95, 0.65F, 0.475F, 0.4F, 0.45F, 6.0F, 3.0F)),
 			new CaveSettings(),
 			new ClimateSettings(
-				new RangeValue(0, 6, 2, 0.0F, 0.98F, 0.05F), 
+				new RangeValue(0, 6, 2, 0.0F, 0.98F, 0.05F),
 				new RangeValue(0, 6, 1, 0.0F, 1.0F, 0.0F), 
 				new BiomeShape(225, 8, 150, 80),
 				new BiomeNoise(ClimateSettings.BiomeNoise.EdgeType.SIMPLEX, 24, 2, 0.5F, 2.65F, 14)
@@ -128,7 +129,7 @@ public class BuiltinPresets {
 			), 
 			new TerrainSettings(
 				new General(0, 690, 0.629F, 0.629F, false),
-				new Terrain(1.0F, 1.0F, 1.0F, 1.0F), 
+				new Terrain(1.0F, 1.0F, 1.0F, 1.0F),
 				new Terrain(1.25F, 1.0F, 1.0F, 1.0F), 
 				new Terrain(2.5F, 1.0F, 1.0F, 1.0F),
 				new Terrain(2.0F, 1.0F, 1.0F, 1.0F),

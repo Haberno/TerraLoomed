@@ -1,6 +1,7 @@
 package org.haberno.terraloomed.compat.terrablender;
 
-import raccoonman.reterraforged.platform.ModLoaderUtil;
+
+import org.haberno.terraloomed.platform.ModLoaderUtil;
 import terrablender.core.TerraBlender;
 
 public class TBCompat {

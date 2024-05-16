@@ -1,10 +1,11 @@
 package org.haberno.terraloomed.data.preset;
 
+import net.minecraft.util.Identifier;
+import org.haberno.terraloomed.RTFCommon;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import net.minecraft.util.Identifier;
-import raccoonman.reterraforged.RTFCommon;
 
 public class PresetTemplatePaths {
 	public static final List<Identifier> OAK_SMALL = tree("oak/small", "oak_bush_1", "oak_bush_2", "oak_small_1", "oak_small_2", "oak_small_3", "oak_small_4");

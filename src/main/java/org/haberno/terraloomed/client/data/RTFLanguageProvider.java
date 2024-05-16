@@ -1,8 +1,8 @@
 package org.haberno.terraloomed.client.data;
 
 import net.minecraft.data.DataOutput;
-import raccoonman.reterraforged.RTFCommon;
-import raccoonman.reterraforged.client.gui.Tooltips;
+import org.haberno.terraloomed.RTFCommon;
+import org.haberno.terraloomed.client.gui.Tooltips;
 
 // TODO add some more languages
 public class RTFLanguageProvider {

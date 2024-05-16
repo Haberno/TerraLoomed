@@ -1,9 +1,8 @@
 package org.haberno.terraloomed.worldgen.feature.template.placement;
 
 import com.mojang.serialization.Codec;
-
-import raccoonman.reterraforged.platform.RegistryUtil;
-import raccoonman.reterraforged.registries.RTFBuiltInRegistries;
+import org.haberno.terraloomed.platform.RegistryUtil;
+import org.haberno.terraloomed.registries.RTFBuiltInRegistries;
 
 public class TemplatePlacements {
 

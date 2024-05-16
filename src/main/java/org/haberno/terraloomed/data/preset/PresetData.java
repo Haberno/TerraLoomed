@@ -1,9 +1,10 @@
 package org.haberno.terraloomed.data.preset;
 
+
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
-import raccoonman.reterraforged.data.preset.settings.Preset;
-import raccoonman.reterraforged.registries.RTFRegistries;
+import org.haberno.terraloomed.data.preset.settings.Preset;
+import org.haberno.terraloomed.registries.RTFRegistries;
 
 //TODO support different presets per dimension
 public class PresetData {

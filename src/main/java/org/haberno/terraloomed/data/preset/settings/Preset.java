@@ -2,30 +2,10 @@ package org.haberno.terraloomed.data.preset.settings;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.registry.DynamicRegistryManager;
-import net.minecraft.registry.Registerable;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryBuilder;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
-import raccoonman.reterraforged.compat.terrablender.TBNoiseRouterData;
-import raccoonman.reterraforged.data.preset.PresetBiomeData;
-import raccoonman.reterraforged.data.preset.PresetBiomeModifierData;
-import raccoonman.reterraforged.data.preset.PresetConfiguredCarvers;
-import raccoonman.reterraforged.data.preset.PresetConfiguredFeatures;
-import raccoonman.reterraforged.data.preset.PresetData;
-import raccoonman.reterraforged.data.preset.PresetDimensionTypes;
-import raccoonman.reterraforged.data.preset.PresetNoiseData;
-import raccoonman.reterraforged.data.preset.PresetNoiseGeneratorSettings;
-import raccoonman.reterraforged.data.preset.PresetNoiseParameters;
-import raccoonman.reterraforged.data.preset.PresetNoiseRouterData;
-import raccoonman.reterraforged.data.preset.PresetPlacedFeatures;
-import raccoonman.reterraforged.data.preset.PresetStructureRuleData;
-import raccoonman.reterraforged.data.preset.PresetStructureSets;
-import raccoonman.reterraforged.data.preset.PresetSurfaceLayerData;
-import raccoonman.reterraforged.registries.RTFRegistries;
+import net.minecraft.registry.*;
+import org.haberno.terraloomed.data.preset.PresetNoiseGeneratorSettings;
+
+import java.util.stream.Stream;
 
 //TODO make this actually immutable when we rework the gui
 public record Preset(WorldSettings world, SurfaceSettings surface, CaveSettings caves, ClimateSettings climate, TerrainSettings terrain, RiverSettings rivers, FilterSettings filters, MiscellaneousSettings miscellaneous) {
@@ -67,7 +47,10 @@ public record Preset(WorldSettings world, SurfaceSettings surface, CaveSettings 
 //			TBNoiseRouterData.bootstrap(ctx);
 //		});
 		this.addPatch(builder, RegistryKeys.CHUNK_GENERATOR_SETTINGS, PresetNoiseGeneratorSettings::bootstrap);
-		return builder.createWrapperLookup(DynamicRegistryManager.of(Registries.REGISTRIES), registries);
+		Stream<RegistryWrapper.Impl<?>> stream = registries.streamAllRegistries().map((entry) -> {
+			return entry.value().getReadOnlyWrapper();
+		});
+		return builder.createWrapperLookup(DynamicRegistryManager.of(Registries.REGISTRIES), stream );
 	}
 	
 	private <T> void addPatch(RegistryBuilder builder, RegistryKey<? extends Registry<T>> key, Patch<T> patch) {

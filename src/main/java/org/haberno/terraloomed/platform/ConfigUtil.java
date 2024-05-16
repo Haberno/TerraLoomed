@@ -1,11 +1,11 @@
 package org.haberno.terraloomed.platform;
 
+import net.fabricmc.loader.api.FabricLoader;
+import org.haberno.terraloomed.RTFCommon;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
-import dev.architectury.injectables.annotations.ExpectPlatform;
-import raccoonman.reterraforged.RTFCommon;
 
 public class ConfigUtil {
 	public static final Path RTF_CONFIG_PATH = getConfigPath().resolve(RTFCommon.MOD_ID);
@@ -18,10 +18,9 @@ public class ConfigUtil {
 	public static Path legacy(String path) {
 		return LEGACY_CONFIG_PATH.resolve(path);
 	}
-	
-	@ExpectPlatform
+
 	public static Path getConfigPath() {
-		throw new IllegalStateException();
+		return FabricLoader.getInstance().getConfigDir();
 	}
 	
 	static {

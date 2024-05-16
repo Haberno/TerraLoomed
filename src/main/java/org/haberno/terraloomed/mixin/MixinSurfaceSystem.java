@@ -1,9 +1,5 @@
 package org.haberno.terraloomed.mixin;
 
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.random.Random;
@@ -11,6 +7,9 @@ import net.minecraft.util.math.random.RandomSplitter;
 import net.minecraft.world.gen.noise.NoiseConfig;
 import net.minecraft.world.gen.surfacebuilder.MaterialRules;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import org.haberno.terraloomed.RTFCommon;
+import org.haberno.terraloomed.worldgen.surface.RTFSurfaceSystem;
+import org.haberno.terraloomed.worldgen.surface.rule.StrataRule.Strata;
 import org.spongepowered.asm.mixin.Implements;
 import org.spongepowered.asm.mixin.Interface;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,11 +17,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import raccoonman.reterraforged.RTFCommon;
-import raccoonman.reterraforged.compat.terrablender.TBCompat;
-import raccoonman.reterraforged.world.worldgen.surface.RTFSurfaceSystem;
-import raccoonman.reterraforged.world.worldgen.surface.rule.StrataRule.Strata;
-import terrablender.worldgen.surface.NamespacedSurfaceRuleSource;
+
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
 
 @Mixin(SurfaceBuilder.class)
 @Implements(@Interface(iface = RTFSurfaceSystem.class, prefix = RTFCommon.MOD_ID + "$RTFSurfaceSystem$"))
@@ -36,7 +35,7 @@ class MixinSurfaceSystem {
 		method = "<init>"
 	)
     public void SurfaceSystem(NoiseConfig randomState, BlockState blockState, int i, RandomSplitter positionalRandomFactory, CallbackInfo callback) {
-    	this.strataRandom = randomState.randomDeriver.fromHashOf(STRATA_RANDOM);
+    	this.strataRandom = randomState.randomDeriver.split(STRATA_RANDOM);
     	this.strata = new ConcurrentHashMap<>();
 	}
 	
@@ -58,7 +57,7 @@ class MixinSurfaceSystem {
 
 	public List<Strata> reterraforged$RTFSurfaceSystem$getOrCreateStrata(Identifier cacheId, Function<Random, List<Strata>> factory) {
 		return this.strata.computeIfAbsent(cacheId, (k) -> {
-			return factory.apply(this.strataRandom.fork());
+			return factory.apply(this.strataRandom.split());
 		});
 	}
 }

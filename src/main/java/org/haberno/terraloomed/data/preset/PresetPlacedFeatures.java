@@ -1,6 +1,5 @@
 package org.haberno.terraloomed.data.preset;
 
-import java.util.List;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryEntryLookup;
@@ -10,28 +9,17 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.Heightmap.Type;
 import net.minecraft.world.dimension.DimensionOptions;
 import net.minecraft.world.gen.blockpredicate.BlockPredicate;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.MiscConfiguredFeatures;
-import net.minecraft.world.gen.feature.MiscPlacedFeatures;
-import net.minecraft.world.gen.feature.OreConfiguredFeatures;
-import net.minecraft.world.gen.feature.OrePlacedFeatures;
-import net.minecraft.world.gen.feature.PlacedFeature;
-import net.minecraft.world.gen.feature.PlacedFeatures;
-import net.minecraft.world.gen.placementmodifier.BiomePlacementModifier;
-import net.minecraft.world.gen.placementmodifier.BlockFilterPlacementModifier;
-import net.minecraft.world.gen.placementmodifier.CountPlacementModifier;
-import net.minecraft.world.gen.placementmodifier.EnvironmentScanPlacementModifier;
-import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
-import net.minecraft.world.gen.placementmodifier.PlacementModifier;
-import net.minecraft.world.gen.placementmodifier.RarityFilterPlacementModifier;
-import net.minecraft.world.gen.placementmodifier.SquarePlacementModifier;
-import raccoonman.reterraforged.RTFCommon;
-import raccoonman.reterraforged.data.preset.settings.MiscellaneousSettings;
-import raccoonman.reterraforged.data.preset.settings.Preset;
-import raccoonman.reterraforged.registries.RTFRegistries;
-import raccoonman.reterraforged.world.worldgen.feature.placement.RTFPlacementModifiers;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
-import raccoonman.reterraforged.world.worldgen.terrain.TerrainType;
+import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.placementmodifier.*;
+import org.haberno.terraloomed.RTFCommon;
+import org.haberno.terraloomed.data.preset.settings.MiscellaneousSettings;
+import org.haberno.terraloomed.data.preset.settings.Preset;
+import org.haberno.terraloomed.registries.RTFRegistries;
+import org.haberno.terraloomed.worldgen.feature.placement.RTFPlacementModifiers;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.terrain.TerrainType;
+
+import java.util.List;
 
 public class PresetPlacedFeatures {
 	public static final RegistryKey<PlacedFeature> ERODE_SNOW = createKey("erode_snow");

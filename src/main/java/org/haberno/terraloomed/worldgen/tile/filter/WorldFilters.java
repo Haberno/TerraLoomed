@@ -1,11 +1,12 @@
 package org.haberno.terraloomed.worldgen.tile.filter;
 
-import java.util.function.IntFunction;
 
-import raccoonman.reterraforged.data.preset.settings.FilterSettings;
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.heightmap.Heightmap;
-import raccoonman.reterraforged.world.worldgen.tile.Tile;
+import org.haberno.terraloomed.data.preset.settings.FilterSettings;
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.heightmap.Heightmap;
+import org.haberno.terraloomed.worldgen.tile.Tile;
+
+import java.util.function.IntFunction;
 
 public class WorldFilters {
     private Smoothing smoothing;

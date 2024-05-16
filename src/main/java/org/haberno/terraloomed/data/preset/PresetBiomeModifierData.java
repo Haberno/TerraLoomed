@@ -1,6 +1,5 @@
 package org.haberno.terraloomed.data.preset;
 
-import java.util.Map;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKey;
@@ -11,15 +10,17 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.PlacedFeature;
 import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
-import raccoonman.reterraforged.RTFCommon;
-import raccoonman.reterraforged.data.preset.settings.MiscellaneousSettings;
-import raccoonman.reterraforged.data.preset.settings.Preset;
-import raccoonman.reterraforged.registries.RTFRegistries;
-import raccoonman.reterraforged.tags.RTFBiomeTags;
-import raccoonman.reterraforged.world.worldgen.biome.modifier.BiomeModifier;
-import raccoonman.reterraforged.world.worldgen.biome.modifier.BiomeModifiers;
-import raccoonman.reterraforged.world.worldgen.biome.modifier.Filter;
-import raccoonman.reterraforged.world.worldgen.biome.modifier.Order;
+import org.haberno.terraloomed.RTFCommon;
+import org.haberno.terraloomed.data.preset.settings.MiscellaneousSettings;
+import org.haberno.terraloomed.data.preset.settings.Preset;
+import org.haberno.terraloomed.registries.RTFRegistries;
+import org.haberno.terraloomed.tags.RTFBiomeTags;
+import org.haberno.terraloomed.worldgen.biome.modifier.BiomeModifier;
+import org.haberno.terraloomed.worldgen.biome.modifier.BiomeModifiers;
+import org.haberno.terraloomed.worldgen.biome.modifier.Filter;
+import org.haberno.terraloomed.worldgen.biome.modifier.Order;
+
+import java.util.Map;
 
 public class PresetBiomeModifierData {
 	public static final RegistryKey<BiomeModifier> SWAMP_SURFACE = createKey("raw_generation/swamp_surface");
@@ -58,8 +59,8 @@ public class PresetBiomeModifierData {
 	
 	public static void bootstrap(Preset preset, Registerable<BiomeModifier> ctx) {
 		MiscellaneousSettings miscellaneous = preset.miscellaneous();
-		RegistryEntryLookup<PlacedFeature> placedFeatures = ctx.lookup(RegistryKeys.PLACED_FEATURE);
-		RegistryEntryLookup<Biome> biomes = ctx.lookup(RegistryKeys.BIOME);
+		RegistryEntryLookup<PlacedFeature> placedFeatures = ctx.getRegistryLookup(RegistryKeys.PLACED_FEATURE);
+		RegistryEntryLookup<Biome> biomes = ctx.getRegistryLookup(RegistryKeys.BIOME);
 
 		RegistryEntryList<Biome> hasSwampSurface = biomes.getOrThrow(RTFBiomeTags.HAS_SWAMP_SURFACE);
 		

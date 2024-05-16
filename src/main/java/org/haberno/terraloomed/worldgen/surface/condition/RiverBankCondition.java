@@ -5,12 +5,13 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.dynamic.CodecHolder;
 import net.minecraft.world.gen.surfacebuilder.MaterialRules;
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
+import net.minecraft.world.gen.surfacebuilder.MaterialRules.MaterialRuleContext;
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
 
 class RiverBankCondition extends ThresholdCondition {
 	
-	public RiverBankCondition(Context context, Noise threshold, Noise variance) {
+	public RiverBankCondition(MaterialRuleContext context, Noise threshold, Noise variance) {
 		super(context, threshold, variance);
 	}
 
@@ -26,7 +27,7 @@ class RiverBankCondition extends ThresholdCondition {
 		).apply(instance, Source::new));
 
 		@Override
-		public RiverBankCondition apply(Context ctx) {
+		public RiverBankCondition apply(MaterialRuleContext ctx) {
 			return new RiverBankCondition(ctx, this.threshold.value(), this.variance.value());
 		}
 

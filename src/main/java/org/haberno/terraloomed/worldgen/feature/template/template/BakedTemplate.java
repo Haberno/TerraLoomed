@@ -1,8 +1,9 @@
 package org.haberno.terraloomed.worldgen.feature.template.template;
 
-import java.util.stream.Stream;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
+
+import java.util.stream.Stream;
 
 public class BakedTemplate extends BakedTransform<BlockInfo[]> {
 

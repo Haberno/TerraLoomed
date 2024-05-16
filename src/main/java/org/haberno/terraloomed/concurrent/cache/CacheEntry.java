@@ -1,9 +1,10 @@
 package org.haberno.terraloomed.concurrent.cache;
 
+
+import org.haberno.terraloomed.concurrent.task.LazyCallable;
+
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.Future;
-
-import raccoonman.reterraforged.concurrent.task.LazyCallable;
 
 public class CacheEntry<T> extends LazyCallable<T> implements ExpiringEntry {
 	private volatile long timestamp;

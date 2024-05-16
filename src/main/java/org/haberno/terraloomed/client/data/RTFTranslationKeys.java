@@ -1,6 +1,7 @@
 package org.haberno.terraloomed.client.data;
 
-import raccoonman.reterraforged.RTFCommon;
+
+import org.haberno.terraloomed.RTFCommon;
 
 public class RTFTranslationKeys {
 	public static final String METADATA_DESCRIPTION = resolve("metadata.description");

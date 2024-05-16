@@ -1,13 +1,14 @@
 package org.haberno.terraloomed.worldgen.terrain.populator;
 
-import raccoonman.reterraforged.world.worldgen.biome.Erosion;
-import raccoonman.reterraforged.world.worldgen.biome.Weirdness;
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.cell.CellPopulator;
-import raccoonman.reterraforged.world.worldgen.heightmap.Levels;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
-import raccoonman.reterraforged.world.worldgen.terrain.TerrainType;
-import raccoonman.reterraforged.world.worldgen.terrain.region.RegionSelector;
+
+import org.haberno.terraloomed.worldgen.biome.Erosion;
+import org.haberno.terraloomed.worldgen.biome.Weirdness;
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.cell.CellPopulator;
+import org.haberno.terraloomed.worldgen.heightmap.Levels;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.terrain.TerrainType;
+import org.haberno.terraloomed.worldgen.terrain.region.RegionSelector;
 
 public record VolcanoPopulator(float weight, Noise ground, Noise cone, Noise height, Noise lowlands, float inversionPoint, float blendLower, float blendUpper, float blendRange, Levels levels) implements CellPopulator, RegionSelector.Weighted {
     

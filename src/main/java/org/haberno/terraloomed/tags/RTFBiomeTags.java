@@ -3,7 +3,7 @@ package org.haberno.terraloomed.tags;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.world.biome.Biome;
-import raccoonman.reterraforged.RTFCommon;
+import org.haberno.terraloomed.RTFCommon;
 
 public class RTFBiomeTags {
 	public static final TagKey<Biome> HAS_SWAMP_SURFACE = resolve("features/has_swamp_surface");

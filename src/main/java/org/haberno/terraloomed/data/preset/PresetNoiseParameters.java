@@ -3,7 +3,7 @@ package org.haberno.terraloomed.data.preset;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
-import raccoonman.reterraforged.data.preset.settings.Preset;
+import org.haberno.terraloomed.data.preset.settings.Preset;
 
 public class PresetNoiseParameters {
 

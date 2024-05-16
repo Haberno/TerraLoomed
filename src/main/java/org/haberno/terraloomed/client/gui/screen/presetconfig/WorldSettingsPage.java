@@ -1,18 +1,20 @@
 package org.haberno.terraloomed.client.gui.screen.presetconfig;
 
-import java.util.Optional;
+import com.google.common.collect.ImmutableList;
 import net.minecraft.client.gui.widget.CyclingButtonWidget;
 import net.minecraft.text.Text;
-import com.google.common.collect.ImmutableList;
-import raccoonman.reterraforged.client.data.RTFTranslationKeys;
-import raccoonman.reterraforged.client.gui.screen.page.LinkedPageScreen.Page;
-import raccoonman.reterraforged.client.gui.screen.presetconfig.PresetListPage.PresetEntry;
-import raccoonman.reterraforged.client.gui.widget.Slider;
-import raccoonman.reterraforged.data.preset.settings.Preset;
-import raccoonman.reterraforged.data.preset.settings.WorldSettings;
-import raccoonman.reterraforged.world.worldgen.biome.spawn.SpawnType;
-import raccoonman.reterraforged.world.worldgen.continent.ContinentType;
-import raccoonman.reterraforged.world.worldgen.noise.function.DistanceFunction;
+import net.minecraft.util.math.MathHelper;
+import org.haberno.terraloomed.client.data.RTFTranslationKeys;
+import org.haberno.terraloomed.client.gui.screen.page.LinkedPageScreen.Page;
+import org.haberno.terraloomed.client.gui.screen.presetconfig.PresetListPage.PresetEntry;
+import org.haberno.terraloomed.client.gui.widget.Slider;
+import org.haberno.terraloomed.data.preset.settings.Preset;
+import org.haberno.terraloomed.data.preset.settings.WorldSettings;
+import org.haberno.terraloomed.worldgen.biome.spawn.SpawnType;
+import org.haberno.terraloomed.worldgen.continent.ContinentType;
+import org.haberno.terraloomed.worldgen.noise.function.DistanceFunction;
+
+import java.util.Optional;
 
 public class WorldSettingsPage extends PresetEditorPage {
 	private CyclingButtonWidget<ContinentType> continentType;
@@ -130,25 +132,25 @@ public class WorldSettingsPage extends PresetEditorPage {
 			return value;
 		});
 		this.deepOcean = PresetWidgets.createFloatSlider(controlPoints.deepOcean, 0.0F, 1.0F, RTFTranslationKeys.GUI_SLIDER_DEEP_OCEAN, (slider, value) -> {
-			value = Mth.clamp(value, this.islandCoast.getValue(), this.shallowOcean.getValue());
+			value = MathHelper.clamp(value, this.islandCoast.getValue(), this.shallowOcean.getValue());
 			controlPoints.deepOcean = (float) slider.scaleValue(value);
 			this.regenerate();
 			return value;
 		});
 		this.shallowOcean = PresetWidgets.createFloatSlider(controlPoints.shallowOcean, 0.0F, 1.0F, RTFTranslationKeys.GUI_SLIDER_SHALLOW_OCEAN, (slider, value) -> {
-			value = Mth.clamp(value, this.deepOcean.getValue(), this.beach.getValue());
+			value = MathHelper.clamp(value, this.deepOcean.getValue(), this.beach.getValue());
 			controlPoints.shallowOcean = (float) slider.scaleValue(value);
 			this.regenerate();
 			return value;
 		});
 		this.beach = PresetWidgets.createFloatSlider(controlPoints.beach, 0.0F, 1.0F, RTFTranslationKeys.GUI_SLIDER_BEACH, (slider, value) -> {
-			value = Mth.clamp(value, this.shallowOcean.getValue(), this.coast.getValue());
+			value = MathHelper.clamp(value, this.shallowOcean.getValue(), this.coast.getValue());
 			controlPoints.beach = (float) slider.scaleValue(value);
 			this.regenerate();
 			return value;
 		});
 		this.coast = PresetWidgets.createFloatSlider(controlPoints.coast, 0.0F, 1.0F, RTFTranslationKeys.GUI_SLIDER_COAST, (slider, value) -> {
-			value = Mth.clamp(value, this.beach.getValue(), this.nearInland.getValue());
+			value = MathHelper.clamp(value, this.beach.getValue(), this.nearInland.getValue());
 			controlPoints.coast = (float) slider.scaleValue(value);
 			this.regenerate();
 			return value;

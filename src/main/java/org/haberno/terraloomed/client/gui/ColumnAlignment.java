@@ -3,7 +3,7 @@ package org.haberno.terraloomed.client.gui;
 import net.minecraft.client.gui.Drawable;
 import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.screen.Screen;
-import raccoonman.reterraforged.mixin.ScreenInvoker;
+import org.haberno.terraloomed.mixin.ScreenInvoker;
 
 public class ColumnAlignment {
 	private Screen parent;

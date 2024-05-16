@@ -1,7 +1,7 @@
 package org.haberno.terraloomed.data.preset;
 
-import java.util.List;
-import java.util.Map;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registerable;
@@ -15,47 +15,35 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.gen.blockpredicate.BlockPredicate;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.ConfiguredFeatures;
-import net.minecraft.world.gen.feature.DiskFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureConfig;
-import net.minecraft.world.gen.feature.MiscConfiguredFeatures;
-import net.minecraft.world.gen.feature.PlacedFeature;
-import net.minecraft.world.gen.feature.PlacedFeatures;
-import net.minecraft.world.gen.feature.RandomFeatureConfig;
-import net.minecraft.world.gen.feature.RandomFeatureEntry;
-import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
-import net.minecraft.world.gen.feature.SimpleBlockFeatureConfig;
-import net.minecraft.world.gen.feature.TreeConfiguredFeatures;
-import net.minecraft.world.gen.feature.TreePlacedFeatures;
+import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.PredicatedStateProvider;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.treedecorator.AlterGroundTreeDecorator;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import raccoonman.reterraforged.RTFCommon;
-import raccoonman.reterraforged.data.preset.settings.MiscellaneousSettings;
-import raccoonman.reterraforged.data.preset.settings.Preset;
-import raccoonman.reterraforged.data.preset.settings.SurfaceSettings;
-import raccoonman.reterraforged.data.preset.settings.TerrainSettings;
-import raccoonman.reterraforged.world.worldgen.feature.BushFeature;
-import raccoonman.reterraforged.world.worldgen.feature.ErodeSnowFeature;
-import raccoonman.reterraforged.world.worldgen.feature.RTFFeatures;
-import raccoonman.reterraforged.world.worldgen.feature.SwampSurfaceFeature;
-import raccoonman.reterraforged.world.worldgen.feature.chance.ChanceFeature;
-import raccoonman.reterraforged.world.worldgen.feature.chance.ChanceModifier;
-import raccoonman.reterraforged.world.worldgen.feature.chance.RTFChanceModifiers;
-import raccoonman.reterraforged.world.worldgen.feature.template.TemplateFeature;
-import raccoonman.reterraforged.world.worldgen.feature.template.decorator.DecoratorConfig;
-import raccoonman.reterraforged.world.worldgen.feature.template.decorator.TemplateDecorator;
-import raccoonman.reterraforged.world.worldgen.feature.template.decorator.TemplateDecorators;
-import raccoonman.reterraforged.world.worldgen.feature.template.decorator.TreeContext;
-import raccoonman.reterraforged.world.worldgen.feature.template.paste.PasteConfig;
-import raccoonman.reterraforged.world.worldgen.feature.template.placement.TemplatePlacement;
-import raccoonman.reterraforged.world.worldgen.feature.template.placement.TemplatePlacements;
-import raccoonman.reterraforged.world.worldgen.feature.template.template.TemplateContext;
+import org.haberno.terraloomed.RTFCommon;
+import org.haberno.terraloomed.data.preset.settings.MiscellaneousSettings;
+import org.haberno.terraloomed.data.preset.settings.Preset;
+import org.haberno.terraloomed.data.preset.settings.SurfaceSettings;
+import org.haberno.terraloomed.data.preset.settings.TerrainSettings;
+import org.haberno.terraloomed.worldgen.feature.BushFeature;
+import org.haberno.terraloomed.worldgen.feature.ErodeSnowFeature;
+import org.haberno.terraloomed.worldgen.feature.RTFFeatures;
+import org.haberno.terraloomed.worldgen.feature.SwampSurfaceFeature;
+import org.haberno.terraloomed.worldgen.feature.chance.ChanceFeature;
+import org.haberno.terraloomed.worldgen.feature.chance.ChanceModifier;
+import org.haberno.terraloomed.worldgen.feature.chance.RTFChanceModifiers;
+import org.haberno.terraloomed.worldgen.feature.template.TemplateFeature;
+import org.haberno.terraloomed.worldgen.feature.template.decorator.DecoratorConfig;
+import org.haberno.terraloomed.worldgen.feature.template.decorator.TemplateDecorator;
+import org.haberno.terraloomed.worldgen.feature.template.decorator.TemplateDecorators;
+import org.haberno.terraloomed.worldgen.feature.template.decorator.TreeContext;
+import org.haberno.terraloomed.worldgen.feature.template.paste.PasteConfig;
+import org.haberno.terraloomed.worldgen.feature.template.placement.TemplatePlacement;
+import org.haberno.terraloomed.worldgen.feature.template.placement.TemplatePlacements;
+import org.haberno.terraloomed.worldgen.feature.template.template.TemplateContext;
+
+import java.util.List;
+import java.util.Map;
 
 public class PresetConfiguredFeatures {
 	public static final RegistryKey<ConfiguredFeature<?, ?>> ERODE_SNOW = createKey("erode_snow");
@@ -291,9 +279,9 @@ public class PresetConfiguredFeatures {
 				makeWeighted(0.4F, jungleBush)
 			)));
 			ConfiguredFeatures.register(ctx, FOREST_GRASS, Feature.RANDOM_SELECTOR, makeRandom(
-				makeInlined(Feature.RANDOM_PATCH, makePatch(Blocks.GRASS, 48)),
+				makeInlined(Feature.RANDOM_PATCH, makePatch(Blocks.GRASS_BLOCK, 48)),
 				List.of(
-					makeWeighted(0.5F, makeInlined(Feature.RANDOM_PATCH, makePatch(Blocks.GRASS, 56))),
+					makeWeighted(0.5F, makeInlined(Feature.RANDOM_PATCH, makePatch(Blocks.GRASS_BLOCK, 56))),
 					makeWeighted(0.4F, makeInlined(Feature.RANDOM_PATCH, makePatch(Blocks.TALL_GRASS, 56))),
 					makeWeighted(0.2F, makeInlined(Feature.RANDOM_PATCH, makePatch(Blocks.LARGE_FERN, 48))),
 					makeWeighted(0.2F, makeInlined(Feature.RANDOM_PATCH, makePatch(Blocks.FERN, 24)))
@@ -302,16 +290,16 @@ public class PresetConfiguredFeatures {
 			ConfiguredFeatures.register(ctx, MEADOW_GRASS, Feature.RANDOM_SELECTOR, makeRandom(
 				makeInlined(Feature.RANDOM_PATCH, makePatch(Blocks.FERN, 15)),
 				List.of(
-					makeWeighted(0.5F, makeInlined(Feature.RANDOM_PATCH, makePatch(Blocks.GRASS, 15))),
+					makeWeighted(0.5F, makeInlined(Feature.RANDOM_PATCH, makePatch(Blocks.GRASS_BLOCK, 15))),
 					makeWeighted(0.5F, makeInlined(Feature.RANDOM_PATCH, makePatch(Blocks.FERN, 36))),
 					makeWeighted(0.2F, makeInlined(Feature.RANDOM_PATCH, makePatch(Blocks.LARGE_FERN, 55))),
 					makeWeighted(0.4F, makeInlined(Feature.RANDOM_PATCH, makePatch(Blocks.TALL_GRASS, 45)))
 				)
 			));
 			ConfiguredFeatures.register(ctx, FERN_GRASS, Feature.RANDOM_SELECTOR, makeRandom(
-				makeInlined(Feature.RANDOM_PATCH, makePatch(Blocks.GRASS, 48)),
+				makeInlined(Feature.RANDOM_PATCH, makePatch(Blocks.GRASS_BLOCK, 48)),
 				List.of(
-					makeWeighted(0.55F, makeInlined(Feature.RANDOM_PATCH, makePatch(Blocks.GRASS, 56))),
+					makeWeighted(0.55F, makeInlined(Feature.RANDOM_PATCH, makePatch(Blocks.GRASS_BLOCK, 56))),
 					makeWeighted(0.2F, makeInlined(Feature.RANDOM_PATCH, makePatch(Blocks.TALL_GRASS, 24))),
 					makeWeighted(0.3F, makeInlined(Feature.RANDOM_PATCH, makePatch(Blocks.LARGE_FERN, 24))),
 					makeWeighted(0.5F, makeInlined(Feature.RANDOM_PATCH, makePatch(Blocks.FERN, 36)))

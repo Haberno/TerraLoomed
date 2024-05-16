@@ -1,22 +1,21 @@
 package org.haberno.terraloomed.worldgen.climate;
 
-import raccoonman.reterraforged.data.preset.settings.ClimateSettings;
-import raccoonman.reterraforged.data.preset.settings.WorldSettings;
-import raccoonman.reterraforged.data.preset.settings.WorldSettings.ControlPoints;
-import raccoonman.reterraforged.world.worldgen.biome.type.BiomeType;
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.continent.Continent;
-import raccoonman.reterraforged.world.worldgen.heightmap.Levels;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil.Vec2f;
-import raccoonman.reterraforged.world.worldgen.noise.function.DistanceFunction;
-import raccoonman.reterraforged.world.worldgen.noise.function.EdgeFunction;
-import raccoonman.reterraforged.world.worldgen.noise.module.LegacyMoisture;
-import raccoonman.reterraforged.world.worldgen.noise.module.LegacyTemperature;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noises;
-import raccoonman.reterraforged.world.worldgen.terrain.TerrainType;
-import raccoonman.reterraforged.world.worldgen.util.Seed;
+import org.haberno.terraloomed.data.preset.settings.ClimateSettings;
+import org.haberno.terraloomed.data.preset.settings.WorldSettings.ControlPoints;
+import org.haberno.terraloomed.worldgen.biome.type.BiomeType;
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.continent.Continent;
+import org.haberno.terraloomed.worldgen.heightmap.Levels;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil.Vec2f;
+import org.haberno.terraloomed.worldgen.noise.function.DistanceFunction;
+import org.haberno.terraloomed.worldgen.noise.function.EdgeFunction;
+import org.haberno.terraloomed.worldgen.noise.module.LegacyMoisture;
+import org.haberno.terraloomed.worldgen.noise.module.LegacyTemperature;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.noise.module.Noises;
+import org.haberno.terraloomed.worldgen.terrain.TerrainType;
+import org.haberno.terraloomed.worldgen.util.Seed;
 
 public class BiomeNoise {
 	private int seed;

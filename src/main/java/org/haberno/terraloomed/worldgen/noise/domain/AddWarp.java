@@ -2,8 +2,7 @@ package org.haberno.terraloomed.worldgen.noise.domain;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise.Visitor;
+import org.haberno.terraloomed.worldgen.noise.module.Noise.Visitor;
 
 public record AddWarp(Domain input1, Domain input2) implements Domain {
 	public static final Codec<AddWarp> CODEC = RecordCodecBuilder.create(instance -> instance.group(

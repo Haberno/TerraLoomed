@@ -1,11 +1,12 @@
 package org.haberno.terraloomed.data.preset;
 
-import java.util.List;
-import net.minecraft.world.gen.treedecorator.BeehiveTreeDecorator;
 import com.google.common.collect.ImmutableList;
-import raccoonman.reterraforged.world.worldgen.feature.template.decorator.TemplateDecorator;
-import raccoonman.reterraforged.world.worldgen.feature.template.decorator.TemplateDecorators;
-import raccoonman.reterraforged.world.worldgen.feature.template.decorator.TreeContext;
+import net.minecraft.world.gen.treedecorator.BeehiveTreeDecorator;
+import org.haberno.terraloomed.worldgen.feature.template.decorator.TemplateDecorator;
+import org.haberno.terraloomed.worldgen.feature.template.decorator.TemplateDecorators;
+import org.haberno.terraloomed.worldgen.feature.template.decorator.TreeContext;
+
+import java.util.List;
 
 public class PresetTemplateDecoratorLists {
 	public static final List<TemplateDecorator<TreeContext>> BEEHIVE_RARITY_0075 = ImmutableList.of(TemplateDecorators.tree(new BeehiveTreeDecorator(0.075F)));

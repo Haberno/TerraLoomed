@@ -13,7 +13,7 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.util.FeatureContext;
-import raccoonman.reterraforged.world.worldgen.feature.template.BlockUtils;
+import org.haberno.terraloomed.worldgen.feature.template.BlockUtils;
 
 public class BushFeature extends Feature<BushFeature.Config> {
     private static final Vec3i[] LOG_POSITIONS = {

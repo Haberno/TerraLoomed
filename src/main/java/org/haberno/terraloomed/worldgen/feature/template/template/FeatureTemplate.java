@@ -24,19 +24,10 @@
 
 package org.haberno.terraloomed.worldgen.feature.template.template;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtHelper;
-import net.minecraft.nbt.NbtIo;
-import net.minecraft.nbt.NbtList;
+import net.minecraft.nbt.*;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.BlockMirror;
@@ -45,15 +36,22 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.chunk.Chunk;
-import raccoonman.reterraforged.world.worldgen.feature.template.StructureUtils;
-import raccoonman.reterraforged.world.worldgen.feature.template.buffer.BufferIterator;
-import raccoonman.reterraforged.world.worldgen.feature.template.buffer.PasteBuffer;
-import raccoonman.reterraforged.world.worldgen.feature.template.buffer.TemplateBuffer;
-import raccoonman.reterraforged.world.worldgen.feature.template.paste.Paste;
-import raccoonman.reterraforged.world.worldgen.feature.template.paste.PasteConfig;
-import raccoonman.reterraforged.world.worldgen.feature.template.paste.PasteType;
-import raccoonman.reterraforged.world.worldgen.feature.template.placement.TemplatePlacement;
-import raccoonman.reterraforged.world.worldgen.feature.util.BlockReader;
+import org.haberno.terraloomed.worldgen.feature.template.StructureUtils;
+import org.haberno.terraloomed.worldgen.feature.template.buffer.BufferIterator;
+import org.haberno.terraloomed.worldgen.feature.template.buffer.PasteBuffer;
+import org.haberno.terraloomed.worldgen.feature.template.buffer.TemplateBuffer;
+import org.haberno.terraloomed.worldgen.feature.template.paste.Paste;
+import org.haberno.terraloomed.worldgen.feature.template.paste.PasteConfig;
+import org.haberno.terraloomed.worldgen.feature.template.paste.PasteType;
+import org.haberno.terraloomed.worldgen.feature.template.placement.TemplatePlacement;
+import org.haberno.terraloomed.worldgen.feature.util.BlockReader;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 public class FeatureTemplate {
     public static final PasteType WORLD_GEN = FeatureTemplate::getWorldGenPaste;
@@ -306,7 +304,7 @@ public class FeatureTemplate {
 
     public static Optional<FeatureTemplate> load(RegistryWrapper<Block> blockLookup, InputStream data) {
         try {
-            NbtCompound root = NbtIo.readCompressed(data);
+            NbtCompound root = NbtIo.readCompressed(data, new NbtSizeTracker(10000, 100000));
             if (!root.contains("palette") || !root.contains("blocks")) {
                 return Optional.empty();
             }

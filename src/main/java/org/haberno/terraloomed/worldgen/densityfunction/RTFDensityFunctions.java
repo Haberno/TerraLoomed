@@ -4,17 +4,17 @@ import com.mojang.serialization.Codec;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
-import raccoonman.reterraforged.platform.RegistryUtil;
-import raccoonman.reterraforged.world.worldgen.cell.CellField;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;	
+import org.haberno.terraloomed.platform.RegistryUtil;
+import org.haberno.terraloomed.worldgen.cell.CellField;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
 
 public class RTFDensityFunctions {
 
 	public static void bootstrap() {
-		register("noise_sampler", NoiseSampler.Marker.REGISTRY_ENTRY_CODEC);
-		register("cell", CellSampler.Marker.REGISTRY_ENTRY_CODEC);
-		register("clamp_to_nearest_unit", ClampToNearestUnit.REGISTRY_ENTRY_CODEC);
-		register("linear_spline", LinearSplineFunction.REGISTRY_ENTRY_CODEC);
+		register("noise_sampler", NoiseSampler.Marker.CODEC);
+		register("cell", CellSampler.Marker.CODEC);
+		register("clamp_to_nearest_unit", ClampToNearestUnit.CODEC);
+		register("linear_spline", LinearSplineFunction.CODEC);
 	}
 	
 	public static NoiseSampler.Marker noise(RegistryEntry<Noise> noise) {

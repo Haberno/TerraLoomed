@@ -1,11 +1,12 @@
 package org.haberno.terraloomed.worldgen.cell;
 
-import raccoonman.reterraforged.concurrent.Resource;
-import raccoonman.reterraforged.concurrent.SimpleResource;
-import raccoonman.reterraforged.concurrent.pool.ThreadLocalPool;
-import raccoonman.reterraforged.world.worldgen.biome.type.BiomeType;
-import raccoonman.reterraforged.world.worldgen.terrain.Terrain;
-import raccoonman.reterraforged.world.worldgen.terrain.TerrainType;
+
+import org.haberno.terraloomed.concurrent.Resource;
+import org.haberno.terraloomed.concurrent.SimpleResource;
+import org.haberno.terraloomed.concurrent.pool.ThreadLocalPool;
+import org.haberno.terraloomed.worldgen.biome.type.BiomeType;
+import org.haberno.terraloomed.worldgen.terrain.Terrain;
+import org.haberno.terraloomed.worldgen.terrain.TerrainType;
 
 public class Cell {
     private static final Cell DEFAULTS = new Cell();
@@ -105,12 +106,10 @@ public class Cell {
         return this;
     }
 
-    @Deprecated(forRemoval = true)
     public boolean isAbsent() {
         return false;
     }
 
-    @Deprecated(forRemoval = true)
     public static Cell empty() {
         return Cell.EMPTY;
     }

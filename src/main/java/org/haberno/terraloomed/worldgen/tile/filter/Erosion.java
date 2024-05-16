@@ -1,15 +1,16 @@
 package org.haberno.terraloomed.worldgen.tile.filter;
 
-import java.util.function.IntFunction;
 
-import raccoonman.reterraforged.data.preset.settings.FilterSettings;
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.heightmap.Levels;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.tile.Size;
-import raccoonman.reterraforged.world.worldgen.tile.Tile;
-import raccoonman.reterraforged.world.worldgen.util.FastRandom;
+import org.haberno.terraloomed.data.preset.settings.FilterSettings;
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.heightmap.Levels;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.tile.Size;
+import org.haberno.terraloomed.worldgen.tile.Tile;
+import org.haberno.terraloomed.worldgen.util.FastRandom;
+
+import java.util.function.IntFunction;
 
 public class Erosion implements Filter {
     private float erodeSpeed;

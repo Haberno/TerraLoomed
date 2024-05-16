@@ -2,21 +2,18 @@ package org.haberno.terraloomed.mixin.terrablender;
 
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.world.biome.source.util.MultiNoiseUtil;
+import org.haberno.terraloomed.compat.terrablender.TBTargetPoint;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import raccoonman.reterraforged.compat.terrablender.TBTargetPoint;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
 import terrablender.api.RegionType;
 import terrablender.api.Regions;
 
-@Mixin(
-	value = MultiNoiseUtil.Entries.class,
-	priority = 1001
-)
+@Mixin(targets = "terrablender.mixin.MixinParameterList")
 class MixinParameterList<T> {
 	private int maxIndex;
 
@@ -41,7 +38,7 @@ class MixinParameterList<T> {
 		method = "findValuePositional",
 		at = @At(
 			value = "INVOKE",
-			target = "Lnet/minecraft/world/level/biome/Climate$ParameterList;getUniqueness(III)I"
+			target =  "Lterrablender/mixin/MixinParameterList;getUniqueness(III)I"
 		)
 	)
     public int getUniqueness(MultiNoiseUtil.Entries<T> parameterList, int x, int y, int z, MultiNoiseUtil.NoiseValuePoint targetPoint) {

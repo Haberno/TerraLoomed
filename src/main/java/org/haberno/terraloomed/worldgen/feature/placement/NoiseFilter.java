@@ -8,7 +8,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.gen.feature.FeaturePlacementContext;
 import net.minecraft.world.gen.placementmodifier.AbstractConditionalPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
 
 class NoiseFilter extends AbstractConditionalPlacementModifier {
 	public static final Codec<NoiseFilter> CODEC = RecordCodecBuilder.create(instance -> instance.group(

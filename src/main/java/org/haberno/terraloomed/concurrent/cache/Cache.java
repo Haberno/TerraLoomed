@@ -1,13 +1,14 @@
 package org.haberno.terraloomed.concurrent.cache;
 
+
+import org.haberno.terraloomed.concurrent.cache.map.LongMap;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.function.IntFunction;
 import java.util.function.LongFunction;
-
-import raccoonman.reterraforged.concurrent.cache.map.LongMap;
 
 public class Cache<V extends ExpiringEntry> implements AutoCloseable {
 	public static final ScheduledExecutorService SCHEDULER = Executors.newSingleThreadScheduledExecutor((r) -> {

@@ -1,27 +1,27 @@
 package org.haberno.terraloomed.worldgen.feature.chance;
 
-import java.util.List;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.PlacedFeature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import org.haberno.map.worldgen.feature.chance.ChanceFeature.Config;
-import raccoonman.reterraforged.world.worldgen.feature.chance.ChanceFeature.Config;
+import org.haberno.terraloomed.worldgen.feature.chance.ChanceFeature.Config;
 
-public class ChanceFeature extends Feature<org.haberno.map.worldgen.feature.chance.ChanceFeature.Config> {
+import java.util.List;
 
-	public ChanceFeature(Codec<org.haberno.map.worldgen.feature.chance.ChanceFeature.Config> codec) {
+public class ChanceFeature extends Feature<Config> {
+
+	public ChanceFeature(Codec<Config> codec) {
 		super(codec);
 	}
 
 	@Override
-	public boolean generate(FeatureContext<org.haberno.map.worldgen.feature.chance.ChanceFeature.Config> ctx) {
+	public boolean generate(FeatureContext<Config> ctx) {
 		Random random = ctx.getRandom();
-		org.haberno.map.worldgen.feature.chance.ChanceFeature.Config config = ctx.getConfig();
+		Config config = ctx.getConfig();
 		
 		int entryCount = config.entries.size();
 		ChanceContext chanceCtx = ChanceContext.make(entryCount);
@@ -55,8 +55,8 @@ public class ChanceFeature extends Feature<org.haberno.map.worldgen.feature.chan
 	}
 	
 	public record Config(List<Entry> entries) implements FeatureConfig {
-		public static final Codec<org.haberno.map.worldgen.feature.chance.ChanceFeature.Config> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			Entry.CODEC.listOf().fieldOf("entries").forGetter(org.haberno.map.worldgen.feature.chance.ChanceFeature.Config::entries)
-		).apply(instance, org.haberno.map.worldgen.feature.chance.ChanceFeature.Config::new));
+		public static final Codec<Config> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+			Entry.CODEC.listOf().fieldOf("entries").forGetter(Config::entries)
+		).apply(instance, Config::new));
 	}
 }

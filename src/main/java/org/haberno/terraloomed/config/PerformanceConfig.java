@@ -1,11 +1,10 @@
 package org.haberno.terraloomed.config;
 
-import java.nio.file.Path;
-
 import com.mojang.serialization.DataResult;
+import org.haberno.terraloomed.concurrent.ThreadPools;
+import org.haberno.terraloomed.platform.ConfigUtil;
 
-import raccoonman.reterraforged.concurrent.ThreadPools;
-import raccoonman.reterraforged.platform.ConfigUtil;
+import java.nio.file.Path;
 
 public record PerformanceConfig(int tileSize, int batchCount, int threadCount) {
 	public static final Path DEFAULT_FILE_PATH = ConfigUtil.rtf("performance_internal.conf");

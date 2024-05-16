@@ -1,12 +1,13 @@
 package org.haberno.terraloomed.worldgen.feature.template.decorator;
 
-import java.util.HashSet;
-import java.util.Set;
+import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.BlockState;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
-import com.google.common.collect.ImmutableSet;
-import raccoonman.reterraforged.world.worldgen.feature.template.template.TemplateContext;
+import org.haberno.terraloomed.worldgen.feature.template.template.TemplateContext;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class TreeContext implements TemplateContext {
 	private Set<BlockPos> logs;

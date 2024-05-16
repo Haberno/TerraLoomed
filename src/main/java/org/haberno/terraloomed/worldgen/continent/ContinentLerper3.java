@@ -1,10 +1,11 @@
 package org.haberno.terraloomed.worldgen.continent;
 
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.cell.CellPopulator;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.noise.function.Interpolation;
-import raccoonman.reterraforged.world.worldgen.noise.module.Noise;
+
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.cell.CellPopulator;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.function.Interpolation;
+import org.haberno.terraloomed.worldgen.noise.module.Noise;
 
 public class ContinentLerper3 implements CellPopulator {
     private CellPopulator lower;

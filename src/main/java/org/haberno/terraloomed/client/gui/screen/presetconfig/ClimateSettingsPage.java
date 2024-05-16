@@ -1,15 +1,17 @@
 package org.haberno.terraloomed.client.gui.screen.presetconfig;
 
-import java.util.Optional;
 import net.minecraft.client.gui.widget.CyclingButtonWidget;
 import net.minecraft.text.Text;
-import raccoonman.reterraforged.client.data.RTFTranslationKeys;
-import raccoonman.reterraforged.client.gui.screen.page.LinkedPageScreen.Page;
-import raccoonman.reterraforged.client.gui.screen.presetconfig.PresetListPage.PresetEntry;
-import raccoonman.reterraforged.client.gui.widget.Slider;
-import raccoonman.reterraforged.client.gui.widget.ValueButton;
-import raccoonman.reterraforged.data.preset.settings.ClimateSettings;
-import raccoonman.reterraforged.data.preset.settings.Preset;
+import org.haberno.terraloomed.client.data.RTFTranslationKeys;
+import org.haberno.terraloomed.client.gui.screen.page.LinkedPageScreen.Page;
+import org.haberno.terraloomed.client.gui.screen.presetconfig.PresetListPage.PresetEntry;
+import org.haberno.terraloomed.client.gui.widget.Slider;
+import org.haberno.terraloomed.client.gui.widget.ValueButton;
+import org.haberno.terraloomed.data.preset.settings.ClimateSettings;
+import org.haberno.terraloomed.data.preset.settings.ClimateSettings.BiomeNoise.EdgeType;
+import org.haberno.terraloomed.data.preset.settings.Preset;
+
+import java.util.Optional;
 
 class ClimateSettingsPage extends PresetEditorPage {
 	private ValueButton<Integer> temperatureSeedOffset;
@@ -31,7 +33,7 @@ class ClimateSettingsPage extends PresetEditorPage {
 	private Slider biomeWarpScale;
 	private Slider biomeWarpStrength;
 	
-	private CyclingButtonWidget<ClimateSettings.BiomeNoise.EdgeType> biomeEdgeType;
+	private CyclingButtonWidget<EdgeType> biomeEdgeType;
 	private Slider biomeEdgeScale;
 	private Slider biomeEdgeOcaves;
 	private Slider biomeEdgeGain;

@@ -1,25 +1,24 @@
 package org.haberno.terraloomed.worldgen.biome.modifier;
 
-import java.util.Map;
-import java.util.Optional;
+import com.mojang.datafixers.util.Pair;
+import com.mojang.serialization.Codec;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.PlacedFeature;
-import com.mojang.datafixers.util.Pair;
-import com.mojang.serialization.Codec;
+import org.haberno.terraloomed.platform.RegistryUtil;
+import org.haberno.terraloomed.registries.RTFBuiltInRegistries;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
-import raccoonman.reterraforged.platform.RegistryUtil;
-import raccoonman.reterraforged.registries.RTFBuiltInRegistries;
+import java.util.Map;
+import java.util.Optional;
 
 public class BiomeModifiers {
 
-	@ExpectPlatform
 	public static void bootstrap() {
-		throw new UnsupportedOperationException();
+		register("add", AddModifier.CODEC);
+		register("replace", ReplaceModifier.CODEC);
 	}
 
 	@SafeVarargs
@@ -40,9 +39,8 @@ public class BiomeModifiers {
 		return add(order, step, Optional.of(Pair.of(filterBehavior, biomes)), features);
 	}
 	
-	@ExpectPlatform
 	public static BiomeModifier add(Order order, GenerationStep.Feature step, Optional<Pair<Filter.Behavior, RegistryEntryList<Biome>>> biomes, RegistryEntryList<PlacedFeature> features) {
-		throw new UnsupportedOperationException();
+		return new AddModifier(order, step, biomes.map((p) -> new Filter(p.getSecond(), p.getFirst())), features);
 	}
 
 	public static BiomeModifier replace(GenerationStep.Feature step, Map<RegistryKey<PlacedFeature>, RegistryEntry<PlacedFeature>> replacements) {
@@ -53,10 +51,11 @@ public class BiomeModifiers {
 		return replace(step, Optional.of(biomes), replacements);
 	}
 	
-	@ExpectPlatform
 	public static BiomeModifier replace(GenerationStep.Feature step, Optional<RegistryEntryList<Biome>> biomes, Map<RegistryKey<PlacedFeature>, RegistryEntry<PlacedFeature>> replacements) {
-		throw new UnsupportedOperationException();
+		return new ReplaceModifier(step, biomes, replacements);
 	}
+
+
 	
 	public static void register(String name, Codec<? extends BiomeModifier> value) {
 		RegistryUtil.register(RTFBuiltInRegistries.BIOME_MODIFIER_TYPE, name, value);

@@ -1,12 +1,13 @@
 package org.haberno.terraloomed.concurrent.cache.map;
 
-import java.util.function.LongFunction;
-import it.unimi.dsi.fastutil.objects.ObjectIterator;
-import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
-import java.util.function.Predicate;
-import java.util.function.Consumer;
 import it.unimi.dsi.fastutil.longs.Long2ObjectLinkedOpenHashMap;
+import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
+import it.unimi.dsi.fastutil.objects.ObjectIterator;
+
 import java.util.concurrent.locks.StampedLock;
+import java.util.function.Consumer;
+import java.util.function.LongFunction;
+import java.util.function.Predicate;
 
 public class StampedBoundLongMap<T> implements LongMap<T> {
 	private int capacity;
@@ -70,8 +71,8 @@ public class StampedBoundLongMap<T> implements LongMap<T> {
 			int startSize = this.map.size();
 			ObjectIterator<Long2ObjectMap.Entry<T>> iterator = this.map.long2ObjectEntrySet().fastIterator();
 			while (iterator.hasNext()) {
-				Long2ObjectMap.Entry<T> entry = (Long2ObjectMap.Entry<T>) iterator.next();
-				if (predicate.test((T) entry.getValue())) {
+				Long2ObjectMap.Entry<T> entry = iterator.next();
+				if (predicate.test(entry.getValue())) {
 					iterator.remove();
 				}
 			}

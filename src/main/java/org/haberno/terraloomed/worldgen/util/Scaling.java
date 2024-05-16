@@ -1,6 +1,7 @@
 package org.haberno.terraloomed.worldgen.util;
 
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
+
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
 
 // TODO clean this up some more
 public record Scaling(int worldHeight, float unit, int waterY, int groundY, int groundLevel, int waterLevel, float ground, float water, float elevationRange) {

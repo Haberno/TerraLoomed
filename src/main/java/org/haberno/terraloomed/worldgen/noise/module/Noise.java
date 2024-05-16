@@ -3,7 +3,7 @@ package org.haberno.terraloomed.worldgen.noise.module;
 import com.mojang.serialization.Codec;
 import net.minecraft.registry.entry.RegistryElementCodec;
 import net.minecraft.registry.entry.RegistryEntry;
-import raccoonman.reterraforged.registries.RTFRegistries;
+import org.haberno.terraloomed.registries.RTFRegistries;
 
 public interface Noise {
     public static final Codec<Noise> DIRECT_CODEC = Noises.DIRECT_CODEC;

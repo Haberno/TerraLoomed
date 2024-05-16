@@ -2,7 +2,7 @@ package org.haberno.terraloomed.registries;
 
 import net.minecraft.command.argument.ArgumentTypes;
 import net.minecraft.registry.Registries;
-import raccoonman.reterraforged.server.commands.TerrainArgument;
+import org.haberno.terraloomed.server.commands.TerrainArgument;
 
 public class RTFArgumentTypeInfos {
 

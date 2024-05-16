@@ -1,15 +1,16 @@
 package org.haberno.terraloomed.worldgen.rivermap.river;
 
+
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.noise.module.Line;
+import org.haberno.terraloomed.worldgen.terrain.populator.LakePopulator;
+import org.haberno.terraloomed.worldgen.terrain.populator.RiverPopulator;
+import org.haberno.terraloomed.worldgen.terrain.populator.WetlandPopulator;
+import org.haberno.terraloomed.worldgen.util.Boundsf;
+import org.haberno.terraloomed.worldgen.util.PosUtil;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.noise.module.Line;
-import raccoonman.reterraforged.world.worldgen.terrain.populator.LakePopulator;
-import raccoonman.reterraforged.world.worldgen.terrain.populator.RiverPopulator;
-import raccoonman.reterraforged.world.worldgen.terrain.populator.WetlandPopulator;
-import raccoonman.reterraforged.world.worldgen.util.Boundsf;
-import raccoonman.reterraforged.world.worldgen.util.PosUtil;
 
 public record Network(RiverPopulator riverCarver, LakePopulator[] lakes, WetlandPopulator[] wetlands, Network[] children, Boundsf bounds) {
     

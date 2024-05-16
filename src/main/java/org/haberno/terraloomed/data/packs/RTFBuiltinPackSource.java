@@ -1,27 +1,18 @@
 package org.haberno.terraloomed.data.packs;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.URL;
-import java.nio.file.FileSystemAlreadyExistsException;
-import java.nio.file.FileSystemNotFoundException;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Collections;
-import net.minecraft.resource.DefaultResourcePack;
-import net.minecraft.resource.DefaultResourcePackBuilder;
-import net.minecraft.resource.ResourcePack;
-import net.minecraft.resource.ResourcePackProfile;
+import net.minecraft.resource.*;
 import net.minecraft.resource.ResourcePackProfile.PackFactory;
-import net.minecraft.resource.ResourcePackSource;
-import net.minecraft.resource.ResourceType;
-import net.minecraft.resource.VanillaResourcePackProvider;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.path.SymlinkFinder;
+import org.haberno.terraloomed.RTFCommon;
 import org.jetbrains.annotations.Nullable;
-import raccoonman.reterraforged.RTFCommon;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
+import java.nio.file.*;
+import java.util.Collections;
 
 public class RTFBuiltinPackSource extends VanillaResourcePackProvider {
 	private static final Identifier PACKS_DIR = RTFCommon.location("datapacks");

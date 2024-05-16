@@ -1,6 +1,8 @@
 package org.haberno.terraloomed.server.commands;
 
-import java.util.concurrent.TimeUnit;
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -13,17 +15,15 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import org.haberno.terraloomed.client.data.RTFTranslationKeys;
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.RTFRandomState;
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.heightmap.WorldLookup;
+import org.haberno.terraloomed.worldgen.terrain.Terrain;
 import org.jetbrains.annotations.Nullable;
 
-import com.mojang.brigadier.Command;
-import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
-import raccoonman.reterraforged.client.data.RTFTranslationKeys;
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.RTFRandomState;
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.heightmap.WorldLookup;
-import raccoonman.reterraforged.world.worldgen.terrain.Terrain;
+import java.util.concurrent.TimeUnit;
 
 public class LocateTerrainCommand {
     private static final DynamicCommandExceptionType ERROR_TERRAIN_NOT_FOUND = new DynamicCommandExceptionType(terrain -> Text.translatable(RTFTranslationKeys.TERRAIN_NOT_FOUND, terrain));
@@ -33,15 +33,15 @@ public class LocateTerrainCommand {
     		CommandManager.literal("rtf").requires((stack) -> stack.hasPermissionLevel(2)).then(
     			CommandManager.literal("locate").then(
     				CommandManager.argument("terrain", TerrainArgument.terrain()).executes((ctx) -> {
-	    				CommandSourceStack stack = ctx.getSource();
+	    				ServerCommandSource stack = ctx.getSource();
 	    				Terrain terrain = ctx.getArgument("terrain", Terrain.class);
 	    				String terrainName = terrain.getName();
-	    				BlockPos origin = BlockPos.containing(stack.getPosition());
+	    				BlockPos origin = BlockPos.ofFloored(stack.getPosition());
 	    				@Nullable
 	    				BlockPos result = locate(stack, terrain, 256, 256, 24000, 30L);
 	    				if(result != null) {
-	    			        int distance = Mth.floor(dist(origin.getX(), origin.getZ(), result.getX(), result.getZ()));
-		    			    stack.sendSuccess(() -> Component.translatable(RTFTranslationKeys.TERRAIN_FOUND, terrainName, createTeleportMessage(result), distance), false);
+	    			        int distance = MathHelper.floor(dist(origin.getX(), origin.getZ(), result.getX(), result.getZ()));
+		    			    stack.sendFeedback(() -> Text.translatable(RTFTranslationKeys.TERRAIN_FOUND, terrainName, createTeleportMessage(result), distance), false);
 		    			    return Command.SINGLE_SUCCESS;
 	    				}
 	    	            throw ERROR_TERRAIN_NOT_FOUND.create(terrainName);
@@ -64,7 +64,7 @@ public class LocateTerrainCommand {
     	ServerWorld level = commandSourceStack.getWorld();
 
     	@Nullable
-    	GeneratorContext generatorContext;
+        GeneratorContext generatorContext;
     	if((Object) level.getChunkManager().getNoiseConfig() instanceof RTFRandomState rtfRandomState && (generatorContext = rtfRandomState.generatorContext()) != null) {
     		return search(commandSourceStack, generatorContext.lookup, target, step, minRadius, maxRadius, timeout);
     	}

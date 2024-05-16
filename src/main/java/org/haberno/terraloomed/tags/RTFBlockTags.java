@@ -3,7 +3,7 @@ package org.haberno.terraloomed.tags;
 import net.minecraft.block.Block;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
-import raccoonman.reterraforged.RTFCommon;
+import org.haberno.terraloomed.RTFCommon;
 
 public class RTFBlockTags {
 	public static final TagKey<Block> SOIL = resolve("soil");

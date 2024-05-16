@@ -1,16 +1,17 @@
 package org.haberno.terraloomed.worldgen.continent.fancy;
 
-import raccoonman.reterraforged.data.preset.settings.WorldSettings;
-import raccoonman.reterraforged.world.worldgen.GeneratorContext;
-import raccoonman.reterraforged.world.worldgen.cell.Cell;
-import raccoonman.reterraforged.world.worldgen.continent.Continent;
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.noise.domain.Domain;
-import raccoonman.reterraforged.world.worldgen.noise.domain.Domains;
-import raccoonman.reterraforged.world.worldgen.rivermap.RiverCache;
-import raccoonman.reterraforged.world.worldgen.rivermap.Rivermap;
-import raccoonman.reterraforged.world.worldgen.util.PosUtil;
-import raccoonman.reterraforged.world.worldgen.util.Seed;
+
+import org.haberno.terraloomed.data.preset.settings.WorldSettings;
+import org.haberno.terraloomed.worldgen.GeneratorContext;
+import org.haberno.terraloomed.worldgen.cell.Cell;
+import org.haberno.terraloomed.worldgen.continent.Continent;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.domain.Domain;
+import org.haberno.terraloomed.worldgen.noise.domain.Domains;
+import org.haberno.terraloomed.worldgen.rivermap.RiverCache;
+import org.haberno.terraloomed.worldgen.rivermap.Rivermap;
+import org.haberno.terraloomed.worldgen.util.PosUtil;
+import org.haberno.terraloomed.worldgen.util.Seed;
 
 public class FancyContinentGenerator implements Continent {
     private float frequency;

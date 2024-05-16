@@ -1,10 +1,11 @@
 package org.haberno.terraloomed.worldgen.rivermap.river;
 
-import java.util.Random;
 
-import raccoonman.reterraforged.world.worldgen.noise.NoiseUtil;
-import raccoonman.reterraforged.world.worldgen.noise.module.Simplex2;
-import raccoonman.reterraforged.world.worldgen.util.PosUtil;
+import org.haberno.terraloomed.worldgen.noise.NoiseUtil;
+import org.haberno.terraloomed.worldgen.noise.module.Simplex2;
+import org.haberno.terraloomed.worldgen.util.PosUtil;
+
+import java.util.Random;
 
 public class RiverWarp {
     public static final RiverWarp NONE = new RiverWarp(0, 0.0F, 0.0F, 0.0F, 0.0F);
